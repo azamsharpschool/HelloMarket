@@ -1,6 +1,6 @@
 ## HelloMarket 
 
-![HelloMarket Logo](/resources/e-commerce_logo.png)
+![HelloMarket Logo](/resources/hellomarket.png)
 
 **NOTE: This project is currently under development.**
 
