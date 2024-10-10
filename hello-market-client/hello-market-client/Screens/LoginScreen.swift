@@ -54,7 +54,6 @@ struct LoginScreen: View {
     
     var body: some View {
         
-        //NavigationStack {
             Form {
                 TextField("User name", text: $username)
                     .textInputAutocapitalization(.never)
@@ -77,11 +76,6 @@ struct LoginScreen: View {
                     RegistrationScreen()
                 }
             })
-        /*
-            .navigationDestination(item: $userId, destination: { _ in
-                MyProductListScreen()
-            })
-         */
             .navigationTitle("Login")
             .overlay(alignment: .center) {
                 if isLoading {
