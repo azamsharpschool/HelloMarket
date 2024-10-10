@@ -1,0 +1,15 @@
+{
+  "originHash" : "88cf1fc9d354e350e41dfcb2899b84f9312b5f8094ec0465100e0296cc38298e",
+  "pins" : [
+    {
+      "identity" : "jwtdecode.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/auth0/JWTDecode.swift.git",
+      "state" : {
+        "revision" : "1e153ef009969543191970c66b7c60163c0b4a65",
+        "version" : "3.2.0"
+      }
+    }
+  ],
+  "version" : 3
+}
