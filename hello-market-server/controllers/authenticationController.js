@@ -1,8 +1,7 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
-const models = require('../models')
-const { Op } = require('sequelize');
 const { validationResult } = require('express-validator');
+const user = require('../services/user');
 
 exports.login = async (req, res) => {
     try {
@@ -18,7 +17,7 @@ exports.login = async (req, res) => {
         console.log(username, password)
 
         // Check if username exists
-        const existingUser = await models.User.findOne({ where: { username } });
+        const existingUser = await user.service.getByUsername(username);
         if (!existingUser) {
             return res.status(401).json({ message: 'Username or password is incorrect', success: false });
         }
@@ -51,11 +50,7 @@ exports.register = async (req, res) => {
         const { username, password } = req.body;
 
         // Check if the user already exists
-        const existingUser = await models.User.findOne({
-            where: {
-                username: { [Op.iLike]: username },
-            },
-        });
+        const existingUser = await user.service.getByUsername(username);
 
         if (existingUser) {
             return res.json({ message: 'Username taken!', success: false });
@@ -66,11 +61,10 @@ exports.register = async (req, res) => {
         const hash = await bcrypt.hash(password, salt);
 
         // Create a new user
-        const newUser = await models.User.create({
+        const newUser = await user.service.create({
             username: username,
             password: hash,
         });
-
         res.status(201).json({ success: true });
     } catch (error) {
         console.error(error);

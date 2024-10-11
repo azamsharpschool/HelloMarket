@@ -1,8 +1,7 @@
-
-const models = require('../models')
 const multer = require('multer')
 const path =  require('path')
 const { validationResult } = require('express-validator');
+const product = require('../services/product')
 
 // Configure multer for file storage
 const storage = multer.diskStorage({
@@ -47,17 +46,16 @@ exports.upload = async (req, res) => {
 }
 
 exports.getAllProducts = async (req, res) => {
-    const products = await models.Product.findAll({})
-    res.json(products)
+    const products = await product.service.findAll({});
+    res.json(products);
 }
 
 exports.getMyProducts = async (req, res) => {
     try {
         const userId = req.params.userId
-        console.log(userId)
-        const products = await models.Product.findAll({
-            user_id: userId
-        })
+        const products = await product.service.findAll({
+          user_id: userId
+        });
         res.json(products)
     } catch (error) {
         res.status(500).json({ message: 'Error retrieving products', success: false });
@@ -76,13 +74,12 @@ exports.create = async (req, res) => {
     const { name, description, price, photoUrl } = req.body
 
     try {
-        const newProduct = await models.Product.create({
-            name: name,
-            description: description,
-            price: price,
-            photo_url: photoUrl
+        const newProduct =  await product.service.create({
+          name: name,
+          description: description,
+          price: price,
+          photo_url: photoUrl
         });
-
         // Return success response with the created product
         return res.status(201).json({ success: true, product: newProduct });
     } catch (error) {
