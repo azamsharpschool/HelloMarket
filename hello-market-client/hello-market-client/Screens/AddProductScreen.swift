@@ -10,14 +10,16 @@ import PhotosUI
 
 struct AddProductScreen: View {
     
-    @State private var name: String = ""
-    @State private var description: String = ""
-    @State private var price: Double?
+    @State private var name: String = "Chair"
+    @State private var description: String = "Chair Description"
+    @State private var price: Double? = 250
     
     @Environment(\.showMessage) private var showMessage
     @Environment(\.dismiss) private var dismiss
     @Environment(ProductStore.self) private var productStore
     @AppStorage("userId") private var userId: Int?
+    
+    @Environment(\.uploader) private var uploader
     
     @State private var uiImage: UIImage?
     @State private var selectedPhotoItem: PhotosPickerItem? = nil
@@ -32,6 +34,13 @@ struct AddProductScreen: View {
         
         do {
             
+            guard let uiImage = uiImage,
+                  let imageData = uiImage.pngData() else { throw ProductSaveError.missingImage }
+            
+            guard let photoURL = try await uploader.upload(data: imageData) else {
+                throw ProductSaveError.missingImage
+            }
+            
             guard let userId = userId else {
                 throw ProductSaveError.missingUserId
             }
@@ -40,11 +49,13 @@ struct AddProductScreen: View {
                 throw ProductSaveError.invalidPrice
             }
             
-            let product = Product(name: name, description: description, price: price, photoUrl: nil, userId: userId)
-            
+            let product = Product(name: name, description: description, price: price, photoUrl: photoURL, userId: userId)
             try await productStore.saveProduct(product)
+             
             dismiss()
+            
         } catch {
+            print(error.localizedDescription)
             showMessage(error.localizedDescription)
         }
     }
@@ -76,6 +87,13 @@ struct AddProductScreen: View {
                 }
                 
             }.font(.title)
+            
+            if let uiImage {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                  
+            }
         }
         .onChange(of: selectedPhotoItem, {
             selectedPhotoItem?.loadTransferable(type: Data.self, completionHandler: { result in

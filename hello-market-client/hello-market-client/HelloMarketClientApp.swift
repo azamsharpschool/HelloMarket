@@ -19,12 +19,9 @@ struct HelloMarketClientApp: App {
         WindowGroup {
             HomeScreen()
             .environment(productStore)
-            .environment(\.authenticationController, AuthenticationController(httpClient: HTTPClient()))
+            .environment(\.authenticationController, AuthenticationController(httpClient: .development))
+            .environment(\.uploader, Uploader(httpClient: .development))
             .withMessageView()
-            .onAppear(perform: {
-                print("HelloMarketClientApp")
-                //let _ = Keychain<String>.delete("jwttoken")
-            })
         }
     }
 }

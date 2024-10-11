@@ -35,6 +35,7 @@ enum HTTPMethod {
     case post(Data?)
     case delete
     case put(Data?)
+    case uploadImage(data: Data)
     
     var name: String {
         switch self {
@@ -46,6 +47,8 @@ enum HTTPMethod {
                 return "DELETE"
             case .put:
                 return "PUT"
+            case .uploadImage:
+                return "POST"
         }
     }
 }
@@ -88,6 +91,10 @@ struct HTTPClient {
                 
             case .delete:
                 request.httpMethod = resource.method.name
+            
+            case .uploadImage(let data):
+                request.httpMethod = resource.method.name
+                request.setValue("multipart/form-data", forHTTPHeaderField: "Content-Type")
         }
         
         // Set custom headers
@@ -118,6 +125,10 @@ struct HTTPClient {
         } catch {
             throw NetworkError.decodingError(error)
         }
+    }
+    
+    private func createMultipartFormDataBody(data: Data) -> Data? {
+        return nil 
     }
 }
 

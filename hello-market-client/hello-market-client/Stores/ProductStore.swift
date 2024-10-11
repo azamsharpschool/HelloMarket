@@ -33,7 +33,7 @@ class ProductStore {
         let resource = Resource(url: Constants.Urls.createProduct, method: .post(product.encode()), modelType: CreateProductResponse.self)
         let response = try await httpClient.load(resource)
         if let product = response.product, response.success {
-            products.append(product)
+            myProducts.append(product)
         } else {
             throw ProductSaveError.operationFailed(response.message ?? "")
         }

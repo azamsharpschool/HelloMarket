@@ -20,11 +20,14 @@ const uploadImage = multer({
     storage: storage,
     limits: { fileSize: 5 * 1024 * 1024 }, // Limit file size to 5MB
     fileFilter: function (req, file, cb) {
+
       // Accept only images (jpeg, jpg, png)
       const fileTypes = /jpeg|jpg|png/;
       const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
       const mimeType = fileTypes.test(file.mimetype);
       
+
+
       if (mimeType && extname) {
         return cb(null, true);
       } else {
@@ -34,15 +37,22 @@ const uploadImage = multer({
   }).single('image');
 
 exports.upload = async (req, res) => {
-    console.log('upload is called.')
+
     uploadImage(req, res, (err) => {
+
         if (err) {
-          return res.status(400).send({ message: err.message });
+          return res.status(400).send({ message: err.message, success: false });
         }
         if (!req.file) {
-          return res.status(400).send({ message: 'No file uploaded' });
+          return res.status(400).send({ message: 'No file uploaded', success: false });
         }
-        res.send({ message: 'File uploaded successfully', fileName: req.file.filename });
+
+        // Construct the full URL for the uploaded file
+        const baseUrl = `${req.protocol}://${req.get('host')}`; // e.g., http://localhost:3000
+        const filePath = `/uploads/${req.file.filename}`; // Assuming your files are served from /uploads
+        const downloadURL = `${baseUrl}${filePath}`;
+
+        res.send({ message: 'File uploaded successfully', downloadURL: downloadURL, success: true });
       });
 }
 
@@ -56,7 +66,9 @@ exports.getMyProducts = async (req, res) => {
         const userId = req.params.userId
         console.log(userId)
         const products = await models.Product.findAll({
-            user_id: userId
+          where: {
+            user_id: userId 
+          }
         })
         res.json(products)
     } catch (error) {
@@ -73,14 +85,15 @@ exports.create = async (req, res) => {
         return res.status(422).json({ message: msg, success: false });
     }
 
-    const { name, description, price, photoUrl } = req.body
+    const { name, description, price, photo_url, user_id } = req.body
 
     try {
         const newProduct = await models.Product.create({
             name: name,
             description: description,
             price: price,
-            photo_url: photoUrl
+            photo_url: photo_url, 
+            user_id: user_id 
         });
 
         // Return success response with the created product
