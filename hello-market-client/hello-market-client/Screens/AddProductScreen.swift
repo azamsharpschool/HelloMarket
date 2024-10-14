@@ -10,11 +10,12 @@ import PhotosUI
 
 struct AddProductScreen: View {
     
-    @State private var name: String = "Chair"
-    @State private var description: String = "Chair Description"
-    @State private var price: Double? = 250
+    @State private var name: String = ""
+    @State private var description: String = ""
+    @State private var price: Double?
     
     @Environment(\.showMessage) private var showMessage
+    
     @Environment(\.dismiss) private var dismiss
     @Environment(ProductStore.self) private var productStore
     @AppStorage("userId") private var userId: Int?
@@ -24,6 +25,8 @@ struct AddProductScreen: View {
     @State private var uiImage: UIImage?
     @State private var selectedPhotoItem: PhotosPickerItem? = nil
     @State private var isCameraSelected: Bool = false
+    
+    @State private var isLoading: Bool = false
         
     private var isFormValid: Bool {
         !name.isEmptyOrWhitespace && !description.isEmptyOrWhitespace
@@ -31,6 +34,8 @@ struct AddProductScreen: View {
     }
     
     private func saveProduct() async {
+        
+        isLoading = true
         
         do {
             
@@ -55,9 +60,10 @@ struct AddProductScreen: View {
             dismiss()
             
         } catch {
-            print(error.localizedDescription)
             showMessage(error.localizedDescription)
         }
+        
+        isLoading = false
     }
     
     var body: some View {
@@ -122,6 +128,10 @@ struct AddProductScreen: View {
                     }
                 }.disabled(!isFormValid)
             }
+        }.overlay(alignment: .center) {
+            if isLoading {
+                ProgressView("Loading...")
+            }
         }
     }
 }
@@ -131,5 +141,6 @@ struct AddProductScreen: View {
         AddProductScreen()
     }
     .environment(ProductStore(httpClient: .development))
+    .environment(\.uploader, Uploader(httpClient: .development))
     .withMessageView()
 }

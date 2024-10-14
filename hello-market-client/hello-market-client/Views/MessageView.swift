@@ -16,7 +16,7 @@ enum MessageType {
 struct MessageWrapper: Identifiable {
     let id: UUID = UUID()
     var message: String
-    var delay: Double = 2.0
+    var delay: Double = 10.0
     var messageType: MessageType = .error
 }
 

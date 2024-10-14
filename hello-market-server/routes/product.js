@@ -2,15 +2,7 @@ const express = require('express')
 const router = express.Router() 
 const productController = require('../controllers/productController')
 const { body } = require('express-validator');
-
-const productValidator = [
-    body('name', 'name cannot be empty.').not().isEmpty(), 
-    body('description', 'description cannot be empty.').not().isEmpty(), 
-    body('price', 'price cannot be empty.').not().isEmpty(), 
-    body('photoUrl')
-      .optional({ checkFalsy: true }) 
-      .isURL().withMessage('photoUrl must be a valid URL if provided.')
-]
+const { productValidator } = require('../utils/validators/validators') 
 
 router.post('/', productValidator, productController.create)
 router.get('/', productController.getAllProducts)

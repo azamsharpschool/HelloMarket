@@ -85,7 +85,9 @@ exports.create = async (req, res) => {
         return res.status(422).json({ message: msg, success: false });
     }
 
+
     const { name, description, price, photo_url, user_id } = req.body
+    console.log(req.body)
 
     try {
         const newProduct = await models.Product.create({

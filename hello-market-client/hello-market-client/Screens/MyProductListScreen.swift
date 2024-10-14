@@ -14,13 +14,13 @@ struct MyProductListScreen: View {
     
     var body: some View {
         List(productStore.myProducts) { product in
-            ProductCellView(product: product)
+            MyProductCellView(product: product)
         }
         .listStyle(.plain)
         .listRowSeparator(.hidden)
         .task {
             do {
-                try await productStore.loadMyProducts(by: 1)
+                try await productStore.loadMyProducts(by: 2)
             } catch {
                 print(error)
             }
@@ -37,6 +37,33 @@ struct MyProductListScreen: View {
                 AddProductScreen()
             }
         })
+    }
+}
+
+struct MyProductCellView: View {
+    
+    let product: Product
+    
+    var body: some View {
+        
+        HStack(alignment: .top) {
+                AsyncImage(url: product.photoUrl) { img in
+                    img.resizable()
+                        .clipShape(RoundedRectangle(cornerRadius: 16.0, style: .continuous))
+                    .frame(width: 100, height: 100)
+                } placeholder: {
+                    ProgressView("Loading...")
+                }
+                Spacer()
+                    .frame(width: 20)
+                VStack {
+                    Text(product.name)
+                        .font(.title)
+                    Text(product.price, format: .currency(code: "USD"))
+                        
+                }
+               
+            }
     }
 }
 
