@@ -9,8 +9,24 @@ import SwiftUI
 
 struct MyProductListScreen: View {
     
+    @Environment(\.showMessage) private var showMessage
     @Environment(ProductStore.self) private var productStore
     @State private var isPresented: Bool = false
+    @AppStorage("userId") private var userId: Int?
+    
+    private func loadMyProducts() async {
+        
+        guard let userId = userId else {
+            showMessage("User ID is missing.", .error)
+            return
+        }
+        
+        do {
+            try await productStore.loadMyProducts(by: userId)
+        } catch {
+            showMessage("Unable to load products: \(error.localizedDescription)", .error)
+        }
+    }
     
     var body: some View {
         List(productStore.myProducts) { product in
@@ -19,11 +35,7 @@ struct MyProductListScreen: View {
         .listStyle(.plain)
         .listRowSeparator(.hidden)
         .task {
-            do {
-                try await productStore.loadMyProducts(by: 2)
-            } catch {
-                print(error)
-            }
+           await loadMyProducts()
         }.navigationTitle("My Products")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -35,6 +47,7 @@ struct MyProductListScreen: View {
         .sheet(isPresented: $isPresented, content: {
             NavigationStack {
                 AddProductScreen()
+                    .withMessageView()
             }
         })
     }

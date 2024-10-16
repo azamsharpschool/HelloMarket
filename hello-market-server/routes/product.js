@@ -5,7 +5,7 @@ const { productValidator } = require('../utils/validators/validators');
 const authenticate = require('../middlewares/authMiddleware');
 
 
-router.post('/', productValidator, productController.create)
+router.post('/', authenticate, productValidator, productController.create)
 router.get('/', productController.getAllProducts)
 router.get('/user/:userId', authenticate, productController.getMyProducts)
 router.post('/upload', productController.upload)

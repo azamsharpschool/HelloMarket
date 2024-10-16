@@ -35,7 +35,7 @@ class ProductStore {
         if let product = response.product, response.success {
             myProducts.append(product)
         } else {
-            throw ProductSaveError.operationFailed(response.message ?? "")
+            throw ProductError.operationFailed(response.message ?? "")
         }
     }
 }

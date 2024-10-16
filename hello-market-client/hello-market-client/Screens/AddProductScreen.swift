@@ -27,44 +27,43 @@ struct AddProductScreen: View {
     @State private var isCameraSelected: Bool = false
     
     @State private var isLoading: Bool = false
-        
+    
     private var isFormValid: Bool {
         !name.isEmptyOrWhitespace && !description.isEmptyOrWhitespace
         && (price ?? 0) > 0
     }
     
     private func saveProduct() async {
-        
         isLoading = true
+        defer { isLoading = false } // Ensures loading state is turned off, even if an error occurs
         
         do {
-            
-            guard let uiImage = uiImage,
-                  let imageData = uiImage.pngData() else { throw ProductSaveError.missingImage }
+            guard let uiImage = uiImage, let imageData = uiImage.pngData() else {
+                throw ProductError.missingImage
+            }
             
             guard let photoURL = try await uploader.upload(data: imageData) else {
-                throw ProductSaveError.missingImage
+                throw ProductError.uploadFailed
             }
             
             guard let userId = userId else {
-                throw ProductSaveError.missingUserId
+                throw ProductError.missingUserId
             }
             
             guard let price = price else {
-                throw ProductSaveError.invalidPrice
+                throw ProductError.invalidPrice
             }
             
             let product = Product(name: name, description: description, price: price, photoUrl: photoURL, userId: userId)
             try await productStore.saveProduct(product)
-             
+            
             dismiss()
             
         } catch {
-            showMessage(error.localizedDescription)
+            showMessage("Failed to save product: \(error.localizedDescription)", .error)
         }
-        
-        isLoading = false
     }
+    
     
     var body: some View {
         
@@ -98,7 +97,7 @@ struct AddProductScreen: View {
                 Image(uiImage: uiImage)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                  
+                
             }
         }
         .onChange(of: selectedPhotoItem, {
@@ -109,7 +108,7 @@ struct AddProductScreen: View {
                         if let data {
                             uiImage = UIImage(data: data)
                         }
-                            
+                        
                     case .failure(let error):
                         print(error.localizedDescription)
                 }

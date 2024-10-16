@@ -25,10 +25,14 @@ enum LoginError: LocalizedError {
     }
 }
 
+enum UserError: Error {
+    case missingUserId
+}
 
-enum ProductSaveError: Error {
+enum ProductError: Error {
     case missingUserId
     case invalidPrice
     case operationFailed(String)
     case missingImage
+    case uploadFailed
 }
