@@ -17,14 +17,13 @@ struct MyProductListScreen: View {
     private func loadMyProducts() async {
         
         guard let userId = userId else {
-            showMessage("User ID is missing.", .error)
             return
         }
         
         do {
             try await productStore.loadMyProducts(by: userId)
         } catch {
-            showMessage("Unable to load products: \(error.localizedDescription)", .error)
+            print(error.localizedDescription)
         }
     }
     
@@ -72,11 +71,11 @@ struct MyProductCellView: View {
                 VStack {
                     Text(product.name)
                         .font(.title)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     Text(product.price, format: .currency(code: "USD"))
-                        
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
-               
-            }
+        }
     }
 }
 

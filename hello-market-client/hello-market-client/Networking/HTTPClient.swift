@@ -65,15 +65,29 @@ struct HTTPClient {
     
     private let session: URLSession
     
+    
     init() {
+         
         let configuration = URLSessionConfiguration.default
-        configuration.httpAdditionalHeaders = ["Content-Type": "application/json"]
+        configuration.httpAdditionalHeaders =  ["Content-Type": "application/json"]
         self.session = URLSession(configuration: configuration)
     }
     
     func load<T: Codable>(_ resource: Resource<T>) async throws -> T {
         
+        var headers: [String: String] = [: ]
+        
+        // Get the token from keychain
+        if let token = Keychain<String>.get("jwttoken") {
+            headers["Authorization"] = "Bearer \(token)"
+        }
+        
         var request = URLRequest(url: resource.url)
+        
+        // Add headers to the request
+        for (key, value) in headers {
+            request.setValue(value, forHTTPHeaderField: key)
+        }
         
         // Set HTTP method and body if needed
         switch resource.method {

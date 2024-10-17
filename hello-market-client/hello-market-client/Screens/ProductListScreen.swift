@@ -11,6 +11,14 @@ struct ProductListScreen: View {
     
     @Environment(ProductStore.self) private var productStore
     
+    private func loadAllProducts() async {
+        do {
+            try await productStore.loadAllProducts()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
     var body: some View {
         List(productStore.products) { product in
           
@@ -22,15 +30,13 @@ struct ProductListScreen: View {
                 
             }.listRowSeparator(.hidden)
         }
-      
+        .refreshable(action: {
+            await loadAllProducts()
+        })
         .navigationTitle("New Arrivals")
         .listStyle(.plain)
         .task {
-            do {
-                try await productStore.loadAllProducts()
-            } catch {
-                print(error.localizedDescription)
-            }
+           await loadAllProducts()
         }
     }
 }
