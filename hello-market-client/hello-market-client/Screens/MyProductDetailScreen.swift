@@ -14,6 +14,8 @@ struct MyProductDetailScreen: View {
     @State private var isPresented: Bool = false
     @Environment(ProductStore.self) private var productStore
     
+    @Environment(\.dismiss) private var dismiss
+    
     private func deleteProduct() async {
         
         do {
@@ -21,7 +23,6 @@ struct MyProductDetailScreen: View {
         } catch {
             print(error.localizedDescription)
         }
-        
     }
     
     var body: some View {
@@ -49,6 +50,7 @@ struct MyProductDetailScreen: View {
             Button(role: .destructive) {
                 Task {
                     await deleteProduct()
+                    dismiss()
                 }
             } label: {
                 Text("Delete")
