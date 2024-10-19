@@ -29,7 +29,11 @@ struct MyProductListScreen: View {
     
     var body: some View {
         List(productStore.myProducts) { product in
-            MyProductCellView(product: product)
+            NavigationLink {
+                MyProductDetailScreen(product: product)
+            } label: {
+                MyProductCellView(product: product)
+            }
         }
         .listStyle(.plain)
         .listRowSeparator(.hidden)
@@ -75,7 +79,7 @@ struct MyProductCellView: View {
                     .frame(width: 20)
                 VStack {
                     Text(product.name)
-                        .font(.title)
+                        .font(.title3)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     Text(product.price, format: .currency(code: "USD"))
                         .frame(maxWidth: .infinity, alignment: .leading)

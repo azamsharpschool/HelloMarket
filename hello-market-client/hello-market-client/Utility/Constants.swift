@@ -17,6 +17,10 @@ struct Constants {
         static let createProduct = URL(string: "http://localhost:8080/api/products")!
         static let uploadProductImage = URL(string: "http://localhost:8080/api/products/upload")!
         
+        static func deleteProduct(_ productId: Int) -> URL {
+            URL(string: "http://localhost:8080/api/products/\(productId)")!
+        }
+        
         static func myProducts(_ userId: Int) -> URL {
             URL(string: "http://localhost:8080/api/products/user/\(userId)")!
         }

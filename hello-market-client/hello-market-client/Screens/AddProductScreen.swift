@@ -10,6 +10,8 @@ import PhotosUI
 
 struct AddProductScreen: View {
     
+    let product: Product?
+    
     @State private var name: String = ""
     @State private var description: String = ""
     @State private var price: Double?
@@ -27,6 +29,10 @@ struct AddProductScreen: View {
     @State private var isCameraSelected: Bool = false
     
     @State private var isLoading: Bool = false
+    
+    init(product: Product? = nil) {
+        self.product = product
+    }
     
     private var isFormValid: Bool {
         !name.isEmptyOrWhitespace && !description.isEmptyOrWhitespace
@@ -118,7 +124,7 @@ struct AddProductScreen: View {
             ImagePicker(image: $uiImage, sourceType: .camera)
         })
         .buttonStyle(.bordered)
-        .navigationTitle("Add Product")
+        .navigationTitle(product != nil ? "Update Product": "Add Product")
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Save") {
@@ -130,6 +136,13 @@ struct AddProductScreen: View {
         }.overlay(alignment: .center) {
             if isLoading {
                 ProgressView("Loading...")
+            }
+        }
+        .onAppear {
+            if let product {
+                name = product.name
+                description = product.description
+                price = product.price 
             }
         }
     }

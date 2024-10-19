@@ -1,4 +1,5 @@
 const { body } = require('express-validator');
+const { param } = require('express-validator');
 
 const registerValidator = [
     body('username', 'username cannot be empty.').not().isEmpty(),
@@ -10,7 +11,7 @@ const loginValidator = [
     body('password', 'password cannot be empty.').not().isEmpty()
 ];
 
-const productValidator = [
+const createProductValidator = [
     body('name', 'name cannot be empty.').not().isEmpty(), 
     body('description', 'description cannot be empty.').not().isEmpty(), 
     body('price', 'price cannot be empty.').not().isEmpty(), 
@@ -18,8 +19,15 @@ const productValidator = [
       .notEmpty().withMessage('photoUrl cannot be empty.')
 ]
 
+const deleteProductValidator = [
+    param('productId')
+    .notEmpty().withMessage('Product Id is required')
+    .isNumeric().withMessage('Product Id must be a number')
+]
+
 module.exports = {
     registerValidator,
     loginValidator, 
-    productValidator
+    createProductValidator, 
+    deleteProductValidator
 };

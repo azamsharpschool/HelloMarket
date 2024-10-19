@@ -35,4 +35,5 @@ enum ProductError: Error {
     case operationFailed(String)
     case missingImage
     case uploadFailed
+    case missingProductId
 }

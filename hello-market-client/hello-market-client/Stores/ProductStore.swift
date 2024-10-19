@@ -29,6 +29,15 @@ class ProductStore {
         myProducts = try await httpClient.load(resource)
     }
     
+    func removeProduct(_ product: Product) async throws {
+        
+        guard let productId = product.id else {
+            throw ProductError.missingProductId
+        }
+        
+        let resource = Resource(url: Constants.Urls.deleteProduct(productId), modelType: DeleteProductResponse.self)
+    }
+    
     func saveProduct(_ product: Product) async throws {
         let resource = Resource(url: Constants.Urls.createProduct, method: .post(product.encode()), modelType: CreateProductResponse.self)
         let response = try await httpClient.load(resource)
