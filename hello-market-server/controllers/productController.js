@@ -4,6 +4,7 @@ const multer = require('multer')
 const path = require('path')
 const fs = require('fs');
 const { validationResult } = require('express-validator');
+const { getFileNameFromUrl, deleteImageFile } = require('../utils/fileUtils');
 
 // Configure multer for file storage
 const storage = multer.diskStorage({
@@ -26,8 +27,6 @@ const uploadImage = multer({
     const fileTypes = /jpeg|jpg|png/;
     const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
     const mimeType = fileTypes.test(file.mimetype);
-
-
 
     if (mimeType && extname) {
       return cb(null, true);
@@ -82,13 +81,7 @@ exports.deleteProduct = async (req, res) => {
     }
 
     const fileName = getFileNameFromUrl(product.photo_url)
-    console.log(fileName)
-
-    // delete the associated image 
-    //await deleteImageFile(fileName)
-
-    //return 
-
+    
     const result = await models.Product.destroy({
       where: {
         id: productId
@@ -99,7 +92,6 @@ exports.deleteProduct = async (req, res) => {
       return res.status(404).json({ message: 'Product not found', success: false });
     }
 
-    // delete the associated image 
     await deleteImageFile(fileName)
 
     return res.status(200).json({ message: `Product with ID ${productId} deleted successfully`, success: true });
@@ -108,49 +100,6 @@ exports.deleteProduct = async (req, res) => {
     return res.status(500).json({ message: `Error deleting product ${error.message} `, success: false });
   }
 }
-
-// I need to move this function to separate file 
-const getFileNameFromUrl = (photoUrl) => {
-  try {
-    const url = new URL(photoUrl); // Parse the URL
-    const fileName = path.basename(url.pathname); // Get the file name from the path
-    return fileName;
-  } catch (error) {
-    console.error('Invalid URL:', error);
-    return null;
-  }
-}
-
-// Helper function to delete image file
-// I need to move this function to separate file 
-const deleteImageFile = (fileName) => {
-  return new Promise((resolve, reject) => {
-    if (!fileName) {
-      return resolve(); // No image to delete
-    }
-
-    const fullImagePath = path.join(__dirname, '../uploads', fileName);
-
-    // Check if the file exists before trying to delete it
-    fs.access(fullImagePath, fs.constants.F_OK, (accessErr) => {
-      if (accessErr) {
-        console.error('File does not exist:', fullImagePath);
-        return resolve(); // If the file doesn't exist, we consider it successfully "deleted"
-      }
-
-      // If the file exists, delete it
-      fs.unlink(fullImagePath, (unlinkErr) => {
-        if (unlinkErr) {
-          console.error('Error deleting image:', unlinkErr);
-          return reject(unlinkErr);
-        } else {
-          console.log('Image deleted successfully');
-          return resolve();
-        }
-      });
-    });
-  });
-};
 
 exports.getMyProducts = async (req, res) => {
   try {
