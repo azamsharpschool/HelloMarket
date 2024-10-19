@@ -109,6 +109,7 @@ exports.deleteProduct = async (req, res) => {
   }
 }
 
+// I need to move this function to separate file 
 const getFileNameFromUrl = (photoUrl) => {
   try {
     const url = new URL(photoUrl); // Parse the URL
@@ -121,6 +122,7 @@ const getFileNameFromUrl = (photoUrl) => {
 }
 
 // Helper function to delete image file
+// I need to move this function to separate file 
 const deleteImageFile = (fileName) => {
   return new Promise((resolve, reject) => {
     if (!fileName) {
