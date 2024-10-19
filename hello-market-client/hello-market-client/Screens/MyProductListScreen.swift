@@ -49,6 +49,11 @@ struct MyProductListScreen: View {
                     .withMessageView()
             }
         })
+        .overlay(alignment: .center) {
+            if productStore.myProducts.isEmpty {
+                ContentUnavailableView("No products available.", systemImage: "cart")
+            }
+        }
     }
 }
 

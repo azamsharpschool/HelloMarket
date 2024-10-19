@@ -50,7 +50,7 @@ struct AddProductScreen: View {
                 throw ProductError.missingUserId
             }
             
-            guard let price = price else {
+            guard let price = price, price > 0 else {
                 throw ProductError.invalidPrice
             }
             
@@ -60,7 +60,7 @@ struct AddProductScreen: View {
             dismiss()
             
         } catch {
-            showMessage("Failed to save product: \(error.localizedDescription)", .error)
+            showMessage("Error saving product: \(error.localizedDescription)")
         }
     }
     

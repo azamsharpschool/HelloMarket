@@ -22,6 +22,7 @@ struct RequiresAuthentication: ViewModifier {
                     content
                 } else {
                     LoginScreen()
+                        .withMessageView()
                 }
             }
         }.onAppear(perform: checkAuthentication)

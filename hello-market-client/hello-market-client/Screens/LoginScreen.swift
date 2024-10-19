@@ -74,6 +74,7 @@ struct LoginScreen: View {
             } .sheet(isPresented: $isRegistrationPresented, content: {
                 NavigationStack {
                     RegistrationScreen()
+                        .withMessageView()
                 }
             })
             .navigationTitle("Login")

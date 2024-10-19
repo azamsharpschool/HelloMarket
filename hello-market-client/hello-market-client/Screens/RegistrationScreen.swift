@@ -9,9 +9,9 @@ import SwiftUI
 
 struct RegistrationScreen: View {
     
+    @Environment(\.showMessage) private var showMessage
     @Environment(\.authenticationController) private var authenticationController
     @Environment(\.dismiss) private var dismiss
-    
     
     @State private var username: String = ""
     @State private var password: String = ""
@@ -28,11 +28,11 @@ struct RegistrationScreen: View {
                 // dismiss the current screen
                 dismiss() 
             } else {
-                message = response.message ?? ""
+                showMessage(response.message ?? "")
             }
             
         } catch {
-            message = error.localizedDescription
+            showMessage(error.localizedDescription)
         }
     }
     
@@ -57,6 +57,9 @@ struct RegistrationScreen: View {
 #Preview {
     NavigationStack {
         RegistrationScreen()
+          
     }
     .environment(\.authenticationController, .development)
+    .withMessageView()
+    
 }

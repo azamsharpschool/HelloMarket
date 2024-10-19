@@ -42,9 +42,9 @@ struct ProductListScreen: View {
 }
 
 struct ProductCellView: View {
-    
+      
     let product: Product
-    
+     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             AsyncImage(url: product.photoUrl) { img in
