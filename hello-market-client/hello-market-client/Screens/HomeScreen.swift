@@ -33,6 +33,7 @@ extension AppScreen {
         }
     }
     
+    @MainActor
     @ViewBuilder
     var destination: some View {
         switch self {
@@ -54,6 +55,7 @@ extension AppScreen {
         }
     }
 }
+
 
 struct HomeScreen: View {
     

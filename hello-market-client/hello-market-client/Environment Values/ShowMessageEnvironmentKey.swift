@@ -11,18 +11,12 @@ import SwiftUI
 struct ShowMessageAction {
     typealias Action = (String, MessageType) -> ()
     let action: Action
+
     func callAsFunction(_ message: String, _ messageType: MessageType = .error) {
         action(message, messageType)
     }
 }
 
-struct ShowMessageEnvironmentKey: EnvironmentKey {
-    nonisolated(unsafe) static let defaultValue: ShowMessageAction = ShowMessageAction(action: { _, _ in })
-}
-
 extension EnvironmentValues {
-    var showMessage: (ShowMessageAction) {
-        get { self[ShowMessageEnvironmentKey.self] }
-        set { self[ShowMessageEnvironmentKey.self] = newValue }
-    }
+    @Entry var showMessage: ShowMessageAction = .init { _, _ in }
 }

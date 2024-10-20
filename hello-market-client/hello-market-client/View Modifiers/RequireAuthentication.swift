@@ -41,7 +41,7 @@ struct RequiresAuthentication: ViewModifier {
 }
 
 extension View {
-    nonisolated func requiresAuthentication() -> some View {
+    func requiresAuthentication() -> some View {
         modifier(RequiresAuthentication())
     }
 }
