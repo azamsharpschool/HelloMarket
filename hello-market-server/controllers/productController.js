@@ -75,13 +75,13 @@ exports.deleteProduct = async (req, res) => {
   try {
 
     // find the product to get the image path 
-    const product = await models.Product.findByPk(productId) 
-    if(!product) {
+    const product = await models.Product.findByPk(productId)
+    if (!product) {
       return res.status(404).json({ message: 'Product not found', success: false });
     }
 
     const fileName = getFileNameFromUrl(product.photo_url)
-    
+
     const result = await models.Product.destroy({
       where: {
         id: productId
@@ -139,10 +139,35 @@ exports.create = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
 
-  const errors = validationResult(req);
+  try {
+    const { name, description, price, photo_url, user_id } = req.body
+    const { productId } = req.params
 
-  if (!errors.isEmpty()) {
-    const msg = errors.array().map(error => error.msg).join('')
-    return res.status(422).json({ message: msg, success: false });
+    const product = await models.Product.findByPk(productId)
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found', success: false });
+    }
+
+    // update the product 
+    await product.update({
+      name,
+      description,
+      price,
+      photo_url,
+      user_id
+    })
+
+    // Return the updated product along with a success message
+    return res.status(200).json({
+      message: 'Product updated successfully',
+      success: true,
+      product // You can return the updated product details if needed
+    });
+  } catch (err) {
+    return res.status(500).json({
+      message: 'An error occurred while updating the product',
+      success: false
+    });
   }
+
 }

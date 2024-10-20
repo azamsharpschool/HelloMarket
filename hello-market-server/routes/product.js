@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router() 
 const productController = require('../controllers/productController')
-const { createProductValidator, deleteProductValidator } = require('../utils/validators/validators'); 
+const { createProductValidator, deleteProductValidator, updateProductValidator } = require('../utils/validators/validators'); 
 const authenticate = require('../middlewares/authMiddleware');
 const validationErrorsMiddleware = require('../middlewares/validationErrorsMiddleware');
 
@@ -16,6 +16,6 @@ router.delete('/:productId', deleteProductValidator, productController.deletePro
 
 // update product 
 // /products/34 
-router.put('/:productId', productController.updateProduct)
+router.put('/:productId', updateProductValidator, validationErrorsMiddleware, productController.updateProduct)
 
 module.exports = router 

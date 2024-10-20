@@ -25,9 +25,19 @@ const deleteProductValidator = [
     .isNumeric().withMessage('Product Id must be a number')
 ]
 
+const updateProductValidator = [
+    param('productId'), 
+    body('name', 'name cannot be empty.').not().isEmpty(), 
+    body('description', 'description cannot be empty.').not().isEmpty(), 
+    body('price', 'price cannot be empty.').not().isEmpty(), 
+    body('photo_url')
+      .notEmpty().withMessage('photoUrl cannot be empty.')
+]
+
 module.exports = {
     registerValidator,
     loginValidator, 
     createProductValidator, 
-    deleteProductValidator
+    deleteProductValidator, 
+    updateProductValidator
 };
