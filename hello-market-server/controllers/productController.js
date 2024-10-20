@@ -118,14 +118,6 @@ exports.getMyProducts = async (req, res) => {
 
 exports.create = async (req, res) => {
 
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    const msg = errors.array().map(error => error.msg).join('')
-    return res.status(422).json({ message: msg, success: false });
-  }
-
-
   const { name, description, price, photo_url, user_id } = req.body
   console.log(req.body)
 
@@ -142,5 +134,15 @@ exports.create = async (req, res) => {
     return res.status(201).json({ success: true, product: newProduct });
   } catch (error) {
     return res.status(500).json({ message: "Internal server error", success: false });
+  }
+}
+
+exports.updateProduct = async (req, res) => {
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    const msg = errors.array().map(error => error.msg).join('')
+    return res.status(422).json({ message: msg, success: false });
   }
 }

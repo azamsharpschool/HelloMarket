@@ -6,14 +6,7 @@ const { validationResult } = require('express-validator');
 
 exports.login = async (req, res) => {
     try {
-        // Validate input
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-
-            const msg = errors.array().map(error => error.msg).join('')
-            return res.status(422).json({ message: msg, success: false });
-        }
-
+       
         const { username, password } = req.body;
         console.log(username, password)
 
@@ -42,11 +35,7 @@ exports.login = async (req, res) => {
 
 
 exports.register = async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(422).json({ errors: errors.array() });
-    }
-
+   
     try {
         const { username, password } = req.body;
 

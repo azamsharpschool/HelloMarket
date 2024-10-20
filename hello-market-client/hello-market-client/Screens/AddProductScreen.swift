@@ -103,7 +103,14 @@ struct AddProductScreen: View {
                 Image(uiImage: uiImage)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                
+            } else if let product {
+                AsyncImage(url: product.photoUrl) { img in
+                    img.resizable()
+                    .clipShape(RoundedRectangle(cornerRadius: 25.0, style: .continuous))
+                    .scaledToFit()
+                } placeholder: {
+                    ProgressView("Loading...")
+                }
             }
         }
         .onChange(of: selectedPhotoItem, {
@@ -150,7 +157,7 @@ struct AddProductScreen: View {
 
 #Preview {
     NavigationStack {
-        AddProductScreen()
+        AddProductScreen(product: Product.preview)
     }
     .environment(ProductStore(httpClient: .development))
     .environment(\.uploader, Uploader(httpClient: .development))
