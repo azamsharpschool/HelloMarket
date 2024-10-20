@@ -18,5 +18,5 @@ struct ShowMessageAction {
 }
 
 extension EnvironmentValues {
-    @Entry var showMessage: ShowMessageAction = .init { _, _ in }
+    @Entry var showMessage: ShowMessageAction = ShowMessageAction { _, _ in }
 }
