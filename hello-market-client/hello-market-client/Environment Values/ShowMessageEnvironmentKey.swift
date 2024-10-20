@@ -17,7 +17,7 @@ struct ShowMessageAction {
 }
 
 struct ShowMessageEnvironmentKey: EnvironmentKey {
-    static var defaultValue: ShowMessageAction = ShowMessageAction(action: { _, _ in })
+    nonisolated(unsafe) static let defaultValue: ShowMessageAction = ShowMessageAction(action: { _, _ in })
 }
 
 extension EnvironmentValues {

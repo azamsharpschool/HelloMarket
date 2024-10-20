@@ -9,10 +9,11 @@ import SwiftUI
 
 struct MyProductListScreen: View {
     
-    @Environment(\.showMessage) private var showMessage
+    //@Environment(\.showMessage) private var showMessage
     @Environment(ProductStore.self) private var productStore
     @State private var isPresented: Bool = false
     @AppStorage("userId") private var userId: Int?
+    
     
     private func loadMyProducts() async {
         

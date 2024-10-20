@@ -43,7 +43,7 @@ extension AppScreen {
             case .myProducts:
             NavigationStack {
                 MyProductListScreen()
-                    .requiresAuthentication()
+                        .requiresAuthentication()
             }
             case .cart:
                 Text("Cart")

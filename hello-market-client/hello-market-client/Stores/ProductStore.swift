@@ -8,6 +8,7 @@
 import Foundation
 import Observation
 
+@MainActor 
 @Observable
 class ProductStore {
     
@@ -37,7 +38,7 @@ class ProductStore {
         
         let resource = Resource(url: Constants.Urls.deleteProduct(productId), method: .delete, modelType: DeleteProductResponse.self)
         let response = try await httpClient.load(resource)
-        print(response.message)
+    
         if response.success {
             // Safely find the index and remove the product from myProducts array
             if let indexToDelete = myProducts.firstIndex(where: { $0.id == product.id }) {
