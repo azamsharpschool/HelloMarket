@@ -32,7 +32,6 @@
 		8D995CAA2C8B374D003AFA2C /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D995CA92C8B374D003AFA2C /* Errors.swift */; };
 		8D995CB02C8CE054003AFA2C /* WithMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D995CAF2C8CE054003AFA2C /* WithMessageView.swift */; };
 		8DAD14C42CC3F8BB00417FE7 /* MyProductDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAD14C32CC3F8BB00417FE7 /* MyProductDetailScreen.swift */; };
-		8DCD24582CC58BE1002D0489 /* FooScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DCD24572CC58BE1002D0489 /* FooScreen.swift */; };
 		8DDE5FB52C8A7D9300A0DBE0 /* HelloMarketClientApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDE5FB42C8A7D9300A0DBE0 /* HelloMarketClientApp.swift */; };
 		8DDE5FB92C8A7D9400A0DBE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DDE5FB82C8A7D9400A0DBE0 /* Assets.xcassets */; };
 		8DDE5FBC2C8A7D9400A0DBE0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DDE5FBB2C8A7D9400A0DBE0 /* Preview Assets.xcassets */; };
@@ -65,7 +64,6 @@
 		8D995CA92C8B374D003AFA2C /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		8D995CAF2C8CE054003AFA2C /* WithMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithMessageView.swift; sourceTree = "<group>"; };
 		8DAD14C32CC3F8BB00417FE7 /* MyProductDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProductDetailScreen.swift; sourceTree = "<group>"; };
-		8DCD24572CC58BE1002D0489 /* FooScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooScreen.swift; sourceTree = "<group>"; };
 		8DDE5FB12C8A7D9300A0DBE0 /* hello-market-client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hello-market-client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DDE5FB42C8A7D9300A0DBE0 /* HelloMarketClientApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloMarketClientApp.swift; sourceTree = "<group>"; };
 		8DDE5FB82C8A7D9400A0DBE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -211,7 +209,6 @@
 				8D3EE2412C968D59004E4B6D /* AddProductScreen.swift */,
 				8D5B74472CAF737200AA4BAC /* ProfileScreen.swift */,
 				8DAD14C32CC3F8BB00417FE7 /* MyProductDetailScreen.swift */,
-				8DCD24572CC58BE1002D0489 /* FooScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -356,7 +353,6 @@
 				8D3EE23C2C9281AA004E4B6D /* ProductStore.swift in Sources */,
 				8D995CB02C8CE054003AFA2C /* WithMessageView.swift in Sources */,
 				8DDE5FC72C8A7DC700A0DBE0 /* AuthenticationController.swift in Sources */,
-				8DCD24582CC58BE1002D0489 /* FooScreen.swift in Sources */,
 				8D3EE2352C927136004E4B6D /* (null) in Sources */,
 				8D3EE2392C92819C004E4B6D /* HomeScreen.swift in Sources */,
 				8D995CA12C8A9996003AFA2C /* String+Extensions.swift in Sources */,
