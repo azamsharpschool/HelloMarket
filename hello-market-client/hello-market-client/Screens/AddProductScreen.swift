@@ -99,6 +99,7 @@ struct AddProductScreen: View {
                 
             }.font(.title)
             
+            
             if let uiImage {
                 Image(uiImage: uiImage)
                     .resizable()
@@ -113,23 +114,21 @@ struct AddProductScreen: View {
                 }
             }
         }
-        .onChange(of: selectedPhotoItem, {
-            selectedPhotoItem?.loadTransferable(type: Data.self, completionHandler: { result in
-                print(result)
-                switch result {
-                    case .success(let data):
-                        if let data {
-                            uiImage = UIImage(data: data)
-                        }
-                        
-                    case .failure(let error):
-                        print(error.localizedDescription)
+        .task(id: selectedPhotoItem, {
+            if let selectedPhotoItem {
+                do {
+                    if let data = try await selectedPhotoItem.loadTransferable(type: Data.self) {
+                        uiImage = UIImage(data: data)
+                    }
+                } catch {
+                    print(error.localizedDescription)
                 }
-            })
+            }
         })
         .sheet(isPresented: $isCameraSelected, content: {
             ImagePicker(image: $uiImage, sourceType: .camera)
         })
+         
         .buttonStyle(.bordered)
         .navigationTitle(product != nil ? "Update Product": "Add Product")
         .toolbar {

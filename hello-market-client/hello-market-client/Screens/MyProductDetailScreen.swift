@@ -41,6 +41,8 @@ struct MyProductDetailScreen: View {
             
             Text(product.description)
                 .padding([.top], 5)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
             Text(product.price, format: .currency(code: "USD"))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.title)
