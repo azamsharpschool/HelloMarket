@@ -82,6 +82,6 @@ struct MyProductDetailScreen: View {
         MyProductDetailScreen(product: Product.preview)
     }
     .environment(ProductStore(httpClient: .development))
-    .environment(\.uploader, Uploader(httpClient: .development))
+    .environment(\.uploaderDownloader, ImageUploaderDownloader(httpClient: .development))
     .withMessageView()
 }

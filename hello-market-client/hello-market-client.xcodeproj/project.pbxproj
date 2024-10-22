@@ -21,8 +21,8 @@
 		8D5B74462CAF70C200AA4BAC /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 8D5B74452CAF70C200AA4BAC /* JWTDecode */; };
 		8D5B74482CAF737200AA4BAC /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5B74472CAF737200AA4BAC /* ProfileScreen.swift */; };
 		8D5B744A2CAF769800AA4BAC /* RequireAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5B74492CAF769800AA4BAC /* RequireAuthentication.swift */; };
-		8D5FE4852CB968A7000F47C8 /* Uploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5FE4842CB968A7000F47C8 /* Uploader.swift */; };
-		8D5FE4872CB96926000F47C8 /* UploaderEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5FE4862CB96926000F47C8 /* UploaderEnvironmentKey.swift */; };
+		8D5FE4852CB968A7000F47C8 /* ImageUploaderDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5FE4842CB968A7000F47C8 /* ImageUploaderDownloader.swift */; };
+		8D5FE4872CB96926000F47C8 /* ImageUploaderDownloaderEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5FE4862CB96926000F47C8 /* ImageUploaderDownloaderEnvironmentKey.swift */; };
 		8D7B08172C8BD95A003D7E91 /* ShowMessageEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7B08162C8BD95A003D7E91 /* ShowMessageEnvironmentKey.swift */; };
 		8D7B081D2C8BEFB0003D7E91 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7B081C2C8BEFB0003D7E91 /* MessageView.swift */; };
 		8D995C9E2C8A962D003AFA2C /* AuthenticationEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D995C9D2C8A962D003AFA2C /* AuthenticationEnvironmentKey.swift */; };
@@ -53,8 +53,8 @@
 		8D3EE2412C968D59004E4B6D /* AddProductScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductScreen.swift; sourceTree = "<group>"; };
 		8D5B74472CAF737200AA4BAC /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		8D5B74492CAF769800AA4BAC /* RequireAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireAuthentication.swift; sourceTree = "<group>"; };
-		8D5FE4842CB968A7000F47C8 /* Uploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Uploader.swift; sourceTree = "<group>"; };
-		8D5FE4862CB96926000F47C8 /* UploaderEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploaderEnvironmentKey.swift; sourceTree = "<group>"; };
+		8D5FE4842CB968A7000F47C8 /* ImageUploaderDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploaderDownloader.swift; sourceTree = "<group>"; };
+		8D5FE4862CB96926000F47C8 /* ImageUploaderDownloaderEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploaderDownloaderEnvironmentKey.swift; sourceTree = "<group>"; };
 		8D7B08162C8BD95A003D7E91 /* ShowMessageEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMessageEnvironmentKey.swift; sourceTree = "<group>"; };
 		8D7B081C2C8BEFB0003D7E91 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		8D995C9D2C8A962D003AFA2C /* AuthenticationEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationEnvironmentKey.swift; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 		8D5FE4832CB96895000F47C8 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				8D5FE4842CB968A7000F47C8 /* Uploader.swift */,
+				8D5FE4842CB968A7000F47C8 /* ImageUploaderDownloader.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -128,7 +128,7 @@
 			children = (
 				8D995C9D2C8A962D003AFA2C /* AuthenticationEnvironmentKey.swift */,
 				8D7B08162C8BD95A003D7E91 /* ShowMessageEnvironmentKey.swift */,
-				8D5FE4862CB96926000F47C8 /* UploaderEnvironmentKey.swift */,
+				8D5FE4862CB96926000F47C8 /* ImageUploaderDownloaderEnvironmentKey.swift */,
 			);
 			path = "Environment Values";
 			sourceTree = "<group>";
@@ -340,11 +340,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DDE5FC42C8A7DB500A0DBE0 /* RegistrationScreen.swift in Sources */,
-				8D5FE4872CB96926000F47C8 /* UploaderEnvironmentKey.swift in Sources */,
+				8D5FE4872CB96926000F47C8 /* ImageUploaderDownloaderEnvironmentKey.swift in Sources */,
 				8DDE5FCA2C8A7E3700A0DBE0 /* HTTPClient.swift in Sources */,
 				8DF13AF02C99262700898DFF /* ImagePicker.swift in Sources */,
 				8D5B744A2CAF769800AA4BAC /* RequireAuthentication.swift in Sources */,
-				8D5FE4852CB968A7000F47C8 /* Uploader.swift in Sources */,
+				8D5FE4852CB968A7000F47C8 /* ImageUploaderDownloader.swift in Sources */,
 				8D3EE2402C953384004E4B6D /* MyProductListScreen.swift in Sources */,
 				8D995CA32C8AA1FA003AFA2C /* LoginScreen.swift in Sources */,
 				8D3EE22F2C92698B004E4B6D /* (null) in Sources */,

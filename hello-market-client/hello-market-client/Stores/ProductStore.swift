@@ -60,4 +60,25 @@ class ProductStore {
             throw ProductError.operationFailed(response.message ?? "")
         }
     }
+    
+    func updateProduct(_ product: Product) async throws {
+        
+        guard let productId = product.id else {
+            throw ProductError.productNotFound
+        }
+        
+        let resource = Resource(url: Constants.Urls.updateProduct(productId), method: .put(product.encode()), modelType: UpdateProductResponse.self)
+        let response = try await httpClient.load(resource)
+        if let updatedProduct = response.product, response.success {
+            // Safely find the index and remove the product from myProducts array
+            if let indexToUpdate = myProducts.firstIndex(where: { $0.id == product.id }) {
+                myProducts[indexToUpdate] = updatedProduct
+            } else {
+                throw ProductError.productNotFound
+            }
+        } else {
+            throw ProductError.operationFailed(response.message ?? "")
+        }
+    }
+    
 }

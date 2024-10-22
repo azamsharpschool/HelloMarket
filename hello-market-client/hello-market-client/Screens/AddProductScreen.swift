@@ -22,7 +22,7 @@ struct AddProductScreen: View {
     @Environment(ProductStore.self) private var productStore
     @AppStorage("userId") private var userId: Int?
     
-    @Environment(\.uploader) private var uploader
+    @Environment(\.uploaderDownloader) private var uploaderDownloader
     
     @State private var uiImage: UIImage?
     @State private var selectedPhotoItem: PhotosPickerItem? = nil
@@ -39,7 +39,11 @@ struct AddProductScreen: View {
         && (price ?? 0) > 0
     }
     
-    private func saveProduct() async {
+    private var actionTitle: String {
+        product != nil ? "Update Product": "Add Product"
+    }
+    
+    private func saveOrUpdateProduct() async {
         isLoading = true
         defer { isLoading = false } // Ensures loading state is turned off, even if an error occurs
         
@@ -48,7 +52,7 @@ struct AddProductScreen: View {
                 throw ProductError.missingImage
             }
             
-            guard let photoURL = try await uploader.upload(data: imageData) else {
+            guard let photoURL = try await uploaderDownloader.upload(data: imageData) else {
                 throw ProductError.uploadFailed
             }
             
@@ -60,8 +64,13 @@ struct AddProductScreen: View {
                 throw ProductError.invalidPrice
             }
             
-            let product = Product(name: name, description: description, price: price, photoUrl: photoURL, userId: userId)
-            try await productStore.saveProduct(product)
+            let product = Product(id: self.product?.id, name: name, description: description, price: price, photoUrl: photoURL, userId: userId)
+            
+            if self.product != nil {
+                try await productStore.updateProduct(product)
+            } else {
+                try await productStore.saveProduct(product)
+            }
             
             dismiss()
             
@@ -107,8 +116,8 @@ struct AddProductScreen: View {
             } else if let product {
                 AsyncImage(url: product.photoUrl) { img in
                     img.resizable()
-                    .clipShape(RoundedRectangle(cornerRadius: 25.0, style: .continuous))
-                    .scaledToFit()
+                        .clipShape(RoundedRectangle(cornerRadius: 25.0, style: .continuous))
+                        .scaledToFit()
                 } placeholder: {
                     ProgressView("Loading...")
                 }
@@ -121,21 +130,21 @@ struct AddProductScreen: View {
                         uiImage = UIImage(data: data)
                     }
                 } catch {
-                    print(error.localizedDescription)
+                    showMessage("Unable to select an image!")
                 }
             }
         })
         .sheet(isPresented: $isCameraSelected, content: {
             ImagePicker(image: $uiImage, sourceType: .camera)
         })
-         
+        
         .buttonStyle(.bordered)
-        .navigationTitle(product != nil ? "Update Product": "Add Product")
+        .navigationTitle(actionTitle)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button("Save") {
+                Button(actionTitle) {
                     Task {
-                        await saveProduct()
+                        await saveOrUpdateProduct()
                     }
                 }.disabled(!isFormValid)
             }
@@ -144,11 +153,25 @@ struct AddProductScreen: View {
                 ProgressView("Loading...")
             }
         }
-        .onAppear {
-            if let product {
+        .task {
+            do {
+                
+                guard let product = product else { return }
+                
                 name = product.name
                 description = product.description
-                price = product.price 
+                price = product.price
+                
+                if let photoUrl = product.photoUrl {
+                    guard let data = try await uploaderDownloader.download(from: photoUrl) else {
+                        return
+                    }
+                    
+                    uiImage = UIImage(data: data)
+                }
+                
+            } catch {
+                print(error.localizedDescription)
             }
         }
     }
@@ -159,6 +182,6 @@ struct AddProductScreen: View {
         AddProductScreen(product: Product.preview)
     }
     .environment(ProductStore(httpClient: .development))
-    .environment(\.uploader, Uploader(httpClient: .development))
+    .environment(\.uploaderDownloader, ImageUploaderDownloader(httpClient: .development))
     .withMessageView()
 }

@@ -20,7 +20,7 @@ struct HelloMarketClientApp: App {
             HomeScreen()
             .environment(productStore)
             .environment(\.authenticationController, AuthenticationController(httpClient: .development))
-            .environment(\.uploader, Uploader(httpClient: .development))
+            .environment(\.uploaderDownloader, ImageUploaderDownloader(httpClient: .development))
             .withMessageView()
         }
     }
