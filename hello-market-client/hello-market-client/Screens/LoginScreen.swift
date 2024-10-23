@@ -13,11 +13,10 @@ struct LoginScreen: View {
     @Environment(\.showMessage) private var showMessage
     @Environment(\.dismiss) private var dismiss
     
-    @State private var username: String = "johndoe"
-    @State private var password: String = "password"
+    @State private var username: String = ""
+    @State private var password: String = ""
     @State private var message: String?
     @State private var isLoading: Bool = false
-    @State private var isLoggedIn: Bool = false
     @State private var isRegistrationPresented: Bool = false
     @AppStorage("userId") private var userId: Int?
     
@@ -35,7 +34,7 @@ struct LoginScreen: View {
             let response = try await authenticationController.login(username: username, password: password)
             
             guard let token = response.token,
-                    let userId = response.userId, response.success else {
+                  let userId = response.userId, response.success else {
                 
                 showMessage(response.message ?? "Unable to login")
                 return
@@ -45,7 +44,7 @@ struct LoginScreen: View {
             Keychain.set(token, forKey: "jwttoken")
             // set the user defaults
             self.userId = userId
-            dismiss() 
+            dismiss()
             
         } catch {
             showMessage(error.localizedDescription)
@@ -54,21 +53,62 @@ struct LoginScreen: View {
     
     var body: some View {
         
+        VStack {
+            
+            HStack {
+                Text("Don't have an account?")
+                Button("Register") {
+                    isRegistrationPresented = true
+                }.foregroundColor(.blue)
+            }
+            .font(.subheadline)
+            .padding([.bottom, .top], 20)
+            
             Form {
                 TextField("User name", text: $username)
                     .textInputAutocapitalization(.never)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(8)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.gray.opacity(0.5))
+                    )
+                
+                
                 SecureField("Password", text: $password)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(8)
+                    .overlay(
+                        HStack {
+                            Spacer()
+                            Image(systemName: "eye")
+                                .foregroundColor(.gray)
+                                .padding(.trailing, 8)
+                        }
+                    )
+                
                 HStack {
-                    Button("Login") {
+                    Button(action: {
                         Task {
                             await login()
                         }
-                    }.disabled(!isFormValid)
+                    }) {
+                        Text("Login")
+                            .bold()
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(isFormValid ? Color.purple : Color.gray)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                    }
+                    .disabled(!isFormValid)
+                    .padding(.horizontal)
+                    .padding(.top, 20)
                     
                     Spacer()
-                    Button("Register") {
-                        isRegistrationPresented = true
-                    }
+                    
                 }.buttonStyle(.borderless)
                 
             } .sheet(isPresented: $isRegistrationPresented, content: {
@@ -83,8 +123,9 @@ struct LoginScreen: View {
                     ProgressView("Loading...")
                 }
             }
+        }
         
-       
+        
         
         
     }

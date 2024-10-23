@@ -15,7 +15,6 @@ struct RegistrationScreen: View {
     
     @State private var username: String = ""
     @State private var password: String = ""
-    @State private var message: String = ""
     
     private var isFormValid: Bool {
         !username.isEmptyOrWhitespace && !password.isEmptyOrWhitespace
@@ -39,16 +38,44 @@ struct RegistrationScreen: View {
     var body: some View {
         Form {
             TextField("User name", text: $username)
+                .padding()
+                .background(Color(.systemGray6))
+                .cornerRadius(8)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.gray.opacity(0.5))
+                )
                 .textInputAutocapitalization(.never)
+                .padding(.bottom, 10) // for spacing
+
             SecureField("Password", text: $password)
-            Button("Register") {
+                .padding()
+                .background(Color(.systemGray6))
+                .cornerRadius(8)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(Color.gray.opacity(0.5))
+                )
+                .padding(.bottom, 20) // for spacing
+
+            Button(action: {
                 Task {
                     await register()
                 }
-            }.disabled(!isFormValid)
+            }) {
+                Text("Register")
+                    .bold()
+                    .frame(maxWidth: .infinity) // makes it fill the width
+                    .padding()
+                    .background(isFormValid ? Color.purple : Color.gray)
+                    .foregroundColor(.white)
+                    .cornerRadius(8)
+            }
+            .disabled(!isFormValid)
+            .padding(.vertical, 10)
             .buttonStyle(.borderless)
             
-            Text(message)
+            
         }
         .navigationTitle("Register")
     }
