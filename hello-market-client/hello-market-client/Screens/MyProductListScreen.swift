@@ -14,7 +14,6 @@ struct MyProductListScreen: View {
     @State private var isPresented: Bool = false
     @AppStorage("userId") private var userId: Int?
     
-    
     private func loadMyProducts() async {
         
         guard let userId = userId else {

@@ -113,15 +113,8 @@ struct AddProductScreen: View {
                 Image(uiImage: uiImage)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-            } else if let product {
-                AsyncImage(url: product.photoUrl) { img in
-                    img.resizable()
-                        .clipShape(RoundedRectangle(cornerRadius: 25.0, style: .continuous))
-                        .scaledToFit()
-                } placeholder: {
-                    ProgressView("Loading...")
-                }
             }
+
         }
         .task(id: selectedPhotoItem, {
             if let selectedPhotoItem {
