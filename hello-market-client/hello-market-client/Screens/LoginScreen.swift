@@ -75,19 +75,7 @@ struct LoginScreen: View {
                             .stroke(Color.gray.opacity(0.5))
                     )
                 
-                
-                SecureField("Password", text: $password)
-                    .padding()
-                    .background(Color(.systemGray6))
-                    .cornerRadius(8)
-                    .overlay(
-                        HStack {
-                            Spacer()
-                            Image(systemName: "eye")
-                                .foregroundColor(.gray)
-                                .padding(.trailing, 8)
-                        }
-                    )
+                PasswordField(password: $password)
                 
                 HStack {
                     Button(action: {

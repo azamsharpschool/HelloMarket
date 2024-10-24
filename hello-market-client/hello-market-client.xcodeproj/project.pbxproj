@@ -40,6 +40,7 @@
 		8DDE5FCA2C8A7E3700A0DBE0 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDE5FC92C8A7E3700A0DBE0 /* HTTPClient.swift */; };
 		8DDE5FCD2C8A7FE900A0DBE0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDE5FCC2C8A7FE900A0DBE0 /* Constants.swift */; };
 		8DDE5FD02C8A811A00A0DBE0 /* DTOs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDE5FCF2C8A811A00A0DBE0 /* DTOs.swift */; };
+		8DDEA1A82CC9C8B000D24D3B /* PasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDEA1A72CC9C8B000D24D3B /* PasswordField.swift */; };
 		8DEC814F2CAED9DD006C4DA5 /* TokenValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC814E2CAED9DD006C4DA5 /* TokenValidator.swift */; };
 		8DF13AF02C99262700898DFF /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF13AEF2C99262700898DFF /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
@@ -73,6 +74,7 @@
 		8DDE5FC92C8A7E3700A0DBE0 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 		8DDE5FCC2C8A7FE900A0DBE0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8DDE5FCF2C8A811A00A0DBE0 /* DTOs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTOs.swift; sourceTree = "<group>"; };
+		8DDEA1A72CC9C8B000D24D3B /* PasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordField.swift; sourceTree = "<group>"; };
 		8DEC814E2CAED9DD006C4DA5 /* TokenValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenValidator.swift; sourceTree = "<group>"; };
 		8DF13AEF2C99262700898DFF /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				8D7B081C2C8BEFB0003D7E91 /* MessageView.swift */,
+				8DDEA1A72CC9C8B000D24D3B /* PasswordField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				8DDE5FCA2C8A7E3700A0DBE0 /* HTTPClient.swift in Sources */,
 				8DF13AF02C99262700898DFF /* ImagePicker.swift in Sources */,
 				8D5B744A2CAF769800AA4BAC /* RequireAuthentication.swift in Sources */,
+				8DDEA1A82CC9C8B000D24D3B /* PasswordField.swift in Sources */,
 				8D5FE4852CB968A7000F47C8 /* ImageUploaderDownloader.swift in Sources */,
 				8D3EE2402C953384004E4B6D /* MyProductListScreen.swift in Sources */,
 				8D995CA32C8AA1FA003AFA2C /* LoginScreen.swift in Sources */,

@@ -24,6 +24,7 @@ struct ProductListScreen: View {
           
             ZStack {
                 ProductCellView(product: product)
+                
                 NavigationLink(destination: ProductDetailScreen(product: product)) {
                     EmptyView()
                 }
