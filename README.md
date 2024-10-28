@@ -38,6 +38,8 @@ CREATE DATABASE hellomarketdb;
 
 Press Enter to execute the command. This will create the `hellomarketdb` database on your local machine. There are many tools available to visualize the database; I recommend using [BeeKeeper Community Edition](https://github.com/beekeeper-studio/beekeeper-studio).
 
+After creating the database, you can go inside the hello-market-server folder and run `npm install`. This will install all the required packages for your server. Once, all the packages are installed you need to configure the database using the following settings. This should be in ```config.json``` file, which resides inside the ```config``` folder. 
+
 You can use the following configuration to connect BeeKeeper to the database:
 
 ```json
@@ -49,6 +51,8 @@ You can use the following configuration to connect BeeKeeper to the database:
     "dialect": "postgres"
 }
 ```
+
+Next, to create all the required tables you can run sequelize db:migrate from the terminal from inside the hello-market-server folder. This will make sure you have all the tables required for the app. 
 
 To run your server, make sure you are inside the `hello-market-server` folder, then run:
 
