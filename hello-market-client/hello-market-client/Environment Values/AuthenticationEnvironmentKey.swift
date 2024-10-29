@@ -8,13 +8,6 @@
 import Foundation
 import SwiftUI
 
-private struct AuthenticationEnvironmentKey: EnvironmentKey {
-  static let defaultValue = AuthenticationController(httpClient: HTTPClient())
-}
-
 extension EnvironmentValues {
-  var authenticationController: AuthenticationController {
-    get { self[AuthenticationEnvironmentKey.self] }
-    set { self[AuthenticationEnvironmentKey.self] = newValue }
-  }
+    @Entry var authenticationController = AuthenticationController(httpClient: HTTPClient())
 }
