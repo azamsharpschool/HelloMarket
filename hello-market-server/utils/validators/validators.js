@@ -34,10 +34,27 @@ const updateProductValidator = [
       .notEmpty().withMessage('photoUrl cannot be empty.')
 ]
 
+const addCartItemValidator = [
+    body('product_id')
+      .not()
+      .isEmpty()
+      .withMessage('Product Id cannot be empty.')
+      .isInt()
+      .withMessage('Product Id must be an integer.'),
+    
+    body('quantity')
+      .not()
+      .isEmpty()
+      .withMessage('Quantity cannot be empty.')
+      .isInt({ min: 1 })
+      .withMessage('Quantity must be a positive integer.'),
+  ];
+
 module.exports = {
     registerValidator,
     loginValidator, 
     createProductValidator, 
     deleteProductValidator, 
-    updateProductValidator
+    updateProductValidator, 
+    addCartItemValidator
 };
