@@ -75,3 +75,36 @@ struct UpdateProductResponse: Codable {
     let product: Product? 
 }
 
+// Cart
+
+struct Cart: Codable, Identifiable {
+    let id: Int?
+    let userId: Int
+    //var cartItems: [CartItem] = []
+    
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case userId = "user_id"
+    }
+}
+
+struct CreateCartItemRequest: Codable, Identifiable {
+    var id: Int?
+    let cartId: Int?
+    let productId: Int
+    let quantity: Int
+    
+    init(id: Int? = nil, cartId: Int?, productId: Int, quantity: Int) {
+        self.id = id
+        self.cartId = cartId
+        self.productId = productId
+        self.quantity = quantity
+    }
+    
+    private enum CodingKeys: String, CodingKey {
+        case id, quantity
+        case cartId = "cart_id"
+        case productId = "product_id"
+    }
+}
+

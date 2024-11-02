@@ -10,6 +10,16 @@ import SwiftUI
 struct ProductDetailScreen: View {
     
     let product: Product
+    @Environment(CartStore.self) private var cartStore
+    
+    private func addToCart() async throws {
+        
+        guard let productId = product.id else {
+            throw ProductError.productNotFound
+        }
+        
+        cartStore.addItemToCart(productId: productId, quantity: 2)
+    }
     
     var body: some View {
         ScrollView {
@@ -34,7 +44,13 @@ struct ProductDetailScreen: View {
                 .padding([.top], 2)
             
             Button {
-                    
+                Task {
+                    do {
+                        try await addToCart()
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
                 } label: {
                     Text("Add to cart")
                         .frame(maxWidth: .infinity)
@@ -51,4 +67,5 @@ struct ProductDetailScreen: View {
 
 #Preview {
     ProductDetailScreen(product: Product.preview)
+        .environment(CartStore(httpClient: .development))
 }
