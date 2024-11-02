@@ -18,7 +18,7 @@ struct ProductDetailScreen: View {
             throw ProductError.productNotFound
         }
         
-        cartStore.addItemToCart(productId: productId, quantity: 2)
+        try await cartStore.addItemToCart(productId: productId, quantity: 1)
     }
     
     var body: some View {

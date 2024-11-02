@@ -37,3 +37,8 @@ enum ProductError: Error {
     case uploadFailed
     case productNotFound
 }
+
+enum CartError: Error {
+    case invalidQuantity 
+    case operationFailed(String)
+}

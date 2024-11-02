@@ -47,7 +47,7 @@ extension AppScreen {
                     .requiresAuthentication()
             }
             case .cart:
-                Text("Cart")
+                CartScreen()
             case .profile:
                 ProfileScreen()
                     .requiresAuthentication()     
@@ -74,4 +74,5 @@ struct HomeScreen: View {
 #Preview {
     HomeScreen()
     .environment(ProductStore(httpClient: .development))
+    .environment(CartStore(httpClient: .development))
 }
