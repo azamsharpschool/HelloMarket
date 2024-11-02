@@ -24,13 +24,7 @@ struct HelloMarketClientApp: App {
             .environment(\.authenticationController, AuthenticationController(httpClient: .development))
             .environment(\.uploaderDownloader, ImageUploaderDownloader(httpClient: .development))
             .withMessageView()
-            .task {
-                do {
-                    try await cartStore.loadCart()
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
+          
         }
     }
 }

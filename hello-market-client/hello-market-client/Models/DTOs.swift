@@ -9,13 +9,13 @@ import Foundation
 
 struct RegisterResponse: Codable {
     let message: String?
-    let success: Bool 
+    let success: Bool
 }
 
 struct LoginResponse: Codable {
     let message: String?
     let token: String?
-    let success: Bool 
+    let success: Bool
     let userId: Int?
     let username: String?
 }
@@ -27,7 +27,7 @@ struct ErrorResponse: Codable {
 struct UploadDataResponse: Codable {
     let message: String?
     let success: Bool
-    let downloadURL: URL? 
+    let downloadURL: URL?
 }
 
 struct Product: Codable, Identifiable {
@@ -61,18 +61,18 @@ extension Product {
 struct CreateProductResponse: Codable {
     let success: Bool
     let product: Product?
-    let message: String? 
+    let message: String?
 }
 
 struct DeleteProductResponse: Codable {
     let success: Bool
-    let message: String? 
+    let message: String?
 }
 
 struct UpdateProductResponse: Codable {
     let success: Bool
     let message: String?
-    let product: Product? 
+    let product: Product?
 }
 
 // Cart
@@ -87,10 +87,58 @@ struct Cart: Codable, Identifiable {
     }
 }
 
+extension Cart {
+    static var preview: Cart {
+        return Cart(
+            id: 1,
+            userId: 101,
+            cartItems: [
+                CartItem(
+                    id: 1,
+                    product: Product(
+                        id: 201,
+                        name: "Coffee",
+                        description: "A rich, aromatic blend of premium coffee beans.",
+                        price: 5.99,
+                        photoUrl: URL(string: "https://picsum.photos/200/300"),
+                        userId: 101
+                    ),
+                    quantity: 2
+                ),
+                CartItem(
+                    id: 2,
+                    product: Product(
+                        id: 202,
+                        name: "Tea",
+                        description: "Refreshing green tea with hints of mint.",
+                        price: 3.49,
+                        photoUrl: URL(string: "https://picsum.photos/200/300"),
+                        userId: 101
+                    ),
+                    quantity: 1
+                ),
+                CartItem(
+                    id: 3,
+                    product: Product(
+                        id: 203,
+                        name: "Hot Chocolate",
+                        description: "Smooth and creamy hot chocolate.",
+                        price: 4.99,
+                        photoUrl: URL(string: "https://picsum.photos/200/300"),
+                        userId: 101
+                    ),
+                    quantity: 3
+                )
+            ]
+        )
+    }
+}
+
+
 struct CartItem: Codable, Identifiable {
     let id: Int?
     let product: Product
-    var quantity: Int 
+    var quantity: Int
 }
 
 extension CartItem {
