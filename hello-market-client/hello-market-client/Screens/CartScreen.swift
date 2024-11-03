@@ -14,11 +14,12 @@ struct CartScreen: View {
     var body: some View {
         VStack {
             if let cart = cartStore.cart {
-                CartView(cartItems: cart.cartItems)
+                CartItemListView(cartItems: cart.cartItems)
             } else {
                 ContentUnavailableView("No items in the cart.", systemImage: "cart")
             }
         }
+        .navigationTitle("Cart")
         .task {
             do {
                 try await cartStore.loadCart()
@@ -26,7 +27,7 @@ struct CartScreen: View {
                 print(error.localizedDescription)
             }
         }
-        .navigationTitle("Cart")
+       
     }
 }
 

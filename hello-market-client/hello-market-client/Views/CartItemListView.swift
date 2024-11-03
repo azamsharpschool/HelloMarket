@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CartView: View {
+struct CartItemListView: View {
     
     let cartItems: [CartItem]
     
@@ -19,5 +19,5 @@ struct CartView: View {
 }
 
 #Preview {
-    CartView(cartItems: Cart.preview.cartItems)
+    CartItemListView(cartItems: Cart.preview.cartItems)
 }

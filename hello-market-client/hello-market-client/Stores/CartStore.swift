@@ -19,12 +19,16 @@ class CartStore {
         self.httpClient = httpClient
     }
     
+    var cartItemsCount: Int {
+        cart?.cartItems.reduce(0) { total, item in
+            total + item.quantity
+        } ?? 0
+    }
+    
     func loadCart() async throws {
         
         let resource = Resource(url: Constants.Urls.loadCart, modelType: CartResponse.self)
         let response = try await httpClient.load(resource)
-        
-        print(response.message)
         
         if let cart = response.cart, response.success {
             self.cart = cart

@@ -12,13 +12,15 @@ struct ProductDetailScreen: View {
     let product: Product
     @Environment(CartStore.self) private var cartStore
     
+    @State private var quantity: Int = 1
+    
     private func addToCart() async throws {
         
         guard let productId = product.id else {
             throw ProductError.productNotFound
         }
         
-        try await cartStore.addItemToCart(productId: productId, quantity: 1)
+        try await cartStore.addItemToCart(productId: productId, quantity: quantity)
     }
     
     var body: some View {
@@ -42,6 +44,10 @@ struct ProductDetailScreen: View {
                 .font(.title)
                 .bold()
                 .padding([.top], 2)
+            
+            Stepper(value: $quantity) {
+                Text("Quantity: \(quantity)")
+            }
             
             Button {
                 Task {
@@ -68,4 +74,5 @@ struct ProductDetailScreen: View {
 #Preview {
     ProductDetailScreen(product: Product.preview)
         .environment(CartStore(httpClient: .development))
+        .withMessageView()
 }

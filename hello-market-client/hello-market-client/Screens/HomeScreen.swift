@@ -47,7 +47,9 @@ extension AppScreen {
                     .requiresAuthentication()
             }
             case .cart:
+            NavigationStack {
                 CartScreen()
+            }
             case .profile:
                 ProfileScreen()
                     .requiresAuthentication()     
@@ -55,10 +57,10 @@ extension AppScreen {
     }
 }
 
-
 struct HomeScreen: View {
     
     @State var selection: AppScreen?
+    @Environment(CartStore.self) private var cartStore
     
     var body: some View {
         TabView(selection: $selection) {
@@ -66,6 +68,7 @@ struct HomeScreen: View {
                     screen.destination
                         .tag(screen as AppScreen?)
                         .tabItem { screen.label }
+                        .badge((screen as AppScreen?) == .cart ? cartStore.cartItemsCount: 0)
             }
         }.navigationBarBackButtonHidden(true)
     }
