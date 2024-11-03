@@ -45,6 +45,11 @@ class CartStore {
     }
     
     func updateItemQuantity(productId: Int, quantity: Int) async throws {
+        
+        // if quantity is zero then delete it
+        
+        // if quantity is > zero then add to the cart, which will update the cart
+        
         try await addItemToCart(productId: productId, quantity: quantity)
     }
     
