@@ -10,6 +10,8 @@ import SwiftUI
 struct CartItemView: View {
     
     let cartItem: CartItem
+    @State private var quantity: Int = 0
+    let onQuantityUpdate: (Int, Int) -> Void
     
     var body: some View {
         HStack(alignment: .top) {
@@ -26,12 +28,42 @@ struct CartItemView: View {
                     Text(cartItem.product.name)
                         .font(.title3)
                     Text(cartItem.product.price, format: .currency(code: "USD"))
-                    Text("\(cartItem.quantity)")
-                }  .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    HStack {
+                        Button {
+                            if quantity == 1 {
+                                // delete it
+                            } else {
+                                quantity -= 1
+                                onQuantityUpdate(cartItem.product.id!, quantity)
+                            }
+                        } label: {
+                            Image(systemName: quantity == 1 ? "trash" : "minus")
+                                .frame(width: 24, height: 24) // Set a fixed frame size
+                        }
+                        Text("\(quantity)")
+                      
+                        Button(action: {
+                                quantity += 1
+                                onQuantityUpdate(cartItem.product.id!, quantity)
+                            }) {
+                                Image(systemName: "plus")
+                            }
+                    }
+                    .frame(width: 120)
+                    .background(.gray)
+                    .foregroundStyle(.white)
+                    .buttonStyle(.borderedProminent)
+                    .tint(.gray)
+                    .cornerRadius(15.0)
+                    
+                }.frame(maxWidth: .infinity, alignment: .leading)
+        }.onAppear {
+            quantity = cartItem.quantity
         }
     }
 }
 
 #Preview {
-    CartItemView(cartItem: CartItem.preview)
+    CartItemView(cartItem: CartItem.preview, onQuantityUpdate: { _, _  in })
 }

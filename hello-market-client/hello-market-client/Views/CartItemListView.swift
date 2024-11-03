@@ -10,14 +10,15 @@ import SwiftUI
 struct CartItemListView: View {
     
     let cartItems: [CartItem]
+    let onQuantityUpdate: (Int, Int) -> Void
     
     var body: some View {
-        List(cartItems) { cartItem in
-            CartItemView(cartItem: cartItem)
+        ForEach(cartItems) { cartItem in
+            CartItemView(cartItem: cartItem, onQuantityUpdate: onQuantityUpdate)
         }.listStyle(.plain)
     }
 }
 
 #Preview {
-    CartItemListView(cartItems: Cart.preview.cartItems)
+    CartItemListView(cartItems: Cart.preview.cartItems, onQuantityUpdate: { _, _  in })
 }

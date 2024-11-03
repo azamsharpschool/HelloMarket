@@ -19,7 +19,13 @@ class CartStore {
         self.httpClient = httpClient
     }
     
-    var cartItemsCount: Int {
+    var total: Double {
+        cart?.cartItems.reduce(0.0, { total, cartItem in
+            total + (cartItem.product.price * Double(cartItem.quantity))
+        }) ?? 0.0
+    }
+    
+    var itemsCount: Int {
         cart?.cartItems.reduce(0) { total, item in
             total + item.quantity
         } ?? 0
@@ -36,6 +42,10 @@ class CartStore {
         } else {
             throw CartError.operationFailed(response.message ?? "")
         }
+    }
+    
+    func updateItemQuantity(productId: Int, quantity: Int) async throws {
+        try await addItemToCart(productId: productId, quantity: quantity)
     }
     
     func addItemToCart(productId: Int, quantity: Int) async throws {
@@ -67,8 +77,6 @@ class CartStore {
         } else {
             throw CartError.operationFailed(response.message ?? "")
         }
-        
-        print(cart?.cartItems.count)
         
     }
     

@@ -69,7 +69,7 @@ exports.addCartItem = async (req, res) => {
 
         if (!created) {
             // item already exists 
-            cartItem.quantity += quantity
+            cartItem.quantity = quantity
             // save it 
             await cartItem.save()
         }
