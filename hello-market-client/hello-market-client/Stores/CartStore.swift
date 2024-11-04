@@ -38,7 +38,6 @@ class CartStore {
         
         if let cart = response.cart, response.success {
             self.cart = cart
-            print(cart.cartItems)
         } else {
             throw CartError.operationFailed(response.message ?? "")
         }
@@ -46,17 +45,22 @@ class CartStore {
     
     func deleteCartItem(cartItemId: Int) async throws {
         
-        let resource = Resource(url: Constants.Urls.deleteCartItem(cartItemId), method: .delete, modelType: [String: Bool].self)
+        let resource = Resource(url: Constants.Urls.deleteCartItem(cartItemId), method: .delete, modelType: DeleteCartItemResponse.self)
         
         let response = try await httpClient.load(resource)
         
-        if let success = response["success"], success == true {
+        if response.success {
             // remove the cartItem from cartItems
-            cart?.cartItems.removeAll { $0.id == cartItemId }
+            if let cart = cart {
+                self.cart?.cartItems = cart.cartItems.filter { $0.id != cartItemId }
+            }
+        } else {
+            throw CartError.operationFailed(response.message ?? "")
         }
     }
     
     func updateItemQuantity(productId: Int, quantity: Int) async throws {
+        
         try await addItemToCart(productId: productId, quantity: quantity)
     }
     
@@ -89,7 +93,5 @@ class CartStore {
         } else {
             throw CartError.operationFailed(response.message ?? "")
         }
-        
     }
-    
 }

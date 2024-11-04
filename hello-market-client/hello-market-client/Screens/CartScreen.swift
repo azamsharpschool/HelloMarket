@@ -10,9 +10,16 @@ import SwiftUI
 struct CartScreen: View {
     
     @Environment(CartStore.self) private var cartStore
+    @Environment(\.showMessage) private var showMessage
     
     private func handleCartItemDelete(cartItemId: Int) {
-        
+        Task {
+            do {
+                try await cartStore.deleteCartItem(cartItemId: cartItemId)
+            } catch {
+                showMessage(error.localizedDescription)
+            }
+        }
     }
     
     private func handleQuantityUpdate(productId: Int, quantity: Int) {
@@ -20,7 +27,7 @@ struct CartScreen: View {
             do {
                 try await cartStore.updateItemQuantity(productId: productId, quantity: quantity)
             } catch {
-                print(error.localizedDescription)
+                showMessage(error.localizedDescription)
             }
         }
     }
@@ -38,6 +45,7 @@ struct CartScreen: View {
                 Button(action: {
                    
                 }) {
+                   
                     Text("Proceed to checkout ^[(\(cartStore.itemsCount) Item](inflect: true))")
                         .bold()
                         .frame(maxWidth: .infinity)
@@ -60,7 +68,7 @@ struct CartScreen: View {
             do {
                 try await cartStore.loadCart()
             } catch {
-                print(error.localizedDescription)
+                showMessage(error.localizedDescription)
             }
         }
        
@@ -71,5 +79,6 @@ struct CartScreen: View {
     NavigationStack {
         CartScreen()
             .environment(CartStore(httpClient: .development))
+            .withMessageView()
     }
 }

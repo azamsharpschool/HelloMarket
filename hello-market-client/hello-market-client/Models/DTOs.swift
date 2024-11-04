@@ -138,7 +138,7 @@ extension Cart {
 struct CartItem: Codable, Identifiable {
     let id: Int?
     let product: Product
-    var quantity: Int
+    var quantity: Int = 1 
 }
 
 extension CartItem {
@@ -158,6 +158,11 @@ struct CartResponse: Codable {
     let success: Bool
     let message: String?
     let cart: Cart?
+}
+
+struct DeleteCartItemResponse: Codable {
+    let success: Bool
+    let message: String?
 }
 
 

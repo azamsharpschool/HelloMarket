@@ -30,6 +30,9 @@ struct CartItemView: View {
                         .font(.title3)
                     Text(cartItem.product.price, format: .currency(code: "USD"))
                     
+                    CartItemQuantityView(cartItem: cartItem)
+                    
+                    /*
                     HStack {
                         Button {
                             if quantity == 1 {
@@ -58,6 +61,8 @@ struct CartItemView: View {
                     .buttonStyle(.borderedProminent)
                     .tint(.gray)
                     .cornerRadius(15.0)
+                    */
+                    
                     
                 }.frame(maxWidth: .infinity, alignment: .leading)
         }.onAppear {
@@ -68,4 +73,5 @@ struct CartItemView: View {
 
 #Preview {
     CartItemView(cartItem: CartItem.preview, onQuantityUpdate: { _, _  in }, onCartItemDelete: { _ in })
+        .environment(CartStore(httpClient: .development))
 }
