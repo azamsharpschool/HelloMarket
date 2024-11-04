@@ -24,6 +24,18 @@ struct HelloMarketClientApp: App {
             .environment(\.authenticationController, AuthenticationController(httpClient: .development))
             .environment(\.uploaderDownloader, ImageUploaderDownloader(httpClient: .development))
             .withMessageView()
+            .task(id: userId) {
+                print("task in App fired")
+                do {
+                    
+                    if userId != nil {
+                        try await cartStore.loadCart()
+                    }
+                    
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
           
         }
     }

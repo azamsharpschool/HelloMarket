@@ -31,6 +31,11 @@ class CartStore {
         } ?? 0
     }
     
+    func emptyCart() {
+        print("emptyCart")
+        cart?.cartItems = []
+    }
+    
     func loadCart() async throws {
         
         let resource = Resource(url: Constants.Urls.loadCart, modelType: CartResponse.self)
@@ -77,16 +82,16 @@ class CartStore {
         let response = try await httpClient.load(resource)
         
         if let cartItem = response.cartItem, response.success {
+            // Initialize cart if it's nil
+            if cart == nil {
+                guard let userId = UserDefaults.standard.userId else { throw UserError.missingUserId }
+                cart = Cart(userId: userId)
+            }
+            
             // if item already exists then update it else insert it
-            let index = cart?.cartItems.firstIndex(where: { $0.id == cartItem.id })
-            if let index {
+            if let index = cart?.cartItems.firstIndex(where: { $0.id == cartItem.id }) {
                 cart?.cartItems[index] = cartItem
             } else {
-                
-                guard let userId = UserDefaults.standard.userId else { throw UserError.missingUserId }
-                
-                // initialze the cart
-                cart = Cart(userId: userId)
                 // new item
                 cart?.cartItems.append(cartItem)
             }
@@ -94,4 +99,5 @@ class CartStore {
             throw CartError.operationFailed(response.message ?? "")
         }
     }
+
 }

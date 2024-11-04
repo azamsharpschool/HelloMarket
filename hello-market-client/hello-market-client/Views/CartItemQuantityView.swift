@@ -54,7 +54,7 @@ struct CartItemQuantityView: View {
         .onAppear(perform: {
             quantity = cartItem.quantity
         })
-        .frame(width: 120)
+        .frame(width: 150)
         .background(.gray)
         .foregroundStyle(.white)
         .buttonStyle(.borderedProminent)
