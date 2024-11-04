@@ -17,7 +17,7 @@ struct ProductDetailScreen: View {
     private func addToCart() async throws {
         
         guard let productId = product.id else {
-            throw ProductError.productNotFound
+            throw ProductError.productNotFound  
         }
         
         try await cartStore.addItemToCart(productId: productId, quantity: quantity)
