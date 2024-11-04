@@ -1,8 +1,8 @@
 const models = require('../models')
 
-exports.loadCart = async (req, res) => {
 
-    req.userId = 2 
+
+exports.loadCart = async (req, res) => {
 
     try {
         const cart = await models.Cart.findOne({
@@ -38,9 +38,7 @@ exports.addCartItem = async (req, res) => {
 
     const productId = req.body.product_id
     const quantity = parseInt(req.body.quantity)
-
-    req.userId = 2
-
+    
     try {
         // get the cart if it is already available for this user 
         let cart = await models.Cart.findOne({
