@@ -6,10 +6,13 @@ const validationErrorsMiddleware = require('../middlewares/validationErrorsMiddl
 const authenticate = require('../middlewares/authMiddleware');
 
 // add authenticate later 
-const cartItemMiddlewares = [addCartItemValidator, validationErrorsMiddleware];
+const cartItemMiddlewares = [authenticate, addCartItemValidator, validationErrorsMiddleware];
 router.post('/items', cartItemMiddlewares, cartController.addCartItem);
 
-// loadCart
-router.get('/', cartController.loadCart)
+// load cart 
+router.get('/', cartItemMiddlewares, cartController.loadCart)
+
+// delete cart item 
+router.delete('/item/:cartItemId', cartItemMiddlewares, cartController.removeCartItem)
 
 module.exports = router 

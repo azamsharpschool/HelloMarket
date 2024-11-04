@@ -11,8 +11,11 @@ struct CartScreen: View {
     
     @Environment(CartStore.self) private var cartStore
     
+    private func handleCartItemDelete(cartItemId: Int) {
+        
+    }
+    
     private func handleQuantityUpdate(productId: Int, quantity: Int) {
-        print(quantity)
         Task {
             do {
                 try await cartStore.updateItemQuantity(productId: productId, quantity: quantity)
@@ -44,7 +47,7 @@ struct CartScreen: View {
                         .cornerRadius(8)
                 }
                 
-                CartItemListView(cartItems: cart.cartItems, onQuantityUpdate: handleQuantityUpdate)
+                CartItemListView(cartItems: cart.cartItems, onQuantityUpdate: handleQuantityUpdate, onCartItemDelete: handleCartItemDelete)
                 
             } else {
                 ContentUnavailableView("No items in the cart.", systemImage: "cart")

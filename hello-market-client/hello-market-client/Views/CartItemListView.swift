@@ -11,14 +11,15 @@ struct CartItemListView: View {
     
     let cartItems: [CartItem]
     let onQuantityUpdate: (Int, Int) -> Void
+    let onCartItemDelete: (Int) -> Void
     
     var body: some View {
         ForEach(cartItems) { cartItem in
-            CartItemView(cartItem: cartItem, onQuantityUpdate: onQuantityUpdate)
+            CartItemView(cartItem: cartItem, onQuantityUpdate: onQuantityUpdate, onCartItemDelete: onCartItemDelete)
         }.listStyle(.plain)
     }
 }
 
 #Preview {
-    CartItemListView(cartItems: Cart.preview.cartItems, onQuantityUpdate: { _, _  in })
+    CartItemListView(cartItems: Cart.preview.cartItems, onQuantityUpdate: { _, _  in }, onCartItemDelete: { _ in })
 }

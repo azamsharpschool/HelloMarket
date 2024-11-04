@@ -4,6 +4,7 @@ const models = require('../models')
 
 const authenticate = async (req, res, next) => {
 
+    console.log("authenticate")
     // get the authorization header 
     const authHeader = req.headers['authorization']
 
@@ -18,17 +19,20 @@ const authenticate = async (req, res, next) => {
     }
 
     try {
-        
-        const decoded = jwt.verify(token, process.env.JWT_KEY);
+
+        const decoded = jwt.verify(token, 'SECRETKEY');
         const user = await models.User.findByPk(decoded.userId)
+        console.log(user)
         if(!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
         req.userId = user.id 
+        console.log(req.userId)
         next() 
 
     } catch (error) {
+        console.log(error)
         return res.status(403).json({ message: 'Invalid or expired token' });
     }
 

@@ -44,12 +44,19 @@ class CartStore {
         }
     }
     
+    func deleteCartItem(cartItemId: Int) async throws {
+        
+        let resource = Resource(url: Constants.Urls.deleteCartItem(cartItemId), method: .delete, modelType: [String: Bool].self)
+        
+        let response = try await httpClient.load(resource)
+        
+        if let success = response["success"], success == true {
+            // remove the cartItem from cartItems
+            cart?.cartItems.removeAll { $0.id == cartItemId }
+        }
+    }
+    
     func updateItemQuantity(productId: Int, quantity: Int) async throws {
-        
-        // if quantity is zero then delete it
-        
-        // if quantity is > zero then add to the cart, which will update the cart
-        
         try await addItemToCart(productId: productId, quantity: quantity)
     }
     

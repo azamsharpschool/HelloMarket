@@ -12,6 +12,7 @@ struct CartItemView: View {
     let cartItem: CartItem
     @State private var quantity: Int = 0
     let onQuantityUpdate: (Int, Int) -> Void
+    let onCartItemDelete: (Int) -> Void
     
     var body: some View {
         HStack(alignment: .top) {
@@ -32,7 +33,8 @@ struct CartItemView: View {
                     HStack {
                         Button {
                             if quantity == 1 {
-                                // delete it
+                                print("about to delete")
+                                onCartItemDelete(cartItem.id!)
                             } else {
                                 quantity -= 1
                                 onQuantityUpdate(cartItem.product.id!, quantity)
@@ -65,5 +67,5 @@ struct CartItemView: View {
 }
 
 #Preview {
-    CartItemView(cartItem: CartItem.preview, onQuantityUpdate: { _, _  in })
+    CartItemView(cartItem: CartItem.preview, onQuantityUpdate: { _, _  in }, onCartItemDelete: { _ in })
 }
