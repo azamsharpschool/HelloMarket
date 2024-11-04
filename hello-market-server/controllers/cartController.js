@@ -59,6 +59,8 @@ exports.addCartItem = async (req, res) => {
     const productId = req.body.product_id
     const quantity = parseInt(req.body.quantity)
 
+    console.log('Quantity: ', quantity)
+
     console.log(req.userId)
 
     try {
@@ -89,7 +91,7 @@ exports.addCartItem = async (req, res) => {
 
         if (!created) {
             // item already exists 
-            cartItem.quantity = quantity
+            cartItem.quantity += quantity
             // save it 
             await cartItem.save()
         }

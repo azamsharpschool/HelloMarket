@@ -71,9 +71,10 @@ class CartStore {
     
     func addItemToCart(productId: Int, quantity: Int) async throws {
         
+        /*
         guard quantity > 0 else {
             throw CartError.invalidQuantity
-        }
+        } */
         
         let body = ["product_id": productId, "quantity": quantity]
         let bodyData = try JSONEncoder().encode(body)

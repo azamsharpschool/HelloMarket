@@ -46,8 +46,8 @@ const addCartItemValidator = [
       .not()
       .isEmpty()
       .withMessage('Quantity cannot be empty.')
-      .isInt({ min: 1 })
-      .withMessage('Quantity must be a positive integer.'),
+      //.isInt({ min: 1 })
+      //.withMessage('Quantity must be a positive integer.'),
   ];
 
 module.exports = {
