@@ -25,7 +25,6 @@ struct HelloMarketClientApp: App {
             .environment(\.uploaderDownloader, ImageUploaderDownloader(httpClient: .development))
             .withMessageView()
             .task(id: userId) {
-                print("task in App fired")
                 do {
                     
                     if userId != nil {

@@ -49,6 +49,7 @@ extension AppScreen {
             case .cart:
             NavigationStack {
                 CartScreen()
+                    .requiresAuthentication()
             }
             case .profile:
                 ProfileScreen()

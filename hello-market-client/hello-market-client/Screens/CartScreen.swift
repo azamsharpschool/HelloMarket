@@ -55,7 +55,7 @@ struct CartScreen: View {
                         .cornerRadius(8)
                 }
                 
-                CartItemListView(cartItems: cart.cartItems, onQuantityUpdate: handleQuantityUpdate, onCartItemDelete: handleCartItemDelete)
+                CartItemListView(cartItems: cart.cartItems)
                 
             } else {
                 ContentUnavailableView("No items in the cart.", systemImage: "cart")
