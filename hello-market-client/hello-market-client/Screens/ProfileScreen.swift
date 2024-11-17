@@ -7,6 +7,20 @@
 
 import SwiftUI
 
+enum ProfileMenuOption: CaseIterable {
+    case orders
+    case signout
+    
+    var title: String {
+        switch self {
+            case .orders:
+                return "Orders"
+            case .signout:
+                return "Signout"
+        }
+    }
+}
+
 struct ProfileScreen: View {
     
     @AppStorage("userId") private var userId: String?
@@ -17,11 +31,12 @@ struct ProfileScreen: View {
             let _ = Keychain<String>.delete("jwttoken")
             userId = nil
             cartStore.emptyCart() 
-        }
+        }.navigationTitle("Profile")
     }
 }
 
 #Preview {
-    ProfileScreen()
-        .environment(CartStore(httpClient: .development))
+    NavigationStack {
+        ProfileScreen()
+    }.environment(CartStore(httpClient: .development))
 }

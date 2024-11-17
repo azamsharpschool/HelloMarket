@@ -52,8 +52,10 @@ extension AppScreen {
                     .requiresAuthentication()
             }
             case .profile:
+            NavigationStack {
                 ProfileScreen()
-                    .requiresAuthentication()     
+                    .requiresAuthentication()
+            }
         }
     }
 }
