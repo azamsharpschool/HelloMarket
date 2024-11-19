@@ -12,25 +12,7 @@ struct CartScreen: View {
     @Environment(CartStore.self) private var cartStore
     @Environment(\.showMessage) private var showMessage
     
-    private func handleCartItemDelete(cartItemId: Int) {
-        Task {
-            do {
-                try await cartStore.deleteCartItem(cartItemId: cartItemId)
-            } catch {
-                showMessage(error.localizedDescription)
-            }
-        }
-    }
-    
-    private func handleQuantityUpdate(productId: Int, quantity: Int) {
-        Task {
-            do {
-                try await cartStore.updateItemQuantity(productId: productId, quantity: quantity)
-            } catch {
-                showMessage(error.localizedDescription)
-            }
-        }
-    }
+    @State private var isPresented: Bool = false
     
     var body: some View {
         List {
@@ -43,7 +25,7 @@ struct CartScreen: View {
                         .bold()
                 }
                 Button(action: {
-                   
+                    isPresented = true
                 }) {
                    
                     Text("Proceed to checkout ^[(\(cartStore.itemsCount) Item](inflect: true))")
@@ -53,7 +35,7 @@ struct CartScreen: View {
                         .background(Color.green)
                         .foregroundStyle(.white)
                         .cornerRadius(8)
-                }
+                }.buttonStyle(.borderless)
                 
                 CartItemListView(cartItems: cart.cartItems)
                 
@@ -61,17 +43,21 @@ struct CartScreen: View {
                 ContentUnavailableView("No items in the cart.", systemImage: "cart")
             }
         }
-       
+        .sheet(isPresented: $isPresented, content: {
+            NavigationStack {
+                CheckoutScreen()
+            }
+        })
         .listStyle(.plain)
         .navigationTitle("Cart")
-        /*
+        
         .task {
             do {
                 try await cartStore.loadCart()
             } catch {
                 showMessage(error.localizedDescription)
             }
-        } */
+        }
        
     }
 }
