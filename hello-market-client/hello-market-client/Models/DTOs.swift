@@ -165,5 +165,14 @@ struct DeleteCartItemResponse: Codable {
     let message: String?
 }
 
+struct UserInfo: Codable {
+    let firstName: String
+    let lastName: String
+    let street: String
+    let city: String
+    let state: String
+    let zipCode: String
+}
+
 
 
