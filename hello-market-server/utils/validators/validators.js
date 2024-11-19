@@ -50,6 +50,10 @@ const addCartItemValidator = [
       //.withMessage('Quantity must be a positive integer.'),
   ];
 
+const updateUserInfoValidator = [
+  
+]
+
 module.exports = {
     registerValidator,
     loginValidator, 
