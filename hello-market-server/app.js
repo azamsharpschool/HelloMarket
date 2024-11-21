@@ -18,7 +18,7 @@ app.use(express.json())
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes)
 app.use('/api/cart', cartRoutes)
-app.use('/api/users', userRoutes)
+app.use('/api/user', userRoutes)
 
 app.listen(8080, () => {
     console.log('Server is running...')
