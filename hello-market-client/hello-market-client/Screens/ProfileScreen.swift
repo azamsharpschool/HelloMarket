@@ -93,13 +93,13 @@ struct ProfileScreen: View {
         
         .onChange(of: userStore.userInfo, initial: true, {
             if let userInfo = userStore.userInfo {
-                firstName = userInfo.firstName
-                lastName = userInfo.lastName
-                street = userInfo.street
-                city = userInfo.city
-                state = userInfo.state
-                zipCode = userInfo.zipCode
-                country = userInfo.country
+                firstName = userInfo.firstName ?? ""
+                lastName = userInfo.lastName ?? ""
+                street = userInfo.street ?? ""
+                city = userInfo.city ?? ""
+                state = userInfo.state ?? ""
+                zipCode = userInfo.zipCode ?? ""
+                country = userInfo.country ?? ""
             }
         }) 
         

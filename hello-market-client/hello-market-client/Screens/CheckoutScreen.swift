@@ -10,6 +10,8 @@ import SwiftUI
 struct CheckoutScreen: View {
     
     @Environment(CartStore.self) private var cartStore
+    @Environment(UserStore.self) private var userStore
+    
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -55,11 +57,19 @@ struct CheckoutScreen: View {
                         Text(0.00, format: .currency(code: "USD"))
                     }
                     
-                    Text("Delivering to Mohammad Azam")
-                            .bold()
+                    if let userInfo = userStore.userInfo, let _ = userInfo.firstName {
+                        
+                        Text("Delivering to \(userInfo.fullName)")
+                                .bold()
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        Text("\(userInfo.address)")
                             .frame(maxWidth: .infinity, alignment: .leading)
-                    Text("1200 Richmond Ave, Houston, TX 77042, United States")
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                    } else {
+                       Text("Please update your profile and add the missing information.")
+                            .foregroundStyle(.red)
+                    }
+                    
                 }
                 .padding()
                 
@@ -68,6 +78,7 @@ struct CheckoutScreen: View {
             }
             Spacer()
         }
+      
         .toolbar(content: {
             ToolbarItem(placement: .topBarLeading) {
                 Button("Cancel") {
@@ -84,5 +95,8 @@ struct CheckoutScreen: View {
     NavigationStack {
         CheckoutScreen()
             .withMessageView()
-    } .environment(CartStore(httpClient: .development))
+    }
+    .environment(CartStore(httpClient: .development))
+    .environment(UserStore(httpClient: .development))
+    
 }
