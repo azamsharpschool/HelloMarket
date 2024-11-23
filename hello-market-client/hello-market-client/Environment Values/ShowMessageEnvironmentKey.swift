@@ -9,14 +9,14 @@ import Foundation
 import SwiftUI
 
 struct ShowMessageAction {
-    typealias Action = (String, MessageType) -> ()
+    typealias Action = (String, MessageType, Double) -> ()
     let action: Action
 
-    func callAsFunction(_ message: String, _ messageType: MessageType = .error) {
-        action(message, messageType)
+    func callAsFunction(_ message: String, _ messageType: MessageType = .error, delay: Double = 2.0) {
+        action(message, messageType, delay)
     }
 }
 
 extension EnvironmentValues {
-    @Entry var showMessage: ShowMessageAction = ShowMessageAction { _, _ in }
+    @Entry var showMessage: ShowMessageAction = ShowMessageAction { _, _, _ in }
 }

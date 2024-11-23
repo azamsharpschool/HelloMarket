@@ -50,15 +50,6 @@ struct CartScreen: View {
         })
         .listStyle(.plain)
         .navigationTitle("Cart")
-        
-        .task {
-            do {
-                try await cartStore.loadCart()
-            } catch {
-                showMessage(error.localizedDescription)
-            }
-        }
-       
     }
 }
 

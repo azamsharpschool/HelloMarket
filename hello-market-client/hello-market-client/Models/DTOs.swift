@@ -172,12 +172,13 @@ struct UserInfo: Codable, Equatable {
     let city: String
     let state: String
     let zipCode: String
+    let country: String 
     
     private enum CodingKeys: String, CodingKey {
         case firstName = "first_name"
         case lastName = "last_name"
         case zipCode = "zip_code"
-        case street, city, state
+        case street, city, state, country
     }
 }
 

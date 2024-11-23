@@ -30,6 +30,8 @@ exports.loadUserInfo = async (req, res) => {
 
 exports.updateUserInfo = async (req, res) => {
 
+    console.log('updateUserInfo')
+
     try {
         const userId = req.userId 
         const { first_name, last_name, street, city, state, zip_code, country } = req.body

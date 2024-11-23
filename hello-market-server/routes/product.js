@@ -6,16 +6,48 @@ const authenticate = require('../middlewares/authMiddleware');
 const validationErrorsMiddleware = require('../middlewares/validationErrorsMiddleware');
 
 
-router.post('/', authenticate, createProductValidator,validationErrorsMiddleware , productController.create)
-router.get('/', productController.getAllProducts)
-router.get('/user/:userId', authenticate, productController.getMyProducts)
-router.post('/upload', productController.upload)
-
-// /products/34 
-router.delete('/:productId', deleteProductValidator, productController.deleteProduct)
-
+// Create a new product
+router.post(
+    '/',
+    authenticate,
+    createProductValidator,
+    validationErrorsMiddleware,
+    productController.create
+  );
+  
+  // Get all products
+  router.get('/', productController.getAllProducts);
+  
+  // Get products for a specific user
+  router.get(
+    '/user/:userId',
+    authenticate,
+    productController.getMyProducts
+  );
+  
+  // Upload product data
+  router.post(
+    '/upload',
+    authenticate,
+    productController.upload
+  );
+  
+  // Delete a product by ID
+  router.delete(
+    '/:productId',
+    authenticate,
+    deleteProductValidator,
+    validationErrorsMiddleware,
+    productController.deleteProduct
+  );
 // update product 
 // /products/34 
-router.put('/:productId', updateProductValidator, validationErrorsMiddleware, productController.updateProduct)
+router.put(
+    '/:productId',
+    authenticate,
+    updateProductValidator,
+    validationErrorsMiddleware,
+    productController.updateProduct
+)
 
 module.exports = router 

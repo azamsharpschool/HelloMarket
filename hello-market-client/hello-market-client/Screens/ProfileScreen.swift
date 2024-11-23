@@ -21,6 +21,7 @@ struct ProfileScreen: View {
     @State private var city: String = ""
     @State private var state: String = ""
     @State private var zipCode: String = ""
+    @State private var country: String = ""
     
     @State private var validationErrors: [String] = []
     @State private var updatingUserInfo: Bool = false
@@ -44,9 +45,11 @@ struct ProfileScreen: View {
         if state.isEmptyOrWhitespace {
             validationErrors.append("State is required.")
         }
-        
         if !zipCode.isZipCode {
             validationErrors.append("Invalid ZIP code.")
+        }
+        if country.isEmptyOrWhitespace {
+            validationErrors.append("Country is required.")
         }
         
         return validationErrors.isEmpty
@@ -55,8 +58,9 @@ struct ProfileScreen: View {
     private func updateUserInfo() async {
         
         do {
-            let userInfo = UserInfo(firstName: firstName, lastName: lastName, street: street, city: city, state: state, zipCode: zipCode)
+            let userInfo = UserInfo(firstName: firstName, lastName: lastName, street: street, city: city, state: state, zipCode: zipCode, country: country)
             try await userStore.updateUserInfo(userInfo: userInfo)
+            showMessage("User profile has been updated.", .success)
         } catch {
             print(error.localizedDescription.localizedLowercase)
         }
@@ -64,8 +68,6 @@ struct ProfileScreen: View {
     
     var body: some View {
         let _ = Self._printChanges()
-        
-        let _ = print(userStore.userInfo)
         
         List {
             Section("Personal Information") {
@@ -78,15 +80,17 @@ struct ProfileScreen: View {
                 TextField("City", text: $city)
                 TextField("State", text: $state)
                 TextField("Zipcode", text: $zipCode)
+                TextField("Country", text: $country)
             }
             
             Button("Signout") {
                 let _ = Keychain<String>.delete("jwttoken")
                 userId = nil
                 cartStore.emptyCart()
-                userStore.userInfo = nil 
+                userStore.userInfo = nil
             }.buttonStyle(.borderless)
         }
+        
         .onChange(of: userStore.userInfo, initial: true, {
             if let userInfo = userStore.userInfo {
                 firstName = userInfo.firstName
@@ -95,8 +99,9 @@ struct ProfileScreen: View {
                 city = userInfo.city
                 state = userInfo.state
                 zipCode = userInfo.zipCode
+                country = userInfo.country
             }
-        })
+        }) 
         
         .toolbar(content: {
             ToolbarItem(placement: .topBarTrailing) {
@@ -115,7 +120,7 @@ struct ProfileScreen: View {
                 await updateUserInfo()
             }
             
-            updatingUserInfo = false 
+            updatingUserInfo = false
         })
         .navigationTitle("Profile")
     }

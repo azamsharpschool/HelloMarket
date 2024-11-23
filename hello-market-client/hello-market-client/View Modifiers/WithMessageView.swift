@@ -14,8 +14,8 @@ struct WithMessageView: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .environment(\.showMessage, ShowMessageAction(action: { message, messageType in
-                self.messageWrapper = MessageWrapper(message: message, messageType: messageType)
+            .environment(\.showMessage, ShowMessageAction(action: { message, messageType, delay in
+                self.messageWrapper = MessageWrapper(message: message, delay: delay, messageType: messageType)
             }))
             .overlay(alignment: .bottom) {
                 messageWrapper != nil ? MessageView(messageWrapper: $messageWrapper) : nil
