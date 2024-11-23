@@ -11,6 +11,8 @@ struct ProfileScreen: View {
     
     @AppStorage("userId") private var userId: String?
     @Environment(CartStore.self) private var cartStore
+    @Environment(UserStore.self) private var userStore
+    
     @Environment(\.showMessage) private var showMessage
     
     @State private var firstName: String = ""
@@ -21,6 +23,7 @@ struct ProfileScreen: View {
     @State private var zipCode: String = ""
     
     @State private var validationErrors: [String] = []
+    @State private var updatingUserInfo: Bool = false
     
     private func validateForm() -> Bool {
         
@@ -49,7 +52,20 @@ struct ProfileScreen: View {
         return validationErrors.isEmpty
     }
     
+    private func updateUserInfo() async {
+        
+        do {
+            let userInfo = UserInfo(firstName: firstName, lastName: lastName, street: street, city: city, state: state, zipCode: zipCode)
+            try await userStore.updateUserInfo(userInfo: userInfo)
+        } catch {
+            print(error.localizedDescription.localizedLowercase)
+        }
+    }
+    
     var body: some View {
+        let _ = Self._printChanges()
+        
+        let _ = print(userStore.userInfo)
         
         List {
             Section("Personal Information") {
@@ -68,15 +84,25 @@ struct ProfileScreen: View {
                 let _ = Keychain<String>.delete("jwttoken")
                 userId = nil
                 cartStore.emptyCart()
+                userStore.userInfo = nil 
             }.buttonStyle(.borderless)
-           
-            
         }
+        .onChange(of: userStore.userInfo, initial: true, {
+            if let userInfo = userStore.userInfo {
+                firstName = userInfo.firstName
+                lastName = userInfo.lastName
+                street = userInfo.street
+                city = userInfo.city
+                state = userInfo.state
+                zipCode = userInfo.zipCode
+            }
+        })
+        
         .toolbar(content: {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Save") {
                     if validateForm() {
-                        // do something
+                        updatingUserInfo = true
                     } else {
                         // show message
                         showMessage(validationErrors.joined(separator: "\n"))
@@ -84,13 +110,23 @@ struct ProfileScreen: View {
                 }
             }
         })
+        .task(id: updatingUserInfo, {
+            if updatingUserInfo {
+                await updateUserInfo()
+            }
+            
+            updatingUserInfo = false 
+        })
         .navigationTitle("Profile")
     }
 }
 
 #Preview {
+    
     NavigationStack {
         ProfileScreen()
             .withMessageView()
-    }.environment(CartStore(httpClient: .development))
+    }
+    .environment(CartStore(httpClient: .development))
+    .environment(UserStore(httpClient: .development))
 }

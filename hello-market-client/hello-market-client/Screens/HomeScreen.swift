@@ -81,4 +81,5 @@ struct HomeScreen: View {
     HomeScreen()
     .environment(ProductStore(httpClient: .development))
     .environment(CartStore(httpClient: .development))
+    .environment(UserStore(httpClient: .development))
 }

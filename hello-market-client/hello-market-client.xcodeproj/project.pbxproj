@@ -30,6 +30,7 @@
 		8D6668562CD676C0001E1D52 /* CartStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6668552CD676C0001E1D52 /* CartStore.swift */; };
 		8D7B08172C8BD95A003D7E91 /* ShowMessageEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7B08162C8BD95A003D7E91 /* ShowMessageEnvironmentKey.swift */; };
 		8D7B081D2C8BEFB0003D7E91 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7B081C2C8BEFB0003D7E91 /* MessageView.swift */; };
+		8D906AD92CF22288003D382A /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D906AD82CF22288003D382A /* UserStore.swift */; };
 		8D995C9E2C8A962D003AFA2C /* AuthenticationEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D995C9D2C8A962D003AFA2C /* AuthenticationEnvironmentKey.swift */; };
 		8D995CA12C8A9996003AFA2C /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D995CA02C8A9996003AFA2C /* String+Extensions.swift */; };
 		8D995CA32C8AA1FA003AFA2C /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D995CA22C8AA1FA003AFA2C /* LoginScreen.swift */; };
@@ -70,6 +71,7 @@
 		8D6668552CD676C0001E1D52 /* CartStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartStore.swift; sourceTree = "<group>"; };
 		8D7B08162C8BD95A003D7E91 /* ShowMessageEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMessageEnvironmentKey.swift; sourceTree = "<group>"; };
 		8D7B081C2C8BEFB0003D7E91 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		8D906AD82CF22288003D382A /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		8D995C9D2C8A962D003AFA2C /* AuthenticationEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationEnvironmentKey.swift; sourceTree = "<group>"; };
 		8D995CA02C8A9996003AFA2C /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		8D995CA22C8AA1FA003AFA2C /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			children = (
 				8D3EE23B2C9281AA004E4B6D /* ProductStore.swift */,
 				8D6668552CD676C0001E1D52 /* CartStore.swift */,
+				8D906AD82CF22288003D382A /* UserStore.swift */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				8DF13AF02C99262700898DFF /* ImagePicker.swift in Sources */,
 				8D5B744A2CAF769800AA4BAC /* RequireAuthentication.swift in Sources */,
 				8DDEA1A82CC9C8B000D24D3B /* PasswordField.swift in Sources */,
+				8D906AD92CF22288003D382A /* UserStore.swift in Sources */,
 				8D5FE4852CB968A7000F47C8 /* ImageUploaderDownloader.swift in Sources */,
 				8D3EE2402C953384004E4B6D /* MyProductListScreen.swift in Sources */,
 				8D995CA32C8AA1FA003AFA2C /* LoginScreen.swift in Sources */,

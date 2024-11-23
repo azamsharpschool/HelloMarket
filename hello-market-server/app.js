@@ -5,6 +5,7 @@ const authRoutes = require('./routes/auth')
 const productRoutes = require('./routes/product')
 const cartRoutes = require('./routes/cart')
 const userRoutes = require('./routes/user')
+const authenticate = require('./middlewares/authMiddleware')
 
 // use static resources 
 app.use(express.static('public'))
@@ -17,8 +18,8 @@ app.use(express.json())
 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes)
-app.use('/api/cart', cartRoutes)
-app.use('/api/user', userRoutes)
+app.use('/api/cart', authenticate, cartRoutes)
+app.use('/api/user', authenticate, userRoutes)
 
 app.listen(8080, () => {
     console.log('Server is running...')
