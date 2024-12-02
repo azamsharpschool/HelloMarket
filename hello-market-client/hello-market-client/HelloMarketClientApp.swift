@@ -8,6 +8,7 @@
 import SwiftUI
 import UIKit
 import JWTDecode
+@preconcurrency import Stripe
 
 @main
 struct HelloMarketClientApp: App {
@@ -15,12 +16,21 @@ struct HelloMarketClientApp: App {
     @State private var productStore = ProductStore(httpClient: HTTPClient())
     @State private var cartStore = CartStore(httpClient: HTTPClient())
     @State private var userStore = UserStore(httpClient: HTTPClient())
+    @State private var authenticationController = AuthenticationController(httpClient: HTTPClient())
+    @State private var paymentController = PaymentController(httpClient: HTTPClient())
+    @State private var orderStore = OrderStore(httpClient: HTTPClient())
     
     @AppStorage("userId") private var userId: String?
     
+    init() {
+        StripeAPI.defaultPublishableKey = ProcessInfo.processInfo.environment["STRIPE_PUBLISHABLE_KEY"] ?? ""
+    }
+    
     private func fetchUserInfoAndCart() async {
+        
+        await cartStore.loadCart()
+        
         do {
-            try await cartStore.loadCart()
             try await userStore.loadUserInfo()
         } catch {
             print(error.localizedDescription)
@@ -33,7 +43,9 @@ struct HelloMarketClientApp: App {
             .environment(productStore)
             .environment(cartStore)
             .environment(userStore)
-            .environment(\.authenticationController, AuthenticationController(httpClient: .development))
+            .environment(orderStore)
+            .environment(\.authenticationController, authenticationController)
+            .environment(\.paymentController, paymentController)
             .environment(\.uploaderDownloader, ImageUploaderDownloader(httpClient: .development))
             .withMessageView()
             .task(id: userId) {

@@ -44,4 +44,7 @@ enum CartError: Error {
     case operationFailed(String)
 }
 
+enum OrderError: Error {
+    case saveFailed(String)
+}
 

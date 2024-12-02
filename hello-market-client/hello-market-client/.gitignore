@@ -1,0 +1,65 @@
+# macOS System Files
+.DS_Store
+*.swp
+*.lock
+*.xcuserstate
+
+# Build Files
+DerivedData/
+build/
+*.log
+
+# Xcode Workspace and Project Files
+xcuserdata/
+*.xcscmblueprint
+
+# Swift Package Manager
+.swiftpm/
+.build/
+Package.resolved
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/Build/
+
+# Archives
+*.xcarchive
+
+# Xcode Automatically Generated Files
+*.moved-aside
+*.xcuserstate
+*.xcworkspace
+
+# Device-Specific
+*.plist
+*.pbxuser
+
+# Temporary Files
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+fastlane/*.lock
+
+# App Code
+*.orig
+
+# IDE Specific
+.idea/
+*.hmap
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Environment Files
+.env
+.env.*

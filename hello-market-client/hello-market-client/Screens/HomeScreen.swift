@@ -55,7 +55,7 @@ extension AppScreen {
             NavigationStack {
                 ProfileScreen()
                     .requiresAuthentication()
-            }
+            }  
         }
     }
 }

@@ -5,7 +5,6 @@ const { createProductValidator, deleteProductValidator, updateProductValidator }
 const authenticate = require('../middlewares/authMiddleware');
 const validationErrorsMiddleware = require('../middlewares/validationErrorsMiddleware');
 
-
 // Create a new product
 router.post(
     '/',

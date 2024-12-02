@@ -6,34 +6,49 @@
 //
 
 import SwiftUI
+import Stripe
+import StripePaymentSheet
 
 struct CheckoutScreen: View {
     
-    @Environment(CartStore.self) private var cartStore
+    let order: Order
+    
+    @Environment(\.paymentController) private var paymentController
+    
     @Environment(UserStore.self) private var userStore
+    @Environment(\.httpClient) private var httpClient
+    @Environment(OrderStore.self) private var orderStore
+    @Environment(CartStore.self) private var cartStore
+    
+    @State private var paymentSheet: PaymentSheet?
+    @State private var presentOrderConfirmationScreen: Bool = false
+    
     
     @Environment(\.dismiss) private var dismiss
+  
+    private func paymentCompletion(result: PaymentSheetResult) {
+
+        switch result {
+            case .completed:
+                Task {
+                    do {
+                        try await orderStore.saveOrder(order: order)
+                        cartStore.emptyCart()
+                        presentOrderConfirmationScreen = true
+                    } catch {
+                        print(error)
+                    }
+                }
+            case .canceled:
+                print("canceled")
+            case .failed(let error):
+                print(error.localizedDescription)
+        }
+        
+    }
     
     var body: some View {
-        VStack {
-            if let cart = cartStore.cart {
-                
-                Text("By placing your order, you agree to SmartShop privacy notice and conditions of use.")
-                    .font(.caption)
-                
-                Button(action: {
-                   
-                }) {
-                   
-                    Text("Place your order")
-                        .bold()
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color.green)
-                        .foregroundStyle(.white)
-                        .cornerRadius(8)
-                        .padding()
-                }.buttonStyle(.borderless)
+        List {
                 
                 VStack(spacing: 10) {
                     Text("Place your order")
@@ -42,20 +57,9 @@ struct CheckoutScreen: View {
                     HStack {
                         Text("Items:")
                         Spacer()
-                        Text(cartStore.total, format: .currency(code: "USD"))
+                        Text(order.total, format: .currency(code: "USD"))
                     }
-                    
-                    HStack {
-                        Text("Shipping and handling:")
-                        Spacer()
-                        Text(0.00, format: .currency(code: "USD"))
-                    }
-                    
-                    HStack {
-                        Text("Estimated tax to be collected:")
-                        Spacer()
-                        Text(0.00, format: .currency(code: "USD"))
-                    }
+                   
                     
                     if let userInfo = userStore.userInfo, let _ = userInfo.firstName {
                         
@@ -73,19 +77,61 @@ struct CheckoutScreen: View {
                 }
                 .padding()
                 
-                CartItemListView(cartItems: cart.cartItems)
-                    .padding()
-            }
+                ForEach(order.items) { orderItem in
+                    HStack(alignment: .top) {
+                        AsyncImage(url: orderItem.product.photoUrl) { img in
+                                img.resizable()
+                                    .clipShape(RoundedRectangle(cornerRadius: 16.0, style: .continuous))
+                                .frame(width: 100, height: 100)
+                            } placeholder: {
+                                ProgressView("Loading...")
+                            }
+                            Spacer()
+                                .frame(width: 20)
+                            VStack(alignment: .leading) {
+                                Text(orderItem.product.name)
+                                    .font(.title3)
+                                Text(orderItem.product.price, format: .currency(code: "USD"))
+                                
+                            }.frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                }
+            
+                
+                // payment sheet button
+                if let paymentSheet = paymentSheet {
+                    PaymentSheet.PaymentButton(
+                        paymentSheet: paymentSheet,
+                        onCompletion: paymentCompletion
+                    ) {
+                        Text("Place your order")
+                                .bold()
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.green)
+                                .foregroundStyle(.white)
+                                .cornerRadius(8)
+                                .padding()
+                                .buttonStyle(.borderless)
+                    }
+                }
+            
             Spacer()
         }
-      
-        .toolbar(content: {
-            ToolbarItem(placement: .topBarLeading) {
-                Button("Cancel") {
-                    dismiss()
-                }
-            }
+        .navigationDestination(isPresented: $presentOrderConfirmationScreen, destination: {
+            OrderConfirmationScreen()
+                .navigationBarBackButtonHidden()
         })
+        .task {
+            do {
+                paymentSheet = try await paymentController.preparePaymentSheet(for: order)
+            } catch {
+                print(error)
+            }
+        }
+        
+        .listStyle(.plain)
+      
         .navigationTitle("Place Your Order")
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -93,10 +139,13 @@ struct CheckoutScreen: View {
 
 #Preview {
     NavigationStack {
-        CheckoutScreen()
+        CheckoutScreen(order: Order.preview)
             .withMessageView()
     }
     .environment(CartStore(httpClient: .development))
     .environment(UserStore(httpClient: .development))
+    .environment(OrderStore(httpClient: .development))
+    .environment(\.httpClient, .development)
+    
     
 }

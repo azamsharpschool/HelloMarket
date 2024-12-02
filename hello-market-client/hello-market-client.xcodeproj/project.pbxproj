@@ -30,6 +30,21 @@
 		8D6668562CD676C0001E1D52 /* CartStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6668552CD676C0001E1D52 /* CartStore.swift */; };
 		8D7B08172C8BD95A003D7E91 /* ShowMessageEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7B08162C8BD95A003D7E91 /* ShowMessageEnvironmentKey.swift */; };
 		8D7B081D2C8BEFB0003D7E91 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7B081C2C8BEFB0003D7E91 /* MessageView.swift */; };
+		8D80217D2CFCF28E006C709C /* Stripe in Frameworks */ = {isa = PBXBuildFile; productRef = 8D80217C2CFCF28E006C709C /* Stripe */; };
+		8D80217F2CFCF28E006C709C /* StripeApplePay in Frameworks */ = {isa = PBXBuildFile; productRef = 8D80217E2CFCF28E006C709C /* StripeApplePay */; };
+		8D8021812CFCF28E006C709C /* StripeCardScan in Frameworks */ = {isa = PBXBuildFile; productRef = 8D8021802CFCF28E006C709C /* StripeCardScan */; };
+		8D8021832CFCF28E006C709C /* StripeFinancialConnections in Frameworks */ = {isa = PBXBuildFile; productRef = 8D8021822CFCF28E006C709C /* StripeFinancialConnections */; };
+		8D8021852CFCF28E006C709C /* StripeIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 8D8021842CFCF28E006C709C /* StripeIdentity */; };
+		8D8021872CFCF28E006C709C /* StripePaymentSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 8D8021862CFCF28E006C709C /* StripePaymentSheet */; };
+		8D8021892CFCF28E006C709C /* StripePayments in Frameworks */ = {isa = PBXBuildFile; productRef = 8D8021882CFCF28E006C709C /* StripePayments */; };
+		8D80218B2CFCF28F006C709C /* StripePaymentsUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8D80218A2CFCF28F006C709C /* StripePaymentsUI */; };
+		8D80218D2CFCF37D006C709C /* PaymentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D80218C2CFCF37D006C709C /* PaymentStore.swift */; };
+		8D80218F2CFCF43C006C709C /* HTTPClientEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D80218E2CFCF435006C709C /* HTTPClientEnvironmentKey.swift */; };
+		8D8021922CFD27EE006C709C /* PaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8021912CFD27EB006C709C /* PaymentController.swift */; };
+		8D8021962CFD2AC0006C709C /* PaymentControllerEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8021952CFD2ABB006C709C /* PaymentControllerEnvironmentKey.swift */; };
+		8D8021982CFD337E006C709C /* OrderStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8021972CFD337C006C709C /* OrderStore.swift */; };
+		8D80219A2CFD69C0006C709C /* OrderConfirmationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8021992CFD69C0006C709C /* OrderConfirmationScreen.swift */; };
+		8D80219C2CFD76AA006C709C /* .env in Resources */ = {isa = PBXBuildFile; fileRef = 8D80219B2CFD76A5006C709C /* .env */; };
 		8D906AD92CF22288003D382A /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D906AD82CF22288003D382A /* UserStore.swift */; };
 		8D995C9E2C8A962D003AFA2C /* AuthenticationEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D995C9D2C8A962D003AFA2C /* AuthenticationEnvironmentKey.swift */; };
 		8D995CA12C8A9996003AFA2C /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D995CA02C8A9996003AFA2C /* String+Extensions.swift */; };
@@ -71,6 +86,13 @@
 		8D6668552CD676C0001E1D52 /* CartStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartStore.swift; sourceTree = "<group>"; };
 		8D7B08162C8BD95A003D7E91 /* ShowMessageEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMessageEnvironmentKey.swift; sourceTree = "<group>"; };
 		8D7B081C2C8BEFB0003D7E91 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		8D80218C2CFCF37D006C709C /* PaymentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStore.swift; sourceTree = "<group>"; };
+		8D80218E2CFCF435006C709C /* HTTPClientEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientEnvironmentKey.swift; sourceTree = "<group>"; };
+		8D8021912CFD27EB006C709C /* PaymentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentController.swift; sourceTree = "<group>"; };
+		8D8021952CFD2ABB006C709C /* PaymentControllerEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentControllerEnvironmentKey.swift; sourceTree = "<group>"; };
+		8D8021972CFD337C006C709C /* OrderStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStore.swift; sourceTree = "<group>"; };
+		8D8021992CFD69C0006C709C /* OrderConfirmationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmationScreen.swift; sourceTree = "<group>"; };
+		8D80219B2CFD76A5006C709C /* .env */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env; sourceTree = "<group>"; };
 		8D906AD82CF22288003D382A /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		8D995C9D2C8A962D003AFA2C /* AuthenticationEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationEnvironmentKey.swift; sourceTree = "<group>"; };
 		8D995CA02C8A9996003AFA2C /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -100,8 +122,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D8021892CFCF28E006C709C /* StripePayments in Frameworks */,
+				8D8021872CFCF28E006C709C /* StripePaymentSheet in Frameworks */,
 				8D5B74462CAF70C200AA4BAC /* JWTDecode in Frameworks */,
+				8D8021832CFCF28E006C709C /* StripeFinancialConnections in Frameworks */,
+				8D80217F2CFCF28E006C709C /* StripeApplePay in Frameworks */,
+				8D8021852CFCF28E006C709C /* StripeIdentity in Frameworks */,
 				8D20503F2CACC09C0088CFAF /* JWTDecode in Frameworks */,
+				8D8021812CFCF28E006C709C /* StripeCardScan in Frameworks */,
+				8D80218B2CFCF28F006C709C /* StripePaymentsUI in Frameworks */,
+				8D80217D2CFCF28E006C709C /* Stripe in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,9 +141,11 @@
 		8D3EE2332C927129004E4B6D /* Stores */ = {
 			isa = PBXGroup;
 			children = (
+				8D8021972CFD337C006C709C /* OrderStore.swift */,
 				8D3EE23B2C9281AA004E4B6D /* ProductStore.swift */,
 				8D6668552CD676C0001E1D52 /* CartStore.swift */,
 				8D906AD82CF22288003D382A /* UserStore.swift */,
+				8D80218C2CFCF37D006C709C /* PaymentStore.swift */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -150,6 +182,8 @@
 		8D995C9C2C8A961A003AFA2C /* Environment Values */ = {
 			isa = PBXGroup;
 			children = (
+				8D8021952CFD2ABB006C709C /* PaymentControllerEnvironmentKey.swift */,
+				8D80218E2CFCF435006C709C /* HTTPClientEnvironmentKey.swift */,
 				8D995C9D2C8A962D003AFA2C /* AuthenticationEnvironmentKey.swift */,
 				8D7B08162C8BD95A003D7E91 /* ShowMessageEnvironmentKey.swift */,
 				8D5FE4862CB96926000F47C8 /* ImageUploaderDownloaderEnvironmentKey.swift */,
@@ -193,6 +227,7 @@
 		8DDE5FB32C8A7D9300A0DBE0 /* hello-market-client */ = {
 			isa = PBXGroup;
 			children = (
+				8D80219B2CFD76A5006C709C /* .env */,
 				8D5FE4832CB96895000F47C8 /* Services */,
 				8DEC814D2CAED9D3006C4DA5 /* Validators */,
 				8DF13AEE2C99261D00898DFF /* Utilities */,
@@ -236,6 +271,7 @@
 				8DAD14C32CC3F8BB00417FE7 /* MyProductDetailScreen.swift */,
 				8D405AF22CD6B383004BCF0E /* CartScreen.swift */,
 				8D4536972CED23C200BD7BFF /* CheckoutScreen.swift */,
+				8D8021992CFD69C0006C709C /* OrderConfirmationScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -244,6 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				8DDE5FC62C8A7DC700A0DBE0 /* AuthenticationController.swift */,
+				8D8021912CFD27EB006C709C /* PaymentController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -308,6 +345,14 @@
 			packageProductDependencies = (
 				8D20503E2CACC09C0088CFAF /* JWTDecode */,
 				8D5B74452CAF70C200AA4BAC /* JWTDecode */,
+				8D80217C2CFCF28E006C709C /* Stripe */,
+				8D80217E2CFCF28E006C709C /* StripeApplePay */,
+				8D8021802CFCF28E006C709C /* StripeCardScan */,
+				8D8021822CFCF28E006C709C /* StripeFinancialConnections */,
+				8D8021842CFCF28E006C709C /* StripeIdentity */,
+				8D8021862CFCF28E006C709C /* StripePaymentSheet */,
+				8D8021882CFCF28E006C709C /* StripePayments */,
+				8D80218A2CFCF28F006C709C /* StripePaymentsUI */,
 			);
 			productName = "hello-market-client";
 			productReference = 8DDE5FB12C8A7D9300A0DBE0 /* hello-market-client.app */;
@@ -339,6 +384,7 @@
 			mainGroup = 8DDE5FA82C8A7D9300A0DBE0;
 			packageReferences = (
 				8D20503D2CACC09C0088CFAF /* XCRemoteSwiftPackageReference "JWTDecode.swift" */,
+				8D80217B2CFCF28E006C709C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */,
 			);
 			productRefGroup = 8DDE5FB22C8A7D9300A0DBE0 /* Products */;
 			projectDirPath = "";
@@ -354,6 +400,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D80219C2CFD76AA006C709C /* .env in Resources */,
 				8DDE5FBC2C8A7D9400A0DBE0 /* Preview Assets.xcassets in Resources */,
 				8DDE5FB92C8A7D9400A0DBE0 /* Assets.xcassets in Resources */,
 			);
@@ -375,6 +422,7 @@
 				8D906AD92CF22288003D382A /* UserStore.swift in Sources */,
 				8D5FE4852CB968A7000F47C8 /* ImageUploaderDownloader.swift in Sources */,
 				8D3EE2402C953384004E4B6D /* MyProductListScreen.swift in Sources */,
+				8D80219A2CFD69C0006C709C /* OrderConfirmationScreen.swift in Sources */,
 				8D995CA32C8AA1FA003AFA2C /* LoginScreen.swift in Sources */,
 				8D3EE22F2C92698B004E4B6D /* (null) in Sources */,
 				8D995CA72C8B369D003AFA2C /* KeychainWrapper.swift in Sources */,
@@ -386,18 +434,22 @@
 				8D3EE2352C927136004E4B6D /* (null) in Sources */,
 				8D3EE2392C92819C004E4B6D /* HomeScreen.swift in Sources */,
 				8D6668562CD676C0001E1D52 /* CartStore.swift in Sources */,
+				8D80218F2CFCF43C006C709C /* HTTPClientEnvironmentKey.swift in Sources */,
 				8D995CA12C8A9996003AFA2C /* String+Extensions.swift in Sources */,
 				8DEC814F2CAED9DD006C4DA5 /* TokenValidator.swift in Sources */,
 				8D3EE23A2C92819C004E4B6D /* ProductListScreen.swift in Sources */,
 				8DBB77FB2CD6CAD700B0C3E0 /* CartItemListView.swift in Sources */,
 				8D7B081D2C8BEFB0003D7E91 /* MessageView.swift in Sources */,
 				8D405AF12CD6AA6A004BCF0E /* UserDefaults.swift in Sources */,
+				8D80218D2CFCF37D006C709C /* PaymentStore.swift in Sources */,
 				8D7B08172C8BD95A003D7E91 /* ShowMessageEnvironmentKey.swift in Sources */,
+				8D8021982CFD337E006C709C /* OrderStore.swift in Sources */,
 				8DDE5FD02C8A811A00A0DBE0 /* DTOs.swift in Sources */,
 				8D3EE23E2C951CD2004E4B6D /* ProductDetailScreen.swift in Sources */,
 				8DDE5FB52C8A7D9300A0DBE0 /* HelloMarketClientApp.swift in Sources */,
 				8D3EE2422C968D59004E4B6D /* AddProductScreen.swift in Sources */,
 				8D4536982CED23C200BD7BFF /* CheckoutScreen.swift in Sources */,
+				8D8021962CFD2AC0006C709C /* PaymentControllerEnvironmentKey.swift in Sources */,
 				8D5B74482CAF737200AA4BAC /* ProfileScreen.swift in Sources */,
 				8DDE5FCD2C8A7FE900A0DBE0 /* Constants.swift in Sources */,
 				8DAD14C42CC3F8BB00417FE7 /* MyProductDetailScreen.swift in Sources */,
@@ -406,6 +458,7 @@
 				8D405AF52CD6C519004BCF0E /* CartItemView.swift in Sources */,
 				8D995C9E2C8A962D003AFA2C /* AuthenticationEnvironmentKey.swift in Sources */,
 				8D0FC8B32C90E03100767285 /* (null) in Sources */,
+				8D8021922CFD27EE006C709C /* PaymentController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +676,14 @@
 				minimumVersion = 3.2.0;
 			};
 		};
+		8D80217B2CFCF28E006C709C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/stripe/stripe-ios-spm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 24.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -635,6 +696,46 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8D20503D2CACC09C0088CFAF /* XCRemoteSwiftPackageReference "JWTDecode.swift" */;
 			productName = JWTDecode;
+		};
+		8D80217C2CFCF28E006C709C /* Stripe */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D80217B2CFCF28E006C709C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = Stripe;
+		};
+		8D80217E2CFCF28E006C709C /* StripeApplePay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D80217B2CFCF28E006C709C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = StripeApplePay;
+		};
+		8D8021802CFCF28E006C709C /* StripeCardScan */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D80217B2CFCF28E006C709C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = StripeCardScan;
+		};
+		8D8021822CFCF28E006C709C /* StripeFinancialConnections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D80217B2CFCF28E006C709C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = StripeFinancialConnections;
+		};
+		8D8021842CFCF28E006C709C /* StripeIdentity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D80217B2CFCF28E006C709C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = StripeIdentity;
+		};
+		8D8021862CFCF28E006C709C /* StripePaymentSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D80217B2CFCF28E006C709C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = StripePaymentSheet;
+		};
+		8D8021882CFCF28E006C709C /* StripePayments */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D80217B2CFCF28E006C709C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = StripePayments;
+		};
+		8D80218A2CFCF28F006C709C /* StripePaymentsUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D80217B2CFCF28E006C709C /* XCRemoteSwiftPackageReference "stripe-ios-spm" */;
+			productName = StripePaymentsUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

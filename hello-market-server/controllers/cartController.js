@@ -1,5 +1,23 @@
 const models = require('../models')
 
+
+exports.updateCartStatus = async (cartId, isActive, transaction) => {
+    return await models.Cart.update(
+        { is_active: isActive },
+        {
+            where: { id: cartId, is_active: !isActive },
+            transaction,
+        }
+    );
+};
+
+exports.clearCartItems = async (cartId, transaction) => {
+    return await models.CartItem.destroy({
+        where: { cart_id: cartId },
+        transaction,
+    });
+};
+
 exports.removeCartItem = async (req, res) => {
 
     try {
@@ -27,7 +45,8 @@ exports.loadCart = async (req, res) => {
     try {
         const cart = await models.Cart.findOne({
             where: {
-                user_id: req.userId
+                user_id: req.userId, 
+                is_active: true 
             },
             attributes: ['id', 'user_id', 'is_active'],
             include: [

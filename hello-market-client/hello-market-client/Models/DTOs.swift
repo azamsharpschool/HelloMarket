@@ -30,7 +30,7 @@ struct UploadDataResponse: Codable {
     let downloadURL: URL?
 }
 
-struct Product: Codable, Identifiable {
+struct Product: Codable, Identifiable, Hashable {
     
     var id: Int?
     let name: String
@@ -135,7 +135,7 @@ extension Cart {
 }
 
 
-struct CartItem: Codable, Identifiable {
+struct CartItem: Codable, Identifiable, Hashable {
     let id: Int?
     let product: Product
     var quantity: Int = 1
@@ -204,6 +204,63 @@ struct UserInfoResponse: Codable {
     let message: String?
     let userInfo: UserInfo?
 }
+
+struct CreatePaymentIntentResponse: Codable {
+    let paymentIntentClientSecret: String?
+    let customerId: String?
+    let customerEphemeralKeySecret: String?
+    let publishableKey: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        case publishableKey
+        case paymentIntentClientSecret = "paymentIntent"
+        case customerId = "customer"
+        case customerEphemeralKeySecret = "ephemeralKey"
+        
+    }
+}
+
+struct OrderItem: Codable, Hashable, Identifiable {
+    var id: Int?
+    let product: Product
+    var quantity: Int = 1
+}
+
+struct Order: Codable, Hashable {
+    var id: Int?
+    let userId: Int
+    var total: Double
+    var items: [OrderItem]
+    
+    func toRequestBody() -> [String: Any] {
+        return [
+            "user_id": userId,
+            "total": total,
+            "order_items": items.map { item in
+                [
+                    "product_id": item.product.id,
+                    "quantity": item.quantity
+                ]
+            }
+        ]
+    }
+}
+
+extension Order {
+    static var preview: Order {
+        Order(id: 1, userId: 2, total: 10, items: Cart.preview.cartItems.map({ cartItem in
+            OrderItem(id: cartItem.id, product: cartItem.product, quantity: cartItem.quantity)
+        }))
+    }
+}
+
+
+
+struct SaveOrderResponse: Codable {
+    let success: Bool
+    let message: String?
+}
+
 
 
 

@@ -6,13 +6,39 @@
 //
 
 import SwiftUI
+import Stripe
+import StripePaymentSheet
 
 struct CartScreen: View {
     
     @Environment(CartStore.self) private var cartStore
-    @Environment(\.showMessage) private var showMessage
+    @Environment(UserStore.self) private var userStore
     
+    @Environment(\.showMessage) private var showMessage
     @State private var isPresented: Bool = false
+    
+    @AppStorage("userId") private var userId: Int?
+    
+    @State private var order: Order?
+    
+    private func proceedToCheckout() throws {
+        
+        guard let userId = userId else {
+            throw UserError.missingUserId
+        }
+        
+        guard let cart = cartStore.cart else {
+            throw CartError.operationFailed("Missing cart")
+        }
+        
+        // convert cart item to order item
+        let orderItems = cart.cartItems.map { cartItem in
+            OrderItem(product: cartItem.product, quantity: cartItem.quantity)
+        }
+        
+        order = Order(userId: userId, total: cartStore.total, items: orderItems)
+        isPresented = true
+    }
     
     var body: some View {
         List {
@@ -24,8 +50,15 @@ struct CartScreen: View {
                         .font(.title)
                         .bold()
                 }
+                
                 Button(action: {
-                    isPresented = true
+                    
+                    do {
+                        try proceedToCheckout()
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                    
                 }) {
                    
                     Text("Proceed to checkout ^[(\(cartStore.itemsCount) Item](inflect: true))")
@@ -43,10 +76,8 @@ struct CartScreen: View {
                 ContentUnavailableView("No items in the cart.", systemImage: "cart")
             }
         }
-        .sheet(isPresented: $isPresented, content: {
-            NavigationStack {
-                CheckoutScreen()
-            }
+        .navigationDestination(item: $order, destination: { order in
+            CheckoutScreen(order: order)
         })
         .listStyle(.plain)
         .navigationTitle("Cart")
@@ -57,6 +88,8 @@ struct CartScreen: View {
     NavigationStack {
         CartScreen()
             .environment(CartStore(httpClient: .development))
+            .environment(UserStore(httpClient: .development))
+            .environment(\.httpClient, .development)
             .withMessageView()
     }
 }
