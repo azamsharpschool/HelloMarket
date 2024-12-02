@@ -11,6 +11,10 @@ struct OrderItemView: View {
     
     let orderItem: OrderItem
     
+    private var totalPrice: Double {
+        Double(orderItem.quantity) * orderItem.product.price
+    }
+    
     var body: some View {
         HStack(alignment: .top) {
             AsyncImage(url: orderItem.product.photoUrl) { img in
@@ -23,9 +27,12 @@ struct OrderItemView: View {
                 Spacer()
                     .frame(width: 20)
                 VStack(alignment: .leading) {
-                    Text(orderItem.product.name)
-                        .font(.title3)
-                    Text(orderItem.product.price, format: .currency(code: "USD"))
+                    HStack {
+                        Text(orderItem.product.name)
+                            .font(.title3)
+                        Text("(\(orderItem.quantity))")
+                    }
+                    Text(totalPrice, format: .currency(code: "USD"))
                     
                 }.frame(maxWidth: .infinity, alignment: .leading)
         }

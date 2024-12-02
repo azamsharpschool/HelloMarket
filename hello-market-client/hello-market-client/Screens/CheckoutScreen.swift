@@ -16,13 +16,11 @@ struct CheckoutScreen: View {
     @Environment(\.paymentController) private var paymentController
     
     @Environment(UserStore.self) private var userStore
-    @Environment(\.httpClient) private var httpClient
     @Environment(OrderStore.self) private var orderStore
     @Environment(CartStore.self) private var cartStore
     
     @State private var paymentSheet: PaymentSheet?
     @State private var presentOrderConfirmationScreen: Bool = false
-    
     
     @Environment(\.dismiss) private var dismiss
   
@@ -77,7 +75,7 @@ struct CheckoutScreen: View {
                 }
                 .padding()
                 
-                ForEach(order.items) { orderItem in
+                ForEach(order.items, id: \.product.id) { orderItem in
                     OrderItemView(orderItem: orderItem)
                 }
                 

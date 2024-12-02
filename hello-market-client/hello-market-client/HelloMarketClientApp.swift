@@ -26,7 +26,7 @@ struct HelloMarketClientApp: App {
         StripeAPI.defaultPublishableKey = ProcessInfo.processInfo.environment["STRIPE_PUBLISHABLE_KEY"] ?? ""
     }
     
-    private func fetchUserInfoAndCart() async {
+    private func loadUserInfoAndCart() async {
         
         await cartStore.loadCart()
         
@@ -50,7 +50,7 @@ struct HelloMarketClientApp: App {
             .withMessageView()
             .task(id: userId) {
                 if userId != nil {
-                    await fetchUserInfoAndCart()
+                    await loadUserInfoAndCart()
                 }
             }
         }

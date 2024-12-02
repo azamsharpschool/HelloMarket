@@ -36,6 +36,10 @@ struct CartScreen: View {
             OrderItem(product: cartItem.product, quantity: cartItem.quantity)
         }
         
+        for item in orderItems {
+            print(item.product.name)
+        }
+        
         order = Order(userId: userId, total: cartStore.total, items: orderItems)
         isPresented = true
     }

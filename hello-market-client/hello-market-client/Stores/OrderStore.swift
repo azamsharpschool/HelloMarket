@@ -19,8 +19,8 @@ class OrderStore {
         self.httpClient = httpClient
     }
     
-    func fetchOrders() async throws {
-        let resource = Resource(url: Constants.Urls.fetchOrders, modelType: [Order].self)
+    func loadOrders() async throws {
+        let resource = Resource(url: Constants.Urls.loadOrders, modelType: [Order].self)
         orders = try await httpClient.load(resource)
     }
     
@@ -34,7 +34,6 @@ class OrderStore {
         if !response.success {
             throw OrderError.saveFailed(response.message ?? "Unable to save product. Please try again.")
         }
-            
     }
     
 }

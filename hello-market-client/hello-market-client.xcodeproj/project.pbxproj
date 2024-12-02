@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8D0FC8B32C90E03100767285 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		8D1F69E22CFE3726007DD3D6 /* .env in Resources */ = {isa = PBXBuildFile; fileRef = 8D1F69E12CFE3722007DD3D6 /* .env */; };
 		8D20503F2CACC09C0088CFAF /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 8D20503E2CACC09C0088CFAF /* JWTDecode */; };
 		8D3EE22F2C92698B004E4B6D /* (null) in Sources */ = {isa = PBXBuildFile; };
 		8D3EE2322C927112004E4B6D /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -44,7 +45,6 @@
 		8D8021962CFD2AC0006C709C /* PaymentControllerEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8021952CFD2ABB006C709C /* PaymentControllerEnvironmentKey.swift */; };
 		8D8021982CFD337E006C709C /* OrderStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8021972CFD337C006C709C /* OrderStore.swift */; };
 		8D80219A2CFD69C0006C709C /* OrderConfirmationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8021992CFD69C0006C709C /* OrderConfirmationScreen.swift */; };
-		8D80219C2CFD76AA006C709C /* .env in Resources */ = {isa = PBXBuildFile; fileRef = 8D80219B2CFD76A5006C709C /* .env */; };
 		8D906AD92CF22288003D382A /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D906AD82CF22288003D382A /* UserStore.swift */; };
 		8D995C9E2C8A962D003AFA2C /* AuthenticationEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D995C9D2C8A962D003AFA2C /* AuthenticationEnvironmentKey.swift */; };
 		8D995CA12C8A9996003AFA2C /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D995CA02C8A9996003AFA2C /* String+Extensions.swift */; };
@@ -71,6 +71,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8D1F69E12CFE3722007DD3D6 /* .env */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env; sourceTree = "<group>"; };
 		8D3EE2372C92819C004E4B6D /* HomeScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		8D3EE2382C92819C004E4B6D /* ProductListScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListScreen.swift; sourceTree = "<group>"; };
 		8D3EE23B2C9281AA004E4B6D /* ProductStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductStore.swift; sourceTree = "<group>"; };
@@ -94,7 +95,6 @@
 		8D8021952CFD2ABB006C709C /* PaymentControllerEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentControllerEnvironmentKey.swift; sourceTree = "<group>"; };
 		8D8021972CFD337C006C709C /* OrderStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStore.swift; sourceTree = "<group>"; };
 		8D8021992CFD69C0006C709C /* OrderConfirmationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmationScreen.swift; sourceTree = "<group>"; };
-		8D80219B2CFD76A5006C709C /* .env */ = {isa = PBXFileReference; lastKnownFileType = text; path = .env; sourceTree = "<group>"; };
 		8D906AD82CF22288003D382A /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
 		8D995C9D2C8A962D003AFA2C /* AuthenticationEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationEnvironmentKey.swift; sourceTree = "<group>"; };
 		8D995CA02C8A9996003AFA2C /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -232,7 +232,7 @@
 		8DDE5FB32C8A7D9300A0DBE0 /* hello-market-client */ = {
 			isa = PBXGroup;
 			children = (
-				8D80219B2CFD76A5006C709C /* .env */,
+				8D1F69E12CFE3722007DD3D6 /* .env */,
 				8D5FE4832CB96895000F47C8 /* Services */,
 				8DEC814D2CAED9D3006C4DA5 /* Validators */,
 				8DF13AEE2C99261D00898DFF /* Utilities */,
@@ -406,7 +406,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8D80219C2CFD76AA006C709C /* .env in Resources */,
+				8D1F69E22CFE3726007DD3D6 /* .env in Resources */,
 				8DDE5FBC2C8A7D9400A0DBE0 /* Preview Assets.xcassets in Resources */,
 				8DDE5FB92C8A7D9400A0DBE0 /* Assets.xcassets in Resources */,
 			);

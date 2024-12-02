@@ -27,7 +27,7 @@ struct OrderHistoryScreen: View {
         .listStyle(.plain)
         .task {
             do {
-                try await orderStore.fetchOrders()
+                try await orderStore.loadOrders()
             } catch {
                 print(error.localizedDescription)
             } 
