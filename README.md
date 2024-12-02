@@ -1,6 +1,6 @@
 ## HelloMarket 
 
-![HelloMarket Logo](/resources/hellomarket.png)
+![HelloMarket Logo](/resources/logo.jpeg)
 
 **NOTE: This project is currently under development.** 
 
