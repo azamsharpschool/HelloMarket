@@ -78,25 +78,8 @@ struct CheckoutScreen: View {
                 .padding()
                 
                 ForEach(order.items) { orderItem in
-                    HStack(alignment: .top) {
-                        AsyncImage(url: orderItem.product.photoUrl) { img in
-                                img.resizable()
-                                    .clipShape(RoundedRectangle(cornerRadius: 16.0, style: .continuous))
-                                .frame(width: 100, height: 100)
-                            } placeholder: {
-                                ProgressView("Loading...")
-                            }
-                            Spacer()
-                                .frame(width: 20)
-                            VStack(alignment: .leading) {
-                                Text(orderItem.product.name)
-                                    .font(.title3)
-                                Text(orderItem.product.price, format: .currency(code: "USD"))
-                                
-                            }.frame(maxWidth: .infinity, alignment: .leading)
-                    }
+                    OrderItemView(orderItem: orderItem)
                 }
-            
                 
                 // payment sheet button
                 if let paymentSheet = paymentSheet {

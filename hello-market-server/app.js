@@ -23,8 +23,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes)
 app.use('/api/cart', authenticate, cartRoutes)
 app.use('/api/user', authenticate, userRoutes)
-app.use('/api/payment', paymentRoutes)
-app.use('/api/orders', orderRoutes)
+app.use('/api/payment', authenticate, paymentRoutes)
+app.use('/api/orders', authenticate, orderRoutes)
 
 app.listen(8080, () => {
     console.log('Server is running...')

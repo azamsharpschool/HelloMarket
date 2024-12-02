@@ -52,6 +52,8 @@
 		8D995CA72C8B369D003AFA2C /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D995CA62C8B369D003AFA2C /* KeychainWrapper.swift */; };
 		8D995CAA2C8B374D003AFA2C /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D995CA92C8B374D003AFA2C /* Errors.swift */; };
 		8D995CB02C8CE054003AFA2C /* WithMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D995CAF2C8CE054003AFA2C /* WithMessageView.swift */; };
+		8D9FFECA2CFE08C300942B57 /* OrderHistoryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9FFEC92CFE08C300942B57 /* OrderHistoryScreen.swift */; };
+		8D9FFECC2CFE100700942B57 /* OrderItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D9FFECB2CFE100700942B57 /* OrderItemView.swift */; };
 		8DAD14C42CC3F8BB00417FE7 /* MyProductDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAD14C32CC3F8BB00417FE7 /* MyProductDetailScreen.swift */; };
 		8DBB77FB2CD6CAD700B0C3E0 /* CartItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBB77FA2CD6CAD700B0C3E0 /* CartItemListView.swift */; };
 		8DBEF9DE2CD8710F00B24511 /* CartItemQuantityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBEF9DD2CD8710F00B24511 /* CartItemQuantityView.swift */; };
@@ -100,6 +102,8 @@
 		8D995CA62C8B369D003AFA2C /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		8D995CA92C8B374D003AFA2C /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		8D995CAF2C8CE054003AFA2C /* WithMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithMessageView.swift; sourceTree = "<group>"; };
+		8D9FFEC92CFE08C300942B57 /* OrderHistoryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderHistoryScreen.swift; sourceTree = "<group>"; };
+		8D9FFECB2CFE100700942B57 /* OrderItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemView.swift; sourceTree = "<group>"; };
 		8DAD14C32CC3F8BB00417FE7 /* MyProductDetailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProductDetailScreen.swift; sourceTree = "<group>"; };
 		8DBB77FA2CD6CAD700B0C3E0 /* CartItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemListView.swift; sourceTree = "<group>"; };
 		8DBEF9DD2CD8710F00B24511 /* CartItemQuantityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemQuantityView.swift; sourceTree = "<group>"; };
@@ -175,6 +179,7 @@
 				8D405AF42CD6C519004BCF0E /* CartItemView.swift */,
 				8DBB77FA2CD6CAD700B0C3E0 /* CartItemListView.swift */,
 				8DBEF9DD2CD8710F00B24511 /* CartItemQuantityView.swift */,
+				8D9FFECB2CFE100700942B57 /* OrderItemView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -272,6 +277,7 @@
 				8D405AF22CD6B383004BCF0E /* CartScreen.swift */,
 				8D4536972CED23C200BD7BFF /* CheckoutScreen.swift */,
 				8D8021992CFD69C0006C709C /* OrderConfirmationScreen.swift */,
+				8D9FFEC92CFE08C300942B57 /* OrderHistoryScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -417,6 +423,7 @@
 				8D5FE4872CB96926000F47C8 /* ImageUploaderDownloaderEnvironmentKey.swift in Sources */,
 				8DDE5FCA2C8A7E3700A0DBE0 /* HTTPClient.swift in Sources */,
 				8DF13AF02C99262700898DFF /* ImagePicker.swift in Sources */,
+				8D9FFECC2CFE100700942B57 /* OrderItemView.swift in Sources */,
 				8D5B744A2CAF769800AA4BAC /* RequireAuthentication.swift in Sources */,
 				8DDEA1A82CC9C8B000D24D3B /* PasswordField.swift in Sources */,
 				8D906AD92CF22288003D382A /* UserStore.swift in Sources */,
@@ -431,6 +438,7 @@
 				8D995CB02C8CE054003AFA2C /* WithMessageView.swift in Sources */,
 				8DBEF9DE2CD8710F00B24511 /* CartItemQuantityView.swift in Sources */,
 				8DDE5FC72C8A7DC700A0DBE0 /* AuthenticationController.swift in Sources */,
+				8D9FFECA2CFE08C300942B57 /* OrderHistoryScreen.swift in Sources */,
 				8D3EE2352C927136004E4B6D /* (null) in Sources */,
 				8D3EE2392C92819C004E4B6D /* HomeScreen.swift in Sources */,
 				8D6668562CD676C0001E1D52 /* CartStore.swift in Sources */,

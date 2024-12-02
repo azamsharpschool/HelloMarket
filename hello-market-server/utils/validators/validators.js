@@ -46,8 +46,6 @@ const addCartItemValidator = [
       .not()
       .isEmpty()
       .withMessage('Quantity cannot be empty.')
-      //.isInt({ min: 1 })
-      //.withMessage('Quantity must be a positive integer.'),
   ];
 
   const updateUserInfoValidator = [
@@ -60,6 +58,37 @@ const addCartItemValidator = [
     body('country', 'Country cannot be empty.').notEmpty()
   ];
 
+  // Validation rules for createOrder
+const validateCreateOrder = [
+  body('user_id')
+      .isInt({ gt: 0 })
+      .withMessage('user_id must be a positive integer'),
+  body('total')
+      .isFloat({ gt: 0 })
+      .withMessage('total must be a positive number'),
+  body('order_items')
+      .isArray({ min: 1 })
+      .withMessage('order_items must be a non-empty array'),
+  body('order_items.*.product_id')
+      .isInt({ gt: 0 })
+      .withMessage('Each order item must have a valid product_id'),
+  body('order_items.*.quantity')
+      .isInt({ gt: 0 })
+      .withMessage('Each order item must have a valid quantity greater than 0'),
+  // Custom validation example
+  body('order_items').custom((items) => {
+      if (!Array.isArray(items) || items.length === 0) {
+          throw new Error('order_items must be a non-empty array');
+      }
+      items.forEach(item => {
+          if (!item.product_id || !item.quantity) {
+              throw new Error('Each order item must have a product_id and quantity');
+          }
+      });
+      return true;
+  }),
+];
+
 module.exports = {
     registerValidator,
     loginValidator, 
@@ -67,5 +96,6 @@ module.exports = {
     deleteProductValidator, 
     updateProductValidator, 
     addCartItemValidator, 
-    updateUserInfoValidator
+    updateUserInfoValidator, 
+    validateCreateOrder
 };

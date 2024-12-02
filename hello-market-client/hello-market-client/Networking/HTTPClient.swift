@@ -127,7 +127,10 @@ struct HTTPClient {
         }
         
         do {
-            let result = try JSONDecoder().decode(resource.modelType, from: data)
+            
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            let result = try decoder.decode(resource.modelType, from: data)
             return result
         } catch {
             throw NetworkError.decodingError(error)

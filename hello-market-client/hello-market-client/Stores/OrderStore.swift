@@ -19,6 +19,11 @@ class OrderStore {
         self.httpClient = httpClient
     }
     
+    func fetchOrders() async throws {
+        let resource = Resource(url: Constants.Urls.fetchOrders, modelType: [Order].self)
+        orders = try await httpClient.load(resource)
+    }
+    
     func saveOrder(order: Order) async throws {
         
         let body = try! JSONSerialization.data(withJSONObject: order.toRequestBody(), options: [])

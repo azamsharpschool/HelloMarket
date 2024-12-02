@@ -18,7 +18,6 @@ router.post(
 // Load cart
 router.get(
   '/',
-  authenticate,
   validationErrorsMiddleware,
   cartController.loadCart
 );
@@ -26,7 +25,6 @@ router.get(
 // Delete a cart item
 router.delete(
   '/item/:cartItemId',
-  authenticate,
   validationErrorsMiddleware,
   cartController.removeCartItem
 );

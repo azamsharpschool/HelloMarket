@@ -226,11 +226,16 @@ struct OrderItem: Codable, Hashable, Identifiable {
     var quantity: Int = 1
 }
 
-struct Order: Codable, Hashable {
+struct Order: Codable, Hashable, Identifiable {
     var id: Int?
     let userId: Int
     var total: Double
     var items: [OrderItem]
+    
+    private enum CodingKeys: String, CodingKey {
+        case id, total, items
+        case userId = "user_id"
+    }
     
     func toRequestBody() -> [String: Any] {
         return [

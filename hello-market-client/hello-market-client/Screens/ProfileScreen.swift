@@ -26,6 +26,8 @@ struct ProfileScreen: View {
     @State private var validationErrors: [String] = []
     @State private var updatingUserInfo: Bool = false
     
+    @State private var isPresented: Bool = false
+    
     private func validateForm() -> Bool {
         
         validationErrors = []
@@ -83,6 +85,10 @@ struct ProfileScreen: View {
                 TextField("Country", text: $country)
             }
             
+            Button("View Order History") {
+                isPresented = true
+            }
+            
             Button("Signout") {
                 let _ = Keychain<String>.delete("jwttoken")
                 userId = nil
@@ -90,6 +96,12 @@ struct ProfileScreen: View {
                 userStore.userInfo = nil
             }.buttonStyle(.borderless)
         }
+        .sheet(isPresented: $isPresented, content: {
+            NavigationStack {
+                OrderHistoryScreen()
+                    .environment(OrderStore(httpClient: HTTPClient()))
+            }
+        })
         
         .onChange(of: userStore.userInfo, initial: true, {
             if let userInfo = userStore.userInfo {

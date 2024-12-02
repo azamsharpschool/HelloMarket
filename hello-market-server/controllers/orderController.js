@@ -2,12 +2,37 @@
 const models = require('../models')
 const cartController = require('./cartController')
 
-exports.createOrder = async (req, res) => {
-    
-    console.log('createOrder')
-    const { user_id, total, order_items } = req.body;
+exports.loadOrders = async (req, res) => {
 
-    console.log(user_id, total, order_items)
+    const orders = await models.Order.findAll({
+        where: {
+            user_id: req.userId 
+        }, 
+        attributes: ['id', 'user_id', 'total'], 
+        include: [
+            {
+                model: models.OrderItem, 
+                as: 'items', 
+                attributes: ['id', 'quantity'],
+                include: [
+                    {
+                        model: models.Product, 
+                        as: 'product', 
+                        attributes: ['id', 'user_id','name', 'description', 'price', 'photo_url']
+                    }, 
+
+                ]
+            }
+        ]
+    })
+
+    res.json(orders)
+
+}
+
+exports.createOrder = async (req, res) => {
+
+    const { user_id, total, order_items } = req.body;
 
     // Start a transaction for atomicity
     const transaction = await models.Order.sequelize.transaction();
