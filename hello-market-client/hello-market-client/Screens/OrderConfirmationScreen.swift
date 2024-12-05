@@ -39,7 +39,6 @@ struct OrderConfirmationScreen: View {
         .padding()
         .navigationTitle("Order Confirmation")
         .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden()
     }
 }
 
