@@ -32,6 +32,8 @@ exports.loadOrders = async (req, res) => {
 
 exports.createOrder = async (req, res) => {
 
+    const userId = req.userId 
+
     const { user_id, total, order_items } = req.body;
 
     // Start a transaction for atomicity
@@ -41,7 +43,7 @@ exports.createOrder = async (req, res) => {
         // Create the new order
         const newOrder = await models.Order.create(
             {
-                user_id: user_id,
+                user_id: userId,
                 total: total,
             },
             { transaction } // Ensure this operation is part of the transaction
@@ -59,7 +61,7 @@ exports.createOrder = async (req, res) => {
         // get active cart_id 
         let cart = await models.Cart.findOne({
             where: {
-                user_id: user_id, 
+                user_id: userId, 
                 is_active: true 
             },
             attributes: ['id', 'user_id', 'is_active'],

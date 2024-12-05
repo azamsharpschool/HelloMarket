@@ -71,7 +71,7 @@ struct HomeScreen: View {
                     screen.destination
                         .tag(screen as AppScreen?)
                         .tabItem { screen.label }
-                        .badge((screen as AppScreen?) == .cart ? cartStore.itemsCount: 0)
+                        .badge((screen as AppScreen?) == .cart ? cartStore.cart?.itemsCount ?? 0: 0)
             }
         }.navigationBarBackButtonHidden(true)
     }

@@ -11,7 +11,7 @@ import StripePaymentSheet
 
 struct CheckoutScreen: View {
     
-    let order: Order
+    let cart: Cart
     
     @Environment(\.paymentController) private var paymentController
     
@@ -25,25 +25,36 @@ struct CheckoutScreen: View {
     @Environment(\.dismiss) private var dismiss
   
     private func paymentCompletion(result: PaymentSheetResult) {
-
         switch result {
-            case .completed:
-                Task {
-                    do {
-                        try await orderStore.saveOrder(order: order)
-                        cartStore.emptyCart()
-                        presentOrderConfirmationScreen = true
-                    } catch {
-                        print(error)
+        case .completed:
+            Task {
+                do {
+                    guard let cart = cartStore.cart else {
+                        throw CartError.operationFailed("Missing cart")
                     }
+
+                    // Convert Cart to Order
+                    let order = Order(from: cart)
+
+                    // Save the order
+                    try await orderStore.saveOrder(order: order)
+
+                    // Empty the cart
+                    cartStore.emptyCart()
+
+                    // Present order confirmation
+                    presentOrderConfirmationScreen = true
+                } catch {
+                    print("Error processing payment: \(error)")
                 }
-            case .canceled:
-                print("canceled")
-            case .failed(let error):
-                print(error.localizedDescription)
+            }
+        case .canceled:
+            print("Payment canceled")
+        case .failed(let error):
+            print("Payment failed: \(error.localizedDescription)")
         }
-        
     }
+
     
     var body: some View {
         List {
@@ -55,7 +66,7 @@ struct CheckoutScreen: View {
                     HStack {
                         Text("Items:")
                         Spacer()
-                        Text(order.total, format: .currency(code: "USD"))
+                        Text(cart.total, format: .currency(code: "USD"))
                     }
                    
                     
@@ -75,8 +86,8 @@ struct CheckoutScreen: View {
                 }
                 .padding()
                 
-                ForEach(order.items, id: \.product.id) { orderItem in
-                    OrderItemView(orderItem: orderItem)
+                ForEach(cart.cartItems) { cartItem in
+                    CartItemView(cartItem: cartItem)
                 }
                 
                 // payment sheet button
@@ -105,7 +116,7 @@ struct CheckoutScreen: View {
         })
         .task {
             do {
-                paymentSheet = try await paymentController.preparePaymentSheet(for: order)
+                paymentSheet = try await paymentController.preparePaymentSheet(for: cart)
             } catch {
                 print(error)
             }
@@ -120,7 +131,7 @@ struct CheckoutScreen: View {
 
 #Preview {
     NavigationStack {
-        CheckoutScreen(order: Order.preview)
+        CheckoutScreen(cart: Cart.preview)
             .withMessageView()
     }
     .environment(CartStore(httpClient: .development))

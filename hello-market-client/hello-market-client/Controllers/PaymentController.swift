@@ -18,11 +18,9 @@ struct PaymentController {
     }
 
     @MainActor
-    func preparePaymentSheet(for order: Order) async throws -> PaymentSheet {
+    func preparePaymentSheet(for cart: Cart) async throws -> PaymentSheet {
        
-        print(order.total)
-        
-        let params = ["totalAmount": order.total]
+        let params = ["totalAmount": cart.total]
         let paramsData = try JSONEncoder().encode(params)
         
         let resource = Resource(

@@ -45,7 +45,7 @@ exports.updateUserInfo = async (req, res) => {
             return res.status(404).json({ message: 'User not found.', success: false });
         }
 
-        // update the product 
+        // update the user 
         await userInfo.update({
             userId, 
             first_name,

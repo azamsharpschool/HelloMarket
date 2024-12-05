@@ -88,6 +88,21 @@ struct Cart: Codable, Identifiable {
 }
 
 extension Cart {
+    
+    var total: Double {
+        cartItems.reduce(0.0, { total, cartItem in
+            total + (cartItem.product.price * Double(cartItem.quantity))
+        })
+    }
+    
+    var itemsCount: Int {
+        cartItems.reduce(0) { total, item in
+            total + item.quantity
+        } 
+    }
+}
+
+extension Cart {
     static var preview: Cart {
         return Cart(
             id: 1,
@@ -224,6 +239,12 @@ struct OrderItem: Codable, Hashable, Identifiable {
     var id: Int?
     let product: Product
     var quantity: Int = 1
+    
+    init(from cartItem: CartItem) {
+        self.id = nil
+        self.product = cartItem.product
+        self.quantity = cartItem.quantity
+    }
 }
 
 struct Order: Codable, Hashable, Identifiable {
@@ -231,6 +252,13 @@ struct Order: Codable, Hashable, Identifiable {
     let userId: Int
     var total: Double
     var items: [OrderItem]
+    
+    init(from cart: Cart) {
+        self.id = nil
+        self.userId = cart.userId
+        self.total = cart.total
+        self.items = cart.cartItems.map(OrderItem.init)
+    }
     
     private enum CodingKeys: String, CodingKey {
         case id, total, items
@@ -253,9 +281,13 @@ struct Order: Codable, Hashable, Identifiable {
 
 extension Order {
     static var preview: Order {
+        
+        Order(from: Cart.preview)
+        
+        /*
         Order(id: 1, userId: 2, total: 10, items: Cart.preview.cartItems.map({ cartItem in
             OrderItem(id: cartItem.id, product: cartItem.product, quantity: cartItem.quantity)
-        }))
+        })) */
     }
 }
 

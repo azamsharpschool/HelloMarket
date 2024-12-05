@@ -15,12 +15,11 @@ struct CartScreen: View {
     @Environment(UserStore.self) private var userStore
     
     @Environment(\.showMessage) private var showMessage
-    @State private var isPresented: Bool = false
     
+    @State private var proceedToCheckout: Bool = false
     @AppStorage("userId") private var userId: Int?
     
-    @State private var order: Order?
-    
+    /*
     private func proceedToCheckout() throws {
         
         guard let userId = userId else {
@@ -39,10 +38,7 @@ struct CartScreen: View {
         for item in orderItems {
             print(item.product.name)
         }
-        
-        order = Order(userId: userId, total: cartStore.total, items: orderItems)
-        isPresented = true
-    }
+    } */
     
     var body: some View {
         List {
@@ -50,22 +46,16 @@ struct CartScreen: View {
                 HStack {
                     Text("Total: ")
                         .font(.title)
-                    Text(cartStore.total, format: .currency(code: "USD"))
+                    Text(cart.total, format: .currency(code: "USD"))
                         .font(.title)
                         .bold()
                 }
                 
                 Button(action: {
-                    
-                    do {
-                        try proceedToCheckout()
-                    } catch {
-                        print(error.localizedDescription)
-                    }
-                    
+                    proceedToCheckout = true
                 }) {
                    
-                    Text("Proceed to checkout ^[(\(cartStore.itemsCount) Item](inflect: true))")
+                    Text("Proceed to checkout ^[(\(cart.itemsCount) Item](inflect: true))")
                         .bold()
                         .frame(maxWidth: .infinity)
                         .padding()
@@ -80,8 +70,10 @@ struct CartScreen: View {
                 ContentUnavailableView("No items in the cart.", systemImage: "cart")
             }
         }
-        .navigationDestination(item: $order, destination: { order in
-            CheckoutScreen(order: order)
+        .navigationDestination(isPresented: $proceedToCheckout, destination: {
+            if let cart = cartStore.cart {
+                CheckoutScreen(cart: cart)
+            }
         })
         .listStyle(.plain)
         .navigationTitle("Cart")
