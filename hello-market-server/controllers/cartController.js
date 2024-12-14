@@ -77,11 +77,7 @@ exports.addCartItem = async (req, res) => {
 
     const productId = req.body.product_id
     const quantity = parseInt(req.body.quantity)
-
-    console.log('Quantity: ', quantity)
-
-    console.log(req.userId)
-
+    
     try {
         // get the cart if it is already available for this user 
         let cart = await models.Cart.findOne({

@@ -4,9 +4,7 @@ const models = require('../models')
 exports.loadUserInfo = async (req, res) => {
     try {
 
-        const userId = 2 
-
-        const userInfo = await models.User.findByPk(userId, {
+        const userInfo = await models.User.findByPk(req.userId, {
             attributes: ['id', 'first_name', 'last_name', 'street', 'city', 'state', 'zip_code', 'country']
         })
 
@@ -29,8 +27,6 @@ exports.loadUserInfo = async (req, res) => {
 }
 
 exports.updateUserInfo = async (req, res) => {
-
-    console.log('updateUserInfo')
 
     try {
         const userId = req.userId 

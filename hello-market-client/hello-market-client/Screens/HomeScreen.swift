@@ -61,7 +61,7 @@ extension AppScreen {
 }
 
 struct HomeScreen: View {
-    
+     
     @State var selection: AppScreen?
     @Environment(CartStore.self) private var cartStore
     

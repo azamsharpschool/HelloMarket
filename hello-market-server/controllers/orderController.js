@@ -34,7 +34,7 @@ exports.createOrder = async (req, res) => {
 
     const userId = req.userId 
 
-    const { user_id, total, order_items } = req.body;
+    const { total, order_items } = req.body;
 
     // Start a transaction for atomicity
     const transaction = await models.Order.sequelize.transaction();

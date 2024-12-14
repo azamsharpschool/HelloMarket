@@ -27,9 +27,7 @@
 		8D5B74482CAF737200AA4BAC /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5B74472CAF737200AA4BAC /* ProfileScreen.swift */; };
 		8D5B744A2CAF769800AA4BAC /* RequireAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5B74492CAF769800AA4BAC /* RequireAuthentication.swift */; };
 		8D5FE4852CB968A7000F47C8 /* ImageUploaderDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5FE4842CB968A7000F47C8 /* ImageUploaderDownloader.swift */; };
-		8D5FE4872CB96926000F47C8 /* ImageUploaderDownloaderEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D5FE4862CB96926000F47C8 /* ImageUploaderDownloaderEnvironmentKey.swift */; };
 		8D6668562CD676C0001E1D52 /* CartStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D6668552CD676C0001E1D52 /* CartStore.swift */; };
-		8D7B08172C8BD95A003D7E91 /* ShowMessageEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7B08162C8BD95A003D7E91 /* ShowMessageEnvironmentKey.swift */; };
 		8D7B081D2C8BEFB0003D7E91 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7B081C2C8BEFB0003D7E91 /* MessageView.swift */; };
 		8D80217D2CFCF28E006C709C /* Stripe in Frameworks */ = {isa = PBXBuildFile; productRef = 8D80217C2CFCF28E006C709C /* Stripe */; };
 		8D80217F2CFCF28E006C709C /* StripeApplePay in Frameworks */ = {isa = PBXBuildFile; productRef = 8D80217E2CFCF28E006C709C /* StripeApplePay */; };
@@ -40,13 +38,10 @@
 		8D8021892CFCF28E006C709C /* StripePayments in Frameworks */ = {isa = PBXBuildFile; productRef = 8D8021882CFCF28E006C709C /* StripePayments */; };
 		8D80218B2CFCF28F006C709C /* StripePaymentsUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8D80218A2CFCF28F006C709C /* StripePaymentsUI */; };
 		8D80218D2CFCF37D006C709C /* PaymentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D80218C2CFCF37D006C709C /* PaymentStore.swift */; };
-		8D80218F2CFCF43C006C709C /* HTTPClientEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D80218E2CFCF435006C709C /* HTTPClientEnvironmentKey.swift */; };
 		8D8021922CFD27EE006C709C /* PaymentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8021912CFD27EB006C709C /* PaymentController.swift */; };
-		8D8021962CFD2AC0006C709C /* PaymentControllerEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8021952CFD2ABB006C709C /* PaymentControllerEnvironmentKey.swift */; };
 		8D8021982CFD337E006C709C /* OrderStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8021972CFD337C006C709C /* OrderStore.swift */; };
 		8D80219A2CFD69C0006C709C /* OrderConfirmationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8021992CFD69C0006C709C /* OrderConfirmationScreen.swift */; };
 		8D906AD92CF22288003D382A /* UserStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D906AD82CF22288003D382A /* UserStore.swift */; };
-		8D995C9E2C8A962D003AFA2C /* AuthenticationEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D995C9D2C8A962D003AFA2C /* AuthenticationEnvironmentKey.swift */; };
 		8D995CA12C8A9996003AFA2C /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D995CA02C8A9996003AFA2C /* String+Extensions.swift */; };
 		8D995CA32C8AA1FA003AFA2C /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D995CA22C8AA1FA003AFA2C /* LoginScreen.swift */; };
 		8D995CA72C8B369D003AFA2C /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D995CA62C8B369D003AFA2C /* KeychainWrapper.swift */; };
@@ -66,6 +61,7 @@
 		8DDE5FCD2C8A7FE900A0DBE0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDE5FCC2C8A7FE900A0DBE0 /* Constants.swift */; };
 		8DDE5FD02C8A811A00A0DBE0 /* DTOs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDE5FCF2C8A811A00A0DBE0 /* DTOs.swift */; };
 		8DDEA1A82CC9C8B000D24D3B /* PasswordField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDEA1A72CC9C8B000D24D3B /* PasswordField.swift */; };
+		8DE398FF2D0E141800AA3029 /* EnvironmentValues+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE398FE2D0E141800AA3029 /* EnvironmentValues+Extensions.swift */; };
 		8DEC814F2CAED9DD006C4DA5 /* TokenValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DEC814E2CAED9DD006C4DA5 /* TokenValidator.swift */; };
 		8DF13AF02C99262700898DFF /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF13AEF2C99262700898DFF /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
@@ -85,18 +81,13 @@
 		8D5B74472CAF737200AA4BAC /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
 		8D5B74492CAF769800AA4BAC /* RequireAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequireAuthentication.swift; sourceTree = "<group>"; };
 		8D5FE4842CB968A7000F47C8 /* ImageUploaderDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploaderDownloader.swift; sourceTree = "<group>"; };
-		8D5FE4862CB96926000F47C8 /* ImageUploaderDownloaderEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploaderDownloaderEnvironmentKey.swift; sourceTree = "<group>"; };
 		8D6668552CD676C0001E1D52 /* CartStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartStore.swift; sourceTree = "<group>"; };
-		8D7B08162C8BD95A003D7E91 /* ShowMessageEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMessageEnvironmentKey.swift; sourceTree = "<group>"; };
 		8D7B081C2C8BEFB0003D7E91 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		8D80218C2CFCF37D006C709C /* PaymentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStore.swift; sourceTree = "<group>"; };
-		8D80218E2CFCF435006C709C /* HTTPClientEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClientEnvironmentKey.swift; sourceTree = "<group>"; };
 		8D8021912CFD27EB006C709C /* PaymentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentController.swift; sourceTree = "<group>"; };
-		8D8021952CFD2ABB006C709C /* PaymentControllerEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentControllerEnvironmentKey.swift; sourceTree = "<group>"; };
 		8D8021972CFD337C006C709C /* OrderStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStore.swift; sourceTree = "<group>"; };
 		8D8021992CFD69C0006C709C /* OrderConfirmationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmationScreen.swift; sourceTree = "<group>"; };
 		8D906AD82CF22288003D382A /* UserStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStore.swift; sourceTree = "<group>"; };
-		8D995C9D2C8A962D003AFA2C /* AuthenticationEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationEnvironmentKey.swift; sourceTree = "<group>"; };
 		8D995CA02C8A9996003AFA2C /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		8D995CA22C8AA1FA003AFA2C /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
 		8D995CA62C8B369D003AFA2C /* KeychainWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
@@ -117,6 +108,7 @@
 		8DDE5FCC2C8A7FE900A0DBE0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8DDE5FCF2C8A811A00A0DBE0 /* DTOs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTOs.swift; sourceTree = "<group>"; };
 		8DDEA1A72CC9C8B000D24D3B /* PasswordField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordField.swift; sourceTree = "<group>"; };
+		8DE398FE2D0E141800AA3029 /* EnvironmentValues+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues+Extensions.swift"; sourceTree = "<group>"; };
 		8DEC814E2CAED9DD006C4DA5 /* TokenValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenValidator.swift; sourceTree = "<group>"; };
 		8DF13AEF2C99262700898DFF /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -184,23 +176,12 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		8D995C9C2C8A961A003AFA2C /* Environment Values */ = {
-			isa = PBXGroup;
-			children = (
-				8D8021952CFD2ABB006C709C /* PaymentControllerEnvironmentKey.swift */,
-				8D80218E2CFCF435006C709C /* HTTPClientEnvironmentKey.swift */,
-				8D995C9D2C8A962D003AFA2C /* AuthenticationEnvironmentKey.swift */,
-				8D7B08162C8BD95A003D7E91 /* ShowMessageEnvironmentKey.swift */,
-				8D5FE4862CB96926000F47C8 /* ImageUploaderDownloaderEnvironmentKey.swift */,
-			);
-			path = "Environment Values";
-			sourceTree = "<group>";
-		};
 		8D995C9F2C8A998A003AFA2C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				8D995CA02C8A9996003AFA2C /* String+Extensions.swift */,
 				8D405AF02CD6AA6A004BCF0E /* UserDefaults.swift */,
+				8DE398FE2D0E141800AA3029 /* EnvironmentValues+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -241,7 +222,6 @@
 				8D7B08182C8BEBCF003D7E91 /* View Modifiers */,
 				8D995CA82C8B373B003AFA2C /* Custom Errors */,
 				8D995C9F2C8A998A003AFA2C /* Extensions */,
-				8D995C9C2C8A961A003AFA2C /* Environment Values */,
 				8DDE5FCE2C8A810E00A0DBE0 /* Models */,
 				8DDE5FCB2C8A7FDE00A0DBE0 /* Utility */,
 				8DDE5FC82C8A7E2B00A0DBE0 /* Networking */,
@@ -420,7 +400,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DDE5FC42C8A7DB500A0DBE0 /* RegistrationScreen.swift in Sources */,
-				8D5FE4872CB96926000F47C8 /* ImageUploaderDownloaderEnvironmentKey.swift in Sources */,
 				8DDE5FCA2C8A7E3700A0DBE0 /* HTTPClient.swift in Sources */,
 				8DF13AF02C99262700898DFF /* ImagePicker.swift in Sources */,
 				8D9FFECC2CFE100700942B57 /* OrderItemView.swift in Sources */,
@@ -429,6 +408,7 @@
 				8D906AD92CF22288003D382A /* UserStore.swift in Sources */,
 				8D5FE4852CB968A7000F47C8 /* ImageUploaderDownloader.swift in Sources */,
 				8D3EE2402C953384004E4B6D /* MyProductListScreen.swift in Sources */,
+				8DE398FF2D0E141800AA3029 /* EnvironmentValues+Extensions.swift in Sources */,
 				8D80219A2CFD69C0006C709C /* OrderConfirmationScreen.swift in Sources */,
 				8D995CA32C8AA1FA003AFA2C /* LoginScreen.swift in Sources */,
 				8D3EE22F2C92698B004E4B6D /* (null) in Sources */,
@@ -442,7 +422,6 @@
 				8D3EE2352C927136004E4B6D /* (null) in Sources */,
 				8D3EE2392C92819C004E4B6D /* HomeScreen.swift in Sources */,
 				8D6668562CD676C0001E1D52 /* CartStore.swift in Sources */,
-				8D80218F2CFCF43C006C709C /* HTTPClientEnvironmentKey.swift in Sources */,
 				8D995CA12C8A9996003AFA2C /* String+Extensions.swift in Sources */,
 				8DEC814F2CAED9DD006C4DA5 /* TokenValidator.swift in Sources */,
 				8D3EE23A2C92819C004E4B6D /* ProductListScreen.swift in Sources */,
@@ -450,21 +429,18 @@
 				8D7B081D2C8BEFB0003D7E91 /* MessageView.swift in Sources */,
 				8D405AF12CD6AA6A004BCF0E /* UserDefaults.swift in Sources */,
 				8D80218D2CFCF37D006C709C /* PaymentStore.swift in Sources */,
-				8D7B08172C8BD95A003D7E91 /* ShowMessageEnvironmentKey.swift in Sources */,
 				8D8021982CFD337E006C709C /* OrderStore.swift in Sources */,
 				8DDE5FD02C8A811A00A0DBE0 /* DTOs.swift in Sources */,
 				8D3EE23E2C951CD2004E4B6D /* ProductDetailScreen.swift in Sources */,
 				8DDE5FB52C8A7D9300A0DBE0 /* HelloMarketClientApp.swift in Sources */,
 				8D3EE2422C968D59004E4B6D /* AddProductScreen.swift in Sources */,
 				8D4536982CED23C200BD7BFF /* CheckoutScreen.swift in Sources */,
-				8D8021962CFD2AC0006C709C /* PaymentControllerEnvironmentKey.swift in Sources */,
 				8D5B74482CAF737200AA4BAC /* ProfileScreen.swift in Sources */,
 				8DDE5FCD2C8A7FE900A0DBE0 /* Constants.swift in Sources */,
 				8DAD14C42CC3F8BB00417FE7 /* MyProductDetailScreen.swift in Sources */,
 				8D3EE2322C927112004E4B6D /* (null) in Sources */,
 				8D405AF32CD6B383004BCF0E /* CartScreen.swift in Sources */,
 				8D405AF52CD6C519004BCF0E /* CartItemView.swift in Sources */,
-				8D995C9E2C8A962D003AFA2C /* AuthenticationEnvironmentKey.swift in Sources */,
 				8D0FC8B32C90E03100767285 /* (null) in Sources */,
 				8D8021922CFD27EE006C709C /* PaymentController.swift in Sources */,
 			);
