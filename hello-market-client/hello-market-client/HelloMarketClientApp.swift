@@ -20,7 +20,7 @@ struct HelloMarketClientApp: App {
     @State private var paymentController = PaymentController(httpClient: HTTPClient())
     @State private var orderStore = OrderStore(httpClient: HTTPClient())
     
-    @AppStorage("userId") private var userId: String?
+    @AppStorage("isAuthenticated") private var isAuthenticated = false
     
     init() {
         StripeAPI.defaultPublishableKey = ProcessInfo.processInfo.environment["STRIPE_PUBLISHABLE_KEY"] ?? ""
@@ -48,8 +48,8 @@ struct HelloMarketClientApp: App {
             .environment(\.paymentController, paymentController)
             .environment(\.uploaderDownloader, ImageUploaderDownloader(httpClient: .development))
             .withMessageView()
-            .task(id: userId) {
-                if userId != nil {
+            .task(id: isAuthenticated) {
+                if isAuthenticated {
                     await loadUserInfoAndCart()
                 }
             }

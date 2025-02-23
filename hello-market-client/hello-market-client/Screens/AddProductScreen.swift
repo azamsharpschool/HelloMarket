@@ -20,7 +20,6 @@ struct AddProductScreen: View {
     
     @Environment(\.dismiss) private var dismiss
     @Environment(ProductStore.self) private var productStore
-    @AppStorage("userId") private var userId: Int?
     
     @Environment(\.uploaderDownloader) private var uploaderDownloader
     
@@ -56,16 +55,12 @@ struct AddProductScreen: View {
                 throw ProductError.uploadFailed
             }
             
-            guard let userId = userId else {
-                throw ProductError.missingUserId
-            }
-            
             guard let price = price, price > 0 else {
                 throw ProductError.invalidPrice
             }
             
-            let product = Product(id: self.product?.id, name: name, description: description, price: price, photoUrl: photoURL, userId: userId)
-            
+            let product = Product(id: self.product?.id, name: name, description: description, price: price, photoUrl: photoURL)
+             
             if self.product != nil {
                 try await productStore.updateProduct(product)
             } else {

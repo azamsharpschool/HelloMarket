@@ -25,8 +25,8 @@ class ProductStore {
         products = try await httpClient.load(resource)
     }
     
-    func loadMyProducts(by userId: Int) async throws {
-        let resource = Resource(url: Constants.Urls.myProducts(userId), modelType: [Product].self)
+    func loadMyProducts() async throws {
+        let resource = Resource(url: Constants.Urls.myProducts, modelType: [Product].self)
         myProducts = try await httpClient.load(resource)
     }
     
@@ -52,7 +52,10 @@ class ProductStore {
     }
     
     func saveProduct(_ product: Product) async throws {
-        let resource = Resource(url: Constants.Urls.createProduct, method: .post(product.encode()), modelType: CreateProductResponse.self)
+        
+        let body = try JSONEncoder().encode(product)
+        
+        let resource = Resource(url: Constants.Urls.createProduct, method: .post(body), modelType: CreateProductResponse.self)
         let response = try await httpClient.load(resource)
         if let product = response.product, response.success {
             myProducts.append(product)
@@ -64,6 +67,7 @@ class ProductStore {
     func updateProduct(_ product: Product) async throws {
         
         guard let productId = product.id else {
+            print("product id is null")
             throw ProductError.productNotFound
         }
         

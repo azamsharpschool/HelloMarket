@@ -19,7 +19,7 @@ router.post(
   
   // Get products for a specific user
   router.get(
-    '/user/:userId',
+    '/user',
     authenticate,
     productController.getMyProducts
   );

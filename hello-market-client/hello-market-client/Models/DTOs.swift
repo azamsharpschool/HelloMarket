@@ -16,7 +16,6 @@ struct LoginResponse: Codable {
     let message: String?
     let token: String?
     let success: Bool
-    let userId: Int?
     let username: String?
 }
 
@@ -30,6 +29,33 @@ struct UploadDataResponse: Codable {
     let downloadURL: URL?
 }
 
+struct ProductRequest: Codable {
+    
+    var id: Int?
+    let name: String
+    let description: String
+    let price: Double
+    let photoUrl: URL?
+    
+    private enum CodingKeys: String, CodingKey {
+        case id, name, description, price
+        case photoUrl = "photo_url"
+    }
+}
+
+struct CreateProduct: Codable {
+    
+    let name: String
+    let description: String
+    let price: Double
+    let photoUrl: URL?
+    
+    private enum CodingKeys: String, CodingKey {
+        case name, description, price
+        case photoUrl = "photo_url"
+    }
+}
+
 struct Product: Codable, Identifiable, Hashable {
     
     var id: Int?
@@ -37,19 +63,17 @@ struct Product: Codable, Identifiable, Hashable {
     let description: String
     let price: Double
     let photoUrl: URL?
-    let userId: Int
     
     private enum CodingKeys: String, CodingKey {
         case id, name, description, price
         case photoUrl = "photo_url"
-        case userId = "user_id"
     }
 }
 
 extension Product {
     
     static var preview: Product {
-        Product(id: 1, name: "Mirra Chair", description: "The Mirra chair by Herman Miller is an ergonomic office chair designed for comfort and support. It features an adjustable backrest, seat, and armrests, along with a flexible back that adapts to body movements. The chair's breathable mesh promotes airflow, while its responsive design encourages proper posture, making it ideal for long periods of sitting.", price: 850, photoUrl: URL(string: "http://localhost:8080/images/chair.jpg")!, userId: 1)
+        Product(id: 1, name: "Mirra Chair", description: "The Mirra chair by Herman Miller is an ergonomic office chair designed for comfort and support. It features an adjustable backrest, seat, and armrests, along with a flexible back that adapts to body movements. The chair's breathable mesh promotes airflow, while its responsive design encourages proper posture, making it ideal for long periods of sitting.", price: 850, photoUrl: URL(string: "http://localhost:8080/images/chair.jpg")!)
     }
     
     func encode() -> Data? {
@@ -78,12 +102,10 @@ struct UpdateProductResponse: Codable {
 // Cart
 struct Cart: Codable, Identifiable {
     var id: Int?
-    let userId: Int
     var cartItems: [CartItem] = []
     
     private enum CodingKeys: String, CodingKey {
         case id, cartItems
-        case userId = "user_id"
     }
 }
 
@@ -106,7 +128,6 @@ extension Cart {
     static var preview: Cart {
         return Cart(
             id: 1,
-            userId: 101,
             cartItems: [
                 CartItem(
                     id: 1,
@@ -115,8 +136,7 @@ extension Cart {
                         name: "Coffee",
                         description: "A rich, aromatic blend of premium coffee beans.",
                         price: 5.99,
-                        photoUrl: URL(string: "https://picsum.photos/200/300"),
-                        userId: 101
+                        photoUrl: URL(string: "https://picsum.photos/200/300")
                     ),
                     quantity: 2
                 ),
@@ -127,8 +147,7 @@ extension Cart {
                         name: "Tea",
                         description: "Refreshing green tea with hints of mint.",
                         price: 3.49,
-                        photoUrl: URL(string: "https://picsum.photos/200/300"),
-                        userId: 101
+                        photoUrl: URL(string: "https://picsum.photos/200/300")
                     ),
                     quantity: 1
                 ),
@@ -139,8 +158,7 @@ extension Cart {
                         name: "Hot Chocolate",
                         description: "Smooth and creamy hot chocolate.",
                         price: 4.99,
-                        photoUrl: URL(string: "https://picsum.photos/200/300"),
-                        userId: 101
+                        photoUrl: URL(string: "https://picsum.photos/200/300")
                     ),
                     quantity: 3
                 )
@@ -249,25 +267,21 @@ struct OrderItem: Codable, Hashable, Identifiable {
 
 struct Order: Codable, Hashable, Identifiable {
     var id: Int?
-    let userId: Int
     var total: Double
     var items: [OrderItem]
     
     init(from cart: Cart) {
         self.id = nil
-        self.userId = cart.userId
         self.total = cart.total
         self.items = cart.cartItems.map(OrderItem.init)
     }
     
     private enum CodingKeys: String, CodingKey {
         case id, total, items
-        case userId = "user_id"
     }
     
     func toRequestBody() -> [String: Any] {
         return [
-            "user_id": userId,
             "total": total,
             "order_items": items.map { item in
                 [
@@ -281,13 +295,7 @@ struct Order: Codable, Hashable, Identifiable {
 
 extension Order {
     static var preview: Order {
-        
         Order(from: Cart.preview)
-        
-        /*
-        Order(id: 1, userId: 2, total: 10, items: Cart.preview.cartItems.map({ cartItem in
-            OrderItem(id: cartItem.id, product: cartItem.product, quantity: cartItem.quantity)
-        })) */
     }
 }
 

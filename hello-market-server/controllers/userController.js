@@ -2,13 +2,14 @@
 const models = require('../models')
 
 exports.loadUserInfo = async (req, res) => {
+
     try {
 
         const userInfo = await models.User.findByPk(req.userId, {
             attributes: ['id', 'first_name', 'last_name', 'street', 'city', 'state', 'zip_code', 'country']
         })
 
-        if (!userId) {
+        if (!userInfo) {
             return res.status(404).json({ message: 'User not found.', success: false });
         }
 

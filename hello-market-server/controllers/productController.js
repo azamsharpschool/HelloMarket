@@ -103,7 +103,7 @@ exports.deleteProduct = async (req, res) => {
 
 exports.getMyProducts = async (req, res) => {
   try {
-    const userId = req.params.userId
+    const userId = req.userId 
     console.log(userId)
     const products = await models.Product.findAll({
       where: {
@@ -118,8 +118,7 @@ exports.getMyProducts = async (req, res) => {
 
 exports.create = async (req, res) => {
 
-  const { name, description, price, photo_url, user_id } = req.body
-  console.log(req.body)
+  const { name, description, price, photo_url } = req.body
 
   try {
     const newProduct = await models.Product.create({
@@ -127,7 +126,7 @@ exports.create = async (req, res) => {
       description: description,
       price: price,
       photo_url: photo_url,
-      user_id: user_id
+      user_id: req.userId 
     });
 
     // Return success response with the created product
@@ -140,7 +139,7 @@ exports.create = async (req, res) => {
 exports.updateProduct = async (req, res) => {
 
   try {
-    const { name, description, price, photo_url, user_id } = req.body
+    const { name, description, price, photo_url } = req.body
     const { productId } = req.params
 
     const product = await models.Product.findByPk(productId)
@@ -153,8 +152,7 @@ exports.updateProduct = async (req, res) => {
       name,
       description,
       price,
-      photo_url,
-      user_id
+      photo_url
     })
 
     // Return the updated product along with a success message

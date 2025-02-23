@@ -11,14 +11,14 @@ import SwiftUI
 struct RequiresAuthentication: ViewModifier {
     
     @State private var isLoading: Bool = true
-    @AppStorage("userId") private var userId: String?
+    @AppStorage("isAuthenticated") private var isAuthenticated: Bool = false
     
     func body(content: Content) -> some View {
         Group {
             if isLoading {
                 ProgressView("Loading...")
             } else {
-                if userId != nil {
+                if isAuthenticated {
                     content
                 } else {
                     LoginScreen()
@@ -31,8 +31,8 @@ struct RequiresAuthentication: ViewModifier {
     private func checkAuthentication() {
         
         guard let token = Keychain<String>.get("jwttoken"), TokenValidator.validate(token: token) else {
-            userId = nil
             isLoading = false
+            isAuthenticated = false
             return
         }
         

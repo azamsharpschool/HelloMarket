@@ -13,32 +13,9 @@ struct CartScreen: View {
     
     @Environment(CartStore.self) private var cartStore
     @Environment(UserStore.self) private var userStore
-    
     @Environment(\.showMessage) private var showMessage
     
     @State private var proceedToCheckout: Bool = false
-    @AppStorage("userId") private var userId: Int?
-    
-    /*
-    private func proceedToCheckout() throws {
-        
-        guard let userId = userId else {
-            throw UserError.missingUserId
-        }
-        
-        guard let cart = cartStore.cart else {
-            throw CartError.operationFailed("Missing cart")
-        }
-        
-        // convert cart item to order item
-        let orderItems = cart.cartItems.map { cartItem in
-            OrderItem(product: cartItem.product, quantity: cartItem.quantity)
-        }
-        
-        for item in orderItems {
-            print(item.product.name)
-        }
-    } */
     
     var body: some View {
         List {

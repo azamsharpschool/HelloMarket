@@ -85,8 +85,7 @@ class CartStore {
         if let cartItem = response.cartItem, response.success {
             // Initialize cart if it's nil
             if cart == nil {
-                guard let userId = UserDefaults.standard.userId else { throw UserError.missingUserId }
-                cart = Cart(userId: userId)
+                cart = Cart()
             }
             
             // if item already exists then update it else insert it

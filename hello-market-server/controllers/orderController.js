@@ -32,6 +32,7 @@ exports.loadOrders = async (req, res) => {
 
 exports.createOrder = async (req, res) => {
 
+    console.log("CREATE ORDER")
     const userId = req.userId 
 
     const { total, order_items } = req.body;

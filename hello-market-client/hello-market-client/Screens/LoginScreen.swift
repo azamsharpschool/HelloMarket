@@ -18,7 +18,8 @@ struct LoginScreen: View {
     @State private var message: String?
     @State private var isLoading: Bool = false
     @State private var isRegistrationPresented: Bool = false
-    @AppStorage("userId") private var userId: Int?
+    
+    @AppStorage("isAuthenticated") private var isAuthenticated: Bool = false
     
     private var isFormValid: Bool {
         !username.isEmptyOrWhitespace && !password.isEmptyOrWhitespace
@@ -31,21 +32,9 @@ struct LoginScreen: View {
         defer { isLoading = false }
         
         do {
-            let response = try await authenticationController.login(username: username, password: password)
-            
-            guard let token = response.token,
-                  let userId = response.userId, response.success else {
-                
-                showMessage(response.message ?? "Unable to login")
-                return
-            }
-            
-            // set the keychain
-            Keychain.set(token, forKey: "jwttoken")
-            // set the user defaults
-            self.userId = userId
+            try await authenticationController.login(username: username, password: password)
+            isAuthenticated = true
             dismiss()
-            
         } catch {
             showMessage(error.localizedDescription)
         }

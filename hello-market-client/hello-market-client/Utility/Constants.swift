@@ -23,6 +23,7 @@ struct Constants {
         static let createPaymentIntent = URL(string: "http://localhost:8080/api/payment/create-payment-intent")!
         static let saveOrder = URL(string: "http://localhost:8080/api/orders")!
         static let loadOrders = URL(string: "http://localhost:8080/api/orders")!
+        static let myProducts = URL(string: "http://localhost:8080/api/products/user")!
         
         static func deleteCartItem(_ cartItemId: Int) -> URL {
             URL(string: "http://localhost:8080/api/cart/item/\(cartItemId)")!
@@ -30,10 +31,6 @@ struct Constants {
         
         static func deleteProduct(_ productId: Int) -> URL {
             URL(string: "http://localhost:8080/api/products/\(productId)")!
-        }
-        
-        static func myProducts(_ userId: Int) -> URL {
-            URL(string: "http://localhost:8080/api/products/user/\(userId)")!
         }
         
         static func updateProduct(_ productId: Int) -> URL {

@@ -60,9 +60,6 @@ const addCartItemValidator = [
 
   // Validation rules for createOrder
 const validateCreateOrder = [
-  body('user_id')
-      .isInt({ gt: 0 })
-      .withMessage('user_id must be a positive integer'),
   body('total')
       .isFloat({ gt: 0 })
       .withMessage('total must be a positive number'),

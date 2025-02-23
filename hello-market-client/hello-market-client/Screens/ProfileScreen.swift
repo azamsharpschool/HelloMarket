@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ProfileScreen: View {
     
-    @AppStorage("userId") private var userId: String?
     @Environment(CartStore.self) private var cartStore
     @Environment(UserStore.self) private var userStore
     
@@ -27,6 +26,7 @@ struct ProfileScreen: View {
     @State private var updatingUserInfo: Bool = false
     
     @State private var isPresented: Bool = false
+    @AppStorage("isAuthenticated") private var isAuthenticated = false
     
     private func validateForm() -> Bool {
         
@@ -91,7 +91,7 @@ struct ProfileScreen: View {
             
             Button("Signout") {
                 let _ = Keychain<String>.delete("jwttoken")
-                userId = nil
+                isAuthenticated = false 
                 cartStore.emptyCart()
                 userStore.userInfo = nil
             }.buttonStyle(.borderless)

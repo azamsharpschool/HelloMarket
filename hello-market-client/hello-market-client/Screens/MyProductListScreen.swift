@@ -12,16 +12,11 @@ struct MyProductListScreen: View {
     @Environment(\.showMessage) private var showMessage
     @Environment(ProductStore.self) private var productStore
     @State private var isPresented: Bool = false
-    @AppStorage("userId") private var userId: Int?
     
     private func loadMyProducts() async {
         
-        guard let userId = userId else {
-            return
-        }
-        
         do {
-            try await productStore.loadMyProducts(by: userId)
+            try await productStore.loadMyProducts()
         } catch {
             print(error.localizedDescription)
         }
